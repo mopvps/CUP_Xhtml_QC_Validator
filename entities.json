@@ -1,0 +1,5888 @@
+[
+  {
+    "Entity Name": "á",
+    "Decimal": "&#225;",
+    "Hexadecimal": "&#xE1;",
+    "Character": "&aacute;"
+  },
+  {
+    "Entity Name": "Á",
+    "Decimal": "&#193;",
+    "Hexadecimal": "&#xC1;",
+    "Character": "&Aacute;"
+  },
+  {
+    "Entity Name": "ă",
+    "Decimal": "&#259;",
+    "Hexadecimal": "&#x103;",
+    "Character": "&abreve;"
+  },
+  {
+    "Entity Name": "Ă",
+    "Decimal": "&#258;",
+    "Hexadecimal": "&#x102;",
+    "Character": "&Abreve;"
+  },
+  {
+    "Entity Name": "∾",
+    "Decimal": "&#8766;",
+    "Hexadecimal": "&#x223E;",
+    "Character": "&ac;"
+  },
+  {
+    "Entity Name": "∿",
+    "Decimal": "&#8767;",
+    "Hexadecimal": "&#x223F;",
+    "Character": "&acd;"
+  },
+  {
+    "Entity Name": "â",
+    "Decimal": "&#226;",
+    "Hexadecimal": "&#xE2;",
+    "Character": "&acirc;"
+  },
+  {
+    "Entity Name": "Â",
+    "Decimal": "&#194;",
+    "Hexadecimal": "&#xC2;",
+    "Character": "&Acirc;"
+  },
+  {
+    "Entity Name": "´",
+    "Decimal": "&#180;",
+    "Hexadecimal": "&#xB4;",
+    "Character": "&acute;"
+  },
+  {
+    "Entity Name": "а",
+    "Decimal": "&#1072;",
+    "Hexadecimal": "&#x430;",
+    "Character": "&acy;"
+  },
+  {
+    "Entity Name": "А",
+    "Decimal": "&#1040;",
+    "Hexadecimal": "&#x410;",
+    "Character": "&Acy;"
+  },
+  {
+    "Entity Name": "æ",
+    "Decimal": "&#230;",
+    "Hexadecimal": "&#xE6;",
+    "Character": "&aelig;"
+  },
+  {
+    "Entity Name": "Æ",
+    "Decimal": "&#198;",
+    "Hexadecimal": "&#xC6;",
+    "Character": "&AElig;"
+  },
+  {
+    "Entity Name": "𝔙",
+    "Decimal": "&#120094;",
+    "Hexadecimal": "&#x1D51E;",
+    "Character": "&afr;"
+  },
+  {
+    "Entity Name": "𝔄",
+    "Decimal": "&#120068;",
+    "Hexadecimal": "&#x1D504;",
+    "Character": "&Afr;"
+  },
+  {
+    "Entity Name": "à",
+    "Decimal": "&#224;",
+    "Hexadecimal": "&#xE0;",
+    "Character": "&agrave;"
+  },
+  {
+    "Entity Name": "À",
+    "Decimal": "&#192;",
+    "Hexadecimal": "&#xC0;",
+    "Character": "&Agrave;"
+  },
+  {
+    "Entity Name": "ℵ",
+    "Decimal": "&#8501;",
+    "Hexadecimal": "&#x2135;",
+    "Character": "&alefsym;"
+  },
+  {
+    "Entity Name": "α",
+    "Decimal": "&#945;",
+    "Hexadecimal": "&#x3B1;",
+    "Character": "&alpha;"
+  },
+  {
+    "Entity Name": "Α",
+    "Decimal": "&#913;",
+    "Hexadecimal": "&#x391;",
+    "Character": "&Alpha;"
+  },
+  {
+    "Entity Name": "ā",
+    "Decimal": "&#257;",
+    "Hexadecimal": "&#x101;",
+    "Character": "&amacr;"
+  },
+  {
+    "Entity Name": "Ā",
+    "Decimal": "&#256;",
+    "Hexadecimal": "&#x100;",
+    "Character": "&Amacr;"
+  },
+  {
+    "Entity Name": "⨿",
+    "Decimal": "&#10815;",
+    "Hexadecimal": "&#x2A3F;",
+    "Character": "&amalg;"
+  },
+  {
+    "Entity Name": "&",
+    "Decimal": "&#38;",
+    "Hexadecimal": "&#x26;",
+    "Character": "&amp;"
+  },
+  {
+    "Entity Name": "⩓",
+    "Decimal": "&#10835;",
+    "Hexadecimal": "&#x2A53;",
+    "Character": "&And;"
+  },
+  {
+    "Entity Name": "∧",
+    "Decimal": "&#8743;",
+    "Hexadecimal": "&#x2227;",
+    "Character": "&and;"
+  },
+  {
+    "Entity Name": "∠",
+    "Decimal": "&#8736;",
+    "Hexadecimal": "&#x2220;",
+    "Character": "&ang;"
+  },
+  {
+    "Entity Name": "∡",
+    "Decimal": "&#8737;",
+    "Hexadecimal": "&#x2221;",
+    "Character": "&angmsd;"
+  },
+  {
+    "Entity Name": "∟",
+    "Decimal": "&#8735;",
+    "Hexadecimal": "&#x221F;",
+    "Character": "&angrt;"
+  },
+  {
+    "Entity Name": "⊾",
+    "Decimal": "&#8894;",
+    "Hexadecimal": "&#x22BE;",
+    "Character": "&angrtvb;"
+  },
+  {
+    "Entity Name": "∢",
+    "Decimal": "&#8738;",
+    "Hexadecimal": "&#x2222;",
+    "Character": "&angsph;"
+  },
+  {
+    "Entity Name": "ą",
+    "Decimal": "&#261;",
+    "Hexadecimal": "&#x105;",
+    "Character": "&aogon;"
+  },
+  {
+    "Entity Name": "Ą",
+    "Decimal": "&#260;",
+    "Hexadecimal": "&#x104;",
+    "Character": "&Aogon;"
+  },
+  {
+    "Entity Name": "𝕆",
+    "Decimal": "&#120146;",
+    "Hexadecimal": "&#x1D552;",
+    "Character": "&aopf;"
+  },
+  {
+    "Entity Name": "𝔳",
+    "Decimal": "&#120116;",
+    "Hexadecimal": "&#x1D538;",
+    "Character": "&Aopf;"
+  },
+  {
+    "Entity Name": "'",
+    "Decimal": "&#39;",
+    "Hexadecimal": "&#x27;",
+    "Character": "&apos;"
+  },
+  {
+    "Entity Name": "å",
+    "Decimal": "&#229;",
+    "Hexadecimal": "&#xE5;",
+    "Character": "&aring;"
+  },
+  {
+    "Entity Name": "Å",
+    "Decimal": "&#197;",
+    "Hexadecimal": "&#xC5;",
+    "Character": "&Aring;"
+  },
+  {
+    "Entity Name": "𝒶",
+    "Decimal": "&#119990;",
+    "Hexadecimal": "&#x1D4B6;",
+    "Character": "&ascr;"
+  },
+  {
+    "Entity Name": "𝒜",
+    "Decimal": "&#119964;",
+    "Hexadecimal": "&#x1D49C;",
+    "Character": "&Ascr;"
+  },
+  {
+    "Entity Name": "*",
+    "Decimal": "&#42;",
+    "Hexadecimal": "&#x2A;",
+    "Character": "&ast;"
+  },
+  {
+    "Entity Name": "≈",
+    "Decimal": "&#8776;",
+    "Hexadecimal": "&#x2248;",
+    "Character": "&asymp;"
+  },
+  {
+    "Entity Name": "≌",
+    "Decimal": "&#8780;",
+    "Hexadecimal": "&#x224D;",
+    "Character": "&asympeq;"
+  },
+  {
+    "Entity Name": "ã",
+    "Decimal": "&#227;",
+    "Hexadecimal": "&#xE3;",
+    "Character": "&atilde;"
+  },
+  {
+    "Entity Name": "Ã",
+    "Decimal": "&#195;",
+    "Hexadecimal": "&#xC3;",
+    "Character": "&Atilde;"
+  },
+  {
+    "Entity Name": "ä",
+    "Decimal": "&#228;",
+    "Hexadecimal": "&#xE4;",
+    "Character": "&auml;"
+  },
+  {
+    "Entity Name": "Ä",
+    "Decimal": "&#196;",
+    "Hexadecimal": "&#xC4;",
+    "Character": "&Auml;"
+  },
+  {
+    "Entity Name": "∳",
+    "Decimal": "&#8755;",
+    "Hexadecimal": "&#x2233;",
+    "Character": "&awconint;"
+  },
+  {
+    "Entity Name": "⨑",
+    "Decimal": "&#10769;",
+    "Hexadecimal": "&#x2A11;",
+    "Character": "&awint;"
+  },
+  {
+    "Entity Name": "⫧",
+    "Decimal": "&#10919;",
+    "Hexadecimal": "&#x2AE7;",
+    "Character": "&Barv;"
+  },
+  {
+    "Entity Name": "⊽",
+    "Decimal": "&#8893;",
+    "Hexadecimal": "&#x22BD;",
+    "Character": "&barvee;"
+  },
+  {
+    "Entity Name": "⌅",
+    "Decimal": "&#8965;",
+    "Hexadecimal": "&#x2305;",
+    "Character": "&barwed;"
+  },
+  {
+    "Entity Name": "⌆",
+    "Decimal": "&#8966;",
+    "Hexadecimal": "&#x2306;",
+    "Character": "&Barwed;"
+  },
+  {
+    "Entity Name": "⎵",
+    "Decimal": "&#9141;",
+    "Hexadecimal": "&#x23B5;",
+    "Character": "&bbrk;"
+  },
+  {
+    "Entity Name": "⎶",
+    "Decimal": "&#9142;",
+    "Hexadecimal": "&#x23B6;",
+    "Character": "&bbrktbrk;"
+  },
+  {
+    "Entity Name": "≋",
+    "Decimal": "&#8779;",
+    "Hexadecimal": "&#x224C;",
+    "Character": "&bcong;"
+  },
+  {
+    "Entity Name": "б",
+    "Decimal": "&#1073;",
+    "Hexadecimal": "&#x431;",
+    "Character": "&bcy;"
+  },
+  {
+    "Entity Name": "Б",
+    "Decimal": "&#1041;",
+    "Hexadecimal": "&#x411;",
+    "Character": "&Bcy;"
+  },
+  {
+    "Entity Name": "„",
+    "Decimal": "&#8222;",
+    "Hexadecimal": "&#x201E;",
+    "Character": "&bdquo;"
+  },
+  {
+    "Entity Name": "∵",
+    "Decimal": "&#8757;",
+    "Hexadecimal": "&#x2235;",
+    "Character": "&becaus;"
+  },
+  {
+    "Entity Name": "϶",
+    "Decimal": "&#1014;",
+    "Hexadecimal": "&#x3F6;",
+    "Character": "&bepsi;"
+  },
+  {
+    "Entity Name": "ℬ",
+    "Decimal": "&#8492;",
+    "Hexadecimal": "&#x212C;",
+    "Character": "&bernou;"
+  },
+  {
+    "Entity Name": "β",
+    "Decimal": "&#946;",
+    "Hexadecimal": "&#x3B2;",
+    "Character": "&beta;"
+  },
+  {
+    "Entity Name": "Β",
+    "Decimal": "&#914;",
+    "Hexadecimal": "&#x392;",
+    "Character": "&Beta;"
+  },
+  {
+    "Entity Name": "ℶ",
+    "Decimal": "&#8502;",
+    "Hexadecimal": "&#x2136;",
+    "Character": "&beth;"
+  },
+  {
+    "Entity Name": "𝔚",
+    "Decimal": "&#120095;",
+    "Hexadecimal": "&#x1D51F;",
+    "Character": "&bfr;"
+  },
+  {
+    "Entity Name": "𝔅",
+    "Decimal": "&#120069;",
+    "Hexadecimal": "&#x1D505;",
+    "Character": "&Bfr;"
+  },
+  {
+    "Entity Name": "␣",
+    "Decimal": "&#9251;",
+    "Hexadecimal": "&#x2423;",
+    "Character": "&blank;"
+  },
+  {
+    "Entity Name": "▒",
+    "Decimal": "&#9618;",
+    "Hexadecimal": "&#x2592;",
+    "Character": "&blk12;"
+  },
+  {
+    "Entity Name": "░",
+    "Decimal": "&#9617;",
+    "Hexadecimal": "&#x2591;",
+    "Character": "&blk14;"
+  },
+  {
+    "Entity Name": "▓",
+    "Decimal": "&#9619;",
+    "Hexadecimal": "&#x2593;",
+    "Character": "&blk34;"
+  },
+  {
+    "Entity Name": "█",
+    "Decimal": "&#9608;",
+    "Hexadecimal": "&#x2588;",
+    "Character": "&block;"
+  },
+  {
+    "Entity Name": "⌐",
+    "Decimal": "&#8976;",
+    "Hexadecimal": "&#x2310;",
+    "Character": "&bnot;"
+  },
+  {
+    "Entity Name": "⫭",
+    "Decimal": "&#10925;",
+    "Hexadecimal": "&#x2AED;",
+    "Character": "&bNot;"
+  },
+  {
+    "Entity Name": "𝕇",
+    "Decimal": "&#120147;",
+    "Hexadecimal": "&#x1D553;",
+    "Character": "&bopf;"
+  },
+  {
+    "Entity Name": "𝔴",
+    "Decimal": "&#120117;",
+    "Hexadecimal": "&#x1D539;",
+    "Character": "&Bopf;"
+  },
+  {
+    "Entity Name": "⊥",
+    "Decimal": "&#8869;",
+    "Hexadecimal": "&#x22A5;",
+    "Character": "&bottom;"
+  },
+  {
+    "Entity Name": "⋈",
+    "Decimal": "&#8904;",
+    "Hexadecimal": "&#x22C8;",
+    "Character": "&bowtie;"
+  },
+  {
+    "Entity Name": "┐",
+    "Decimal": "&#9488;",
+    "Hexadecimal": "&#x2510;",
+    "Character": "&boxdl;"
+  },
+  {
+    "Entity Name": "╕",
+    "Decimal": "&#9557;",
+    "Hexadecimal": "&#x2555;",
+    "Character": "&boxdL;"
+  },
+  {
+    "Entity Name": "╖",
+    "Decimal": "&#9558;",
+    "Hexadecimal": "&#x2556;",
+    "Character": "&boxDl;"
+  },
+  {
+    "Entity Name": "╗",
+    "Decimal": "&#9559;",
+    "Hexadecimal": "&#x2557;",
+    "Character": "&boxDL;"
+  },
+  {
+    "Entity Name": "┌",
+    "Decimal": "&#9484;",
+    "Hexadecimal": "&#x250C;",
+    "Character": "&boxdr;"
+  },
+  {
+    "Entity Name": "╒",
+    "Decimal": "&#9554;",
+    "Hexadecimal": "&#x2552;",
+    "Character": "&boxdR;"
+  },
+  {
+    "Entity Name": "╓",
+    "Decimal": "&#9555;",
+    "Hexadecimal": "&#x2553;",
+    "Character": "&boxDr;"
+  },
+  {
+    "Entity Name": "╔",
+    "Decimal": "&#9556;",
+    "Hexadecimal": "&#x2554;",
+    "Character": "&boxDR;"
+  },
+  {
+    "Entity Name": "═",
+    "Decimal": "&#9552;",
+    "Hexadecimal": "&#x2550;",
+    "Character": "&boxH;"
+  },
+  {
+    "Entity Name": "─",
+    "Decimal": "&#9472;",
+    "Hexadecimal": "&#x2500;",
+    "Character": "&boxh;"
+  },
+  {
+    "Entity Name": "┬",
+    "Decimal": "&#9516;",
+    "Hexadecimal": "&#x252C;",
+    "Character": "&boxhd;"
+  },
+  {
+    "Entity Name": "╥",
+    "Decimal": "&#9573;",
+    "Hexadecimal": "&#x2565;",
+    "Character": "&boxhD;"
+  },
+  {
+    "Entity Name": "╤",
+    "Decimal": "&#9572;",
+    "Hexadecimal": "&#x2564;",
+    "Character": "&boxHd;"
+  },
+  {
+    "Entity Name": "╦",
+    "Decimal": "&#9574;",
+    "Hexadecimal": "&#x2566;",
+    "Character": "&boxHD;"
+  },
+  {
+    "Entity Name": "┴",
+    "Decimal": "&#9524;",
+    "Hexadecimal": "&#x2534;",
+    "Character": "&boxhu;"
+  },
+  {
+    "Entity Name": "╨",
+    "Decimal": "&#9576;",
+    "Hexadecimal": "&#x2568;",
+    "Character": "&boxhU;"
+  },
+  {
+    "Entity Name": "╧",
+    "Decimal": "&#9575;",
+    "Hexadecimal": "&#x2567;",
+    "Character": "&boxHu;"
+  },
+  {
+    "Entity Name": "╩",
+    "Decimal": "&#9577;",
+    "Hexadecimal": "&#x2569;",
+    "Character": "&boxHU;"
+  },
+  {
+    "Entity Name": "┘",
+    "Decimal": "&#9496;",
+    "Hexadecimal": "&#x2518;",
+    "Character": "&boxul;"
+  },
+  {
+    "Entity Name": "╛",
+    "Decimal": "&#9563;",
+    "Hexadecimal": "&#x255B;",
+    "Character": "&boxuL;"
+  },
+  {
+    "Entity Name": "╜",
+    "Decimal": "&#9564;",
+    "Hexadecimal": "&#x255C;",
+    "Character": "&boxUl;"
+  },
+  {
+    "Entity Name": "╝",
+    "Decimal": "&#9565;",
+    "Hexadecimal": "&#x255D;",
+    "Character": "&boxUL;"
+  },
+  {
+    "Entity Name": "└",
+    "Decimal": "&#9492;",
+    "Hexadecimal": "&#x2514;",
+    "Character": "&boxur;"
+  },
+  {
+    "Entity Name": "╘",
+    "Decimal": "&#9560;",
+    "Hexadecimal": "&#x2558;",
+    "Character": "&boxuR;"
+  },
+  {
+    "Entity Name": "╙",
+    "Decimal": "&#9561;",
+    "Hexadecimal": "&#x2559;",
+    "Character": "&boxUr;"
+  },
+  {
+    "Entity Name": "╚",
+    "Decimal": "&#9562;",
+    "Hexadecimal": "&#x255A;",
+    "Character": "&boxUR;"
+  },
+  {
+    "Entity Name": "│",
+    "Decimal": "&#9474;",
+    "Hexadecimal": "&#x2502;",
+    "Character": "&boxv;"
+  },
+  {
+    "Entity Name": "║",
+    "Decimal": "&#9553;",
+    "Hexadecimal": "&#x2551;",
+    "Character": "&boxV;"
+  },
+  {
+    "Entity Name": "┼",
+    "Decimal": "&#9500;",
+    "Hexadecimal": "&#x253C;",
+    "Character": "&boxvh;"
+  },
+  {
+    "Entity Name": "╪",
+    "Decimal": "&#9578;",
+    "Hexadecimal": "&#x256A;",
+    "Character": "&boxvH;"
+  },
+  {
+    "Entity Name": "╫",
+    "Decimal": "&#9579;",
+    "Hexadecimal": "&#x256B;",
+    "Character": "&boxVh;"
+  },
+  {
+    "Entity Name": "╬",
+    "Decimal": "&#9580;",
+    "Hexadecimal": "&#x256C;",
+    "Character": "&boxVH;"
+  },
+  {
+    "Entity Name": "┤",
+    "Decimal": "&#9508;",
+    "Hexadecimal": "&#x2524;",
+    "Character": "&boxvl;"
+  },
+  {
+    "Entity Name": "╡",
+    "Decimal": "&#9569;",
+    "Hexadecimal": "&#x2561;",
+    "Character": "&boxvL;"
+  },
+  {
+    "Entity Name": "╢",
+    "Decimal": "&#9570;",
+    "Hexadecimal": "&#x2562;",
+    "Character": "&boxVl;"
+  },
+  {
+    "Entity Name": "╣",
+    "Decimal": "&#9571;",
+    "Hexadecimal": "&#x2563;",
+    "Character": "&boxVL;"
+  },
+  {
+    "Entity Name": "├",
+    "Decimal": "&#9500;",
+    "Hexadecimal": "&#x251C;",
+    "Character": "&boxvr;"
+  },
+  {
+    "Entity Name": "╞",
+    "Decimal": "&#9566;",
+    "Hexadecimal": "&#x255E;",
+    "Character": "&boxvR;"
+  },
+  {
+    "Entity Name": "╟",
+    "Decimal": "&#9567;",
+    "Hexadecimal": "&#x255F;",
+    "Character": "&boxVr;"
+  },
+  {
+    "Entity Name": "╠",
+    "Decimal": "&#9568;",
+    "Hexadecimal": "&#x2560;",
+    "Character": "&boxVR;"
+  },
+  {
+    "Entity Name": "‵",
+    "Decimal": "&#8245;",
+    "Hexadecimal": "&#x2035;",
+    "Character": "&bprime;"
+  },
+  {
+    "Entity Name": "˘",
+    "Decimal": "&#728;",
+    "Hexadecimal": "&#x2D8;",
+    "Character": "&breve;"
+  },
+  {
+    "Entity Name": "¦",
+    "Decimal": "&#166;",
+    "Hexadecimal": "&#xA6;",
+    "Character": "&brvbar;"
+  },
+  {
+    "Entity Name": "𝒷",
+    "Decimal": "&#119991;",
+    "Hexadecimal": "&#x1D4B7;",
+    "Character": "&bscr;"
+  },
+  {
+    "Entity Name": "⁏",
+    "Decimal": "&#8271;",
+    "Hexadecimal": "&#x204F;",
+    "Character": "&bsemi;"
+  },
+  {
+    "Entity Name": "∽",
+    "Decimal": "&#8765;",
+    "Hexadecimal": "&#x223D;",
+    "Character": "&bsim;"
+  },
+  {
+    "Entity Name": "⋍",
+    "Decimal": "&#8909;",
+    "Hexadecimal": "&#x22CD;",
+    "Character": "&bsime;"
+  },
+  {
+    "Entity Name": "•",
+    "Decimal": "&#8226;",
+    "Hexadecimal": "&#x2022;",
+    "Character": "&bull;"
+  },
+  {
+    "Entity Name": "≍",
+    "Decimal": "&#8781;",
+    "Hexadecimal": "&#x224E;",
+    "Character": "&bump;"
+  },
+  {
+    "Entity Name": "≎",
+    "Decimal": "&#8782;",
+    "Hexadecimal": "&#x224F;",
+    "Character": "&bumpe;"
+  },
+  {
+    "Entity Name": "ć",
+    "Decimal": "&#263;",
+    "Hexadecimal": "&#x107;",
+    "Character": "&cacute;"
+  },
+  {
+    "Entity Name": "Ć",
+    "Decimal": "&#262;",
+    "Hexadecimal": "&#x106;",
+    "Character": "&Cacute;"
+  },
+  {
+    "Entity Name": "∩",
+    "Decimal": "&#8745;",
+    "Hexadecimal": "&#x2229;",
+    "Character": "&cap;"
+  },
+  {
+    "Entity Name": "⋒",
+    "Decimal": "&#8914;",
+    "Hexadecimal": "&#x22D2;",
+    "Character": "&Cap;"
+  },
+  {
+    "Entity Name": "ⅅ",
+    "Decimal": "&#8517;",
+    "Hexadecimal": "&#x2145;",
+    "Character": "&CapitalDifferentialD;"
+  },
+  {
+    "Entity Name": "ˇ",
+    "Decimal": "&#711;",
+    "Hexadecimal": "&#x2C7;",
+    "Character": "&caron;"
+  },
+  {
+    "Entity Name": "č",
+    "Decimal": "&#269;",
+    "Hexadecimal": "&#x10D;",
+    "Character": "&ccaron;"
+  },
+  {
+    "Entity Name": "Č",
+    "Decimal": "&#268;",
+    "Hexadecimal": "&#x10C;",
+    "Character": "&Ccaron;"
+  },
+  {
+    "Entity Name": "ç",
+    "Decimal": "&#231;",
+    "Hexadecimal": "&#xE7;",
+    "Character": "&ccedil;"
+  },
+  {
+    "Entity Name": "Ç",
+    "Decimal": "&#199;",
+    "Hexadecimal": "&#xC7;",
+    "Character": "&Ccedil;"
+  },
+  {
+    "Entity Name": "ĉ",
+    "Decimal": "&#265;",
+    "Hexadecimal": "&#x109;",
+    "Character": "&ccirc;"
+  },
+  {
+    "Entity Name": "Ĉ",
+    "Decimal": "&#264;",
+    "Hexadecimal": "&#x108;",
+    "Character": "&Ccirc;"
+  },
+  {
+    "Entity Name": "∰",
+    "Decimal": "&#8752;",
+    "Hexadecimal": "&#x2230;",
+    "Character": "&Cconint;"
+  },
+  {
+    "Entity Name": "ċ",
+    "Decimal": "&#267;",
+    "Hexadecimal": "&#x10B;",
+    "Character": "&cdot;"
+  },
+  {
+    "Entity Name": "Ċ",
+    "Decimal": "&#266;",
+    "Hexadecimal": "&#x10A;",
+    "Character": "&Cdot;"
+  },
+  {
+    "Entity Name": "¸",
+    "Decimal": "&#184;",
+    "Hexadecimal": "&#xB8;",
+    "Character": "&cedil;"
+  },
+  {
+    "Entity Name": "¢",
+    "Decimal": "&#162;",
+    "Hexadecimal": "&#xA2;",
+    "Character": "&cent;"
+  },
+  {
+    "Entity Name": "𝔛",
+    "Decimal": "&#120096;",
+    "Hexadecimal": "&#x1D520;",
+    "Character": "&cfr;"
+  },
+  {
+    "Entity Name": "ℭ",
+    "Decimal": "&#8493;",
+    "Hexadecimal": "&#x212D;",
+    "Character": "&Cfr;"
+  },
+  {
+    "Entity Name": "ч",
+    "Decimal": "&#1095;",
+    "Hexadecimal": "&#x447;",
+    "Character": "&chcy;"
+  },
+  {
+    "Entity Name": "Ч",
+    "Decimal": "&#1063;",
+    "Hexadecimal": "&#x427;",
+    "Character": "&CHcy;"
+  },
+  {
+    "Entity Name": "✓",
+    "Decimal": "&#10003;",
+    "Hexadecimal": "&#x2713;",
+    "Character": "&check;"
+  },
+  {
+    "Entity Name": "χ",
+    "Decimal": "&#967;",
+    "Hexadecimal": "&#x3C7;",
+    "Character": "&chi;"
+  },
+  {
+    "Entity Name": "Χ",
+    "Decimal": "&#935;",
+    "Hexadecimal": "&#x3A7;",
+    "Character": "&Chi;"
+  },
+  {
+    "Entity Name": "○",
+    "Decimal": "&#9675;",
+    "Hexadecimal": "&#x25CB;",
+    "Character": "&cir;"
+  },
+  {
+    "Entity Name": "ˆ",
+    "Decimal": "&#710;",
+    "Hexadecimal": "&#x2C6;",
+    "Character": "&circ;"
+  },
+  {
+    "Entity Name": "≖",
+    "Decimal": "&#8790;",
+    "Hexadecimal": "&#x2256;",
+    "Character": "&cire;"
+  },
+  {
+    "Entity Name": "♣",
+    "Decimal": "&#9827;",
+    "Hexadecimal": "&#x2663;",
+    "Character": "&clubs;"
+  },
+  {
+    "Entity Name": "∷",
+    "Decimal": "&#8759;",
+    "Hexadecimal": "&#x2237;",
+    "Character": "&Colon;"
+  },
+  {
+    "Entity Name": "≓",
+    "Decimal": "&#8787;",
+    "Hexadecimal": "&#x2253;",
+    "Character": "&colone;"
+  },
+  {
+    "Entity Name": "@",
+    "Decimal": "&#64;",
+    "Hexadecimal": "&#x40;",
+    "Character": "&commat;"
+  },
+  {
+    "Entity Name": "∁",
+    "Decimal": "&#8705;",
+    "Hexadecimal": "&#x2201;",
+    "Character": "&comp;"
+  },
+  {
+    "Entity Name": "∗",
+    "Decimal": "&#8727;",
+    "Hexadecimal": "&#x2218;",
+    "Character": "&compfn;"
+  },
+  {
+    "Entity Name": "≅",
+    "Decimal": "&#8773;",
+    "Hexadecimal": "&#x2245;",
+    "Character": "&cong;"
+  },
+  {
+    "Entity Name": "∯",
+    "Decimal": "&#8751;",
+    "Hexadecimal": "&#x222F;",
+    "Character": "&Conint;"
+  },
+  {
+    "Entity Name": "∮",
+    "Decimal": "&#8750;",
+    "Hexadecimal": "&#x222E;",
+    "Character": "&conint;"
+  },
+  {
+    "Entity Name": "𝕈",
+    "Decimal": "&#120148;",
+    "Hexadecimal": "&#x1D554;",
+    "Character": "&copf;"
+  },
+  {
+    "Entity Name": "ℂ",
+    "Decimal": "&#8450;",
+    "Hexadecimal": "&#x2102;",
+    "Character": "&Copf;"
+  },
+  {
+    "Entity Name": "∐",
+    "Decimal": "&#8720;",
+    "Hexadecimal": "&#x2210;",
+    "Character": "&coprod;"
+  },
+  {
+    "Entity Name": "©",
+    "Decimal": "&#169;",
+    "Hexadecimal": "&#xA9;",
+    "Character": "&copy;"
+  },
+  {
+    "Entity Name": "℗",
+    "Decimal": "&#8471;",
+    "Hexadecimal": "&#x2117;",
+    "Character": "&copysr;"
+  },
+  {
+    "Entity Name": "↵",
+    "Decimal": "&#8629;",
+    "Hexadecimal": "&#x21B5;",
+    "Character": "&crarr;"
+  },
+  {
+    "Entity Name": "✗",
+    "Decimal": "&#10007;",
+    "Hexadecimal": "&#x2717;",
+    "Character": "&cross;"
+  },
+  {
+    "Entity Name": "⨯",
+    "Decimal": "&#10799;",
+    "Hexadecimal": "&#x2A2F;",
+    "Character": "&Cross;"
+  },
+  {
+    "Entity Name": "𝒸",
+    "Decimal": "&#119992;",
+    "Hexadecimal": "&#x1D4B8;",
+    "Character": "&cscr;"
+  },
+  {
+    "Entity Name": "𝒞",
+    "Decimal": "&#119966;",
+    "Hexadecimal": "&#x1D49E;",
+    "Character": "&Cscr;"
+  },
+  {
+    "Entity Name": "⋯",
+    "Decimal": "&#8943;",
+    "Hexadecimal": "&#x22EF;",
+    "Character": "&ctdot;"
+  },
+  {
+    "Entity Name": "⋞",
+    "Decimal": "&#8926;",
+    "Hexadecimal": "&#x22DE;",
+    "Character": "&cuepr;"
+  },
+  {
+    "Entity Name": "⋟",
+    "Decimal": "&#8927;",
+    "Hexadecimal": "&#x22DF;",
+    "Character": "&cuesc;"
+  },
+  {
+    "Entity Name": "↶",
+    "Decimal": "&#8630;",
+    "Hexadecimal": "&#x21B6;",
+    "Character": "&cularr;"
+  },
+  {
+    "Entity Name": "∪",
+    "Decimal": "&#8746;",
+    "Hexadecimal": "&#x222A;",
+    "Character": "&cup;"
+  },
+  {
+    "Entity Name": "⋓",
+    "Decimal": "&#8915;",
+    "Hexadecimal": "&#x22D3;",
+    "Character": "&Cup;"
+  },
+  {
+    "Entity Name": "⊍",
+    "Decimal": "&#8845;",
+    "Hexadecimal": "&#x228D;",
+    "Character": "&cupdot;"
+  },
+  {
+    "Entity Name": "↷",
+    "Decimal": "&#8631;",
+    "Hexadecimal": "&#x21B7;",
+    "Character": "&curarr;"
+  },
+  {
+    "Entity Name": "¤",
+    "Decimal": "&#164;",
+    "Hexadecimal": "&#xA4;",
+    "Character": "&curren;"
+  },
+  {
+    "Entity Name": "⋎",
+    "Decimal": "&#8910;",
+    "Hexadecimal": "&#x22CE;",
+    "Character": "&cuvee;"
+  },
+  {
+    "Entity Name": "⋏",
+    "Decimal": "&#8911;",
+    "Hexadecimal": "&#x22CF;",
+    "Character": "&cuwed;"
+  },
+  {
+    "Entity Name": "∲",
+    "Decimal": "&#8754;",
+    "Hexadecimal": "&#x2232;",
+    "Character": "&cwconint;"
+  },
+  {
+    "Entity Name": "∱",
+    "Decimal": "&#8753;",
+    "Hexadecimal": "&#x2231;",
+    "Character": "&cwint;"
+  },
+  {
+    "Entity Name": "⌭",
+    "Decimal": "&#9005;",
+    "Hexadecimal": "&#x232D;",
+    "Character": "&cylcty;"
+  },
+  {
+    "Entity Name": "†",
+    "Decimal": "&#8224;",
+    "Hexadecimal": "&#x2020;",
+    "Character": "&dagger;"
+  },
+  {
+    "Entity Name": "‡",
+    "Decimal": "&#8225;",
+    "Hexadecimal": "&#x2021;",
+    "Character": "&Dagger;"
+  },
+  {
+    "Entity Name": "ℸ",
+    "Decimal": "&#8504;",
+    "Hexadecimal": "&#x2138;",
+    "Character": "&daleth;"
+  },
+  {
+    "Entity Name": "⇓",
+    "Decimal": "&#8659;",
+    "Hexadecimal": "&#x21D3;",
+    "Character": "&dArr;"
+  },
+  {
+    "Entity Name": "↓",
+    "Decimal": "&#8595;",
+    "Hexadecimal": "&#x2193;",
+    "Character": "&darr;"
+  },
+  {
+    "Entity Name": "⫤",
+    "Decimal": "&#10916;",
+    "Hexadecimal": "&#x2AE4;",
+    "Character": "&Dashv;"
+  },
+  {
+    "Entity Name": "⊣",
+    "Decimal": "&#8867;",
+    "Hexadecimal": "&#x22A3;",
+    "Character": "&dashv;"
+  },
+  {
+    "Entity Name": "˝",
+    "Decimal": "&#733;",
+    "Hexadecimal": "&#x2DD;",
+    "Character": "&dblac;"
+  },
+  {
+    "Entity Name": "ď",
+    "Decimal": "&#271;",
+    "Hexadecimal": "&#x10F;",
+    "Character": "&dcaron;"
+  },
+  {
+    "Entity Name": "Ď",
+    "Decimal": "&#270;",
+    "Hexadecimal": "&#x10E;",
+    "Character": "&Dcaron;"
+  },
+  {
+    "Entity Name": "д",
+    "Decimal": "&#1076;",
+    "Hexadecimal": "&#x434;",
+    "Character": "&dcy;"
+  },
+  {
+    "Entity Name": "Д",
+    "Decimal": "&#1044;",
+    "Hexadecimal": "&#x414;",
+    "Character": "&Dcy;"
+  },
+  {
+    "Entity Name": "⇊",
+    "Decimal": "&#8650;",
+    "Hexadecimal": "&#x21CA;",
+    "Character": "&ddarr;"
+  },
+  {
+    "Entity Name": "°",
+    "Decimal": "&#176;",
+    "Hexadecimal": "&#xB0;",
+    "Character": "&deg;"
+  },
+  {
+    "Entity Name": "δ",
+    "Decimal": "&#948;",
+    "Hexadecimal": "&#x3B4;",
+    "Character": "&delta;"
+  },
+  {
+    "Entity Name": "Δ",
+    "Decimal": "&#916;",
+    "Hexadecimal": "&#x394;",
+    "Character": "&Delta;"
+  },
+  {
+    "Entity Name": "𝔜",
+    "Decimal": "&#120097;",
+    "Hexadecimal": "&#x1D521;",
+    "Character": "&dfr;"
+  },
+  {
+    "Entity Name": "𝔆",
+    "Decimal": "&#120070;",
+    "Hexadecimal": "&#x1D507;",
+    "Character": "&Dfr;"
+  },
+  {
+    "Entity Name": "⇃",
+    "Decimal": "&#8643;",
+    "Hexadecimal": "&#x21C3;",
+    "Character": "&dharl;"
+  },
+  {
+    "Entity Name": "⇂",
+    "Decimal": "&#8642;",
+    "Hexadecimal": "&#x21C2;",
+    "Character": "&dharr;"
+  },
+  {
+    "Entity Name": "⋄",
+    "Decimal": "&#8900;",
+    "Hexadecimal": "&#x22C4;",
+    "Character": "&diam;"
+  },
+  {
+    "Entity Name": "♦",
+    "Decimal": "&#9830;",
+    "Hexadecimal": "&#x2666;",
+    "Character": "&diams;"
+  },
+  {
+    "Entity Name": "ⅆ",
+    "Decimal": "&#8518;",
+    "Hexadecimal": "&#x2146;",
+    "Character": "&DifferentialD;"
+  },
+  {
+    "Entity Name": "÷",
+    "Decimal": "&#247;",
+    "Hexadecimal": "&#xF7;",
+    "Character": "&divide;"
+  },
+  {
+    "Entity Name": "⋇",
+    "Decimal": "&#8903;",
+    "Hexadecimal": "&#x22C7;",
+    "Character": "&divonx;"
+  },
+  {
+    "Entity Name": "ђ",
+    "Decimal": "&#1106;",
+    "Hexadecimal": "&#x452;",
+    "Character": "&djcy;"
+  },
+  {
+    "Entity Name": "в",
+    "Decimal": "&#1026;",
+    "Hexadecimal": "&#x402;",
+    "Character": "&DJcy;"
+  },
+  {
+    "Entity Name": "⌞",
+    "Decimal": "&#8990;",
+    "Hexadecimal": "&#x231E;",
+    "Character": "&dlcorn;"
+  },
+  {
+    "Entity Name": "⌍",
+    "Decimal": "&#8973;",
+    "Hexadecimal": "&#x230D;",
+    "Character": "&dlcrop;"
+  },
+  {
+    "Entity Name": "𝕉",
+    "Decimal": "&#120149;",
+    "Hexadecimal": "&#x1D555;",
+    "Character": "&dopf;"
+  },
+  {
+    "Entity Name": "𝔵",
+    "Decimal": "&#120117;",
+    "Hexadecimal": "&#x1D53B;",
+    "Character": "&Dopf;"
+  },
+  {
+    "Entity Name": "˙",
+    "Decimal": "&#729;",
+    "Hexadecimal": "&#x2D9;",
+    "Character": "&dot;"
+  },
+  {
+    "Entity Name": "¨",
+    "Decimal": "&#168;",
+    "Hexadecimal": "&#xA8;",
+    "Character": "&Dot;"
+  },
+  {
+    "Entity Name": "đ",
+    "Decimal": "&#273;",
+    "Hexadecimal": "&#x111;",
+    "Character": "&dstrok;"
+  },
+  {
+    "Entity Name": "Đ",
+    "Decimal": "&#272;",
+    "Hexadecimal": "&#x110;",
+    "Character": "&Dstrok;"
+  },
+  {
+    "Entity Name": "⋱",
+    "Decimal": "&#8945;",
+    "Hexadecimal": "&#x22F1;",
+    "Character": "&dtdot;"
+  },
+  {
+    "Entity Name": "▿",
+    "Decimal": "&#9663;",
+    "Hexadecimal": "&#x25BF;",
+    "Character": "&dtri;"
+  },
+  {
+    "Entity Name": "▾",
+    "Decimal": "&#9662;",
+    "Hexadecimal": "&#x25BE;",
+    "Character": "&dtrif;"
+  },
+  {
+    "Entity Name": "⇵",
+    "Decimal": "&#8629;",
+    "Hexadecimal": "&#x21F5;",
+    "Character": "&duarr;"
+  },
+  {
+    "Entity Name": "é",
+    "Decimal": "&#233;",
+    "Hexadecimal": "&#xE9;",
+    "Character": "&eacute;"
+  },
+  {
+    "Entity Name": "É",
+    "Decimal": "&#201;",
+    "Hexadecimal": "&#xC9;",
+    "Character": "&Eacute;"
+  },
+  {
+    "Entity Name": "ě",
+    "Decimal": "&#283;",
+    "Hexadecimal": "&#x11B;",
+    "Character": "&ecaron;"
+  },
+  {
+    "Entity Name": "Ě",
+    "Decimal": "&#282;",
+    "Hexadecimal": "&#x11A;",
+    "Character": "&Ecaron;"
+  },
+  {
+    "Entity Name": "≕",
+    "Decimal": "&#8789;",
+    "Hexadecimal": "&#x2255;",
+    "Character": "&ecir;"
+  },
+  {
+    "Entity Name": "ê",
+    "Decimal": "&#234;",
+    "Hexadecimal": "&#xEA;",
+    "Character": "&ecirc;"
+  },
+  {
+    "Entity Name": "Ê",
+    "Decimal": "&#202;",
+    "Hexadecimal": "&#xCA;",
+    "Character": "&Ecirc;"
+  },
+  {
+    "Entity Name": "≔",
+    "Decimal": "&#8788;",
+    "Hexadecimal": "&#x2254;",
+    "Character": "&ecolon;"
+  },
+  {
+    "Entity Name": "э",
+    "Decimal": "&#1091;",
+    "Hexadecimal": "&#x44D;",
+    "Character": "&ecy;"
+  },
+  {
+    "Entity Name": "Э",
+    "Decimal": "&#1053;",
+    "Hexadecimal": "&#x42D;",
+    "Character": "&Ecy;"
+  },
+  {
+    "Entity Name": "ė",
+    "Decimal": "&#279;",
+    "Hexadecimal": "&#x117;",
+    "Character": "&edot;"
+  },
+  {
+    "Entity Name": "Ė",
+    "Decimal": "&#278;",
+    "Hexadecimal": "&#x116;",
+    "Character": "&Edot;"
+  },
+  {
+    "Entity Name": "≐",
+    "Decimal": "&#8784;",
+    "Hexadecimal": "&#x2250;",
+    "Character": "&eDot;"
+  },
+  {
+    "Entity Name": "≑",
+    "Decimal": "&#8785;",
+    "Hexadecimal": "&#x2251;",
+    "Character": "&efDot;"
+  },
+  {
+    "Entity Name": "𝔝",
+    "Decimal": "&#120098;",
+    "Hexadecimal": "&#x1D522;",
+    "Character": "&efr;"
+  },
+  {
+    "Entity Name": "𝔇",
+    "Decimal": "&#120071;",
+    "Hexadecimal": "&#x1D508;",
+    "Character": "&Efr;"
+  },
+  {
+    "Entity Name": "è",
+    "Decimal": "&#232;",
+    "Hexadecimal": "&#xE8;",
+    "Character": "&egrave;"
+  },
+  {
+    "Entity Name": "È",
+    "Decimal": "&#200;",
+    "Hexadecimal": "&#xC8;",
+    "Character": "&Egrave;"
+  },
+  {
+    "Entity Name": "ℓ",
+    "Decimal": "&#8467;",
+    "Hexadecimal": "&#x2113;",
+    "Character": "&ell;"
+  },
+  {
+    "Entity Name": "ē",
+    "Decimal": "&#275;",
+    "Hexadecimal": "&#x113;",
+    "Character": "&emacr;"
+  },
+  {
+    "Entity Name": "Ē",
+    "Decimal": "&#274;",
+    "Hexadecimal": "&#x112;",
+    "Character": "&Emacr;"
+  },
+  {
+    "Entity Name": "∅",
+    "Decimal": "&#8709;",
+    "Hexadecimal": "&#x2205;",
+    "Character": "&empty;"
+  },
+  {
+    "Entity Name": "◻",
+    "Decimal": "&#9723;",
+    "Hexadecimal": "&#x25FB;",
+    "Character": "&EmptySmallSquare;"
+  },
+  {
+    "Entity Name": "▫",
+    "Decimal": "&#9643;",
+    "Hexadecimal": "&#x25AB;",
+    "Character": "&EmptyVerySmallSquare;"
+  },
+  {
+    "Entity Name": "",
+    "Decimal": "&#8194;",
+    "Hexadecimal": "&#x2002;",
+    "Character": "&ensp;"
+  },
+  {
+    "Entity Name": "ŋ",
+    "Decimal": "&#331;",
+    "Hexadecimal": "&#x14B;",
+    "Character": "&eng;"
+  },
+  {
+    "Entity Name": "Ŋ",
+    "Decimal": "&#330;",
+    "Hexadecimal": "&#x14A;",
+    "Character": "&ENG;"
+  },
+  {
+    "Entity Name": "ę",
+    "Decimal": "&#281;",
+    "Hexadecimal": "&#x119;",
+    "Character": "&eogon;"
+  },
+  {
+    "Entity Name": "Ę",
+    "Decimal": "&#280;",
+    "Hexadecimal": "&#x118;",
+    "Character": "&Eogon;"
+  },
+  {
+    "Entity Name": "𝕊",
+    "Decimal": "&#120150;",
+    "Hexadecimal": "&#x1D556;",
+    "Character": "&eopf;"
+  },
+  {
+    "Entity Name": "𝔶",
+    "Decimal": "&#120118;",
+    "Hexadecimal": "&#x1D53C;",
+    "Character": "&Eopf;"
+  },
+  {
+    "Entity Name": "⋕",
+    "Decimal": "&#8917;",
+    "Hexadecimal": "&#x22D5;",
+    "Character": "&epar;"
+  },
+  {
+    "Entity Name": "ε",
+    "Decimal": "&#949;",
+    "Hexadecimal": "&#x3B5;",
+    "Character": "&epsi;"
+  },
+  {
+    "Entity Name": "ϵ",
+    "Decimal": "&#1013;",
+    "Hexadecimal": "&#x3F5;",
+    "Character": "&epsiv;"
+  },
+  {
+    "Entity Name": "≟",
+    "Decimal": "&#8799;",
+    "Hexadecimal": "&#x225F;",
+    "Character": "&equest;"
+  },
+  {
+    "Entity Name": "≡",
+    "Decimal": "&#8801;",
+    "Hexadecimal": "&#x2261;",
+    "Character": "&equiv;"
+  },
+  {
+    "Entity Name": "ℯ",
+    "Decimal": "&#8495;",
+    "Hexadecimal": "&#x212F;",
+    "Character": "&escr;"
+  },
+  {
+    "Entity Name": "𝒠",
+    "Decimal": "&#8480;",
+    "Hexadecimal": "&#x2130;",
+    "Character": "&Escr;"
+  },
+  {
+    "Entity Name": "≏",
+    "Decimal": "&#8783;",
+    "Hexadecimal": "&#x224F;",
+    "Character": "&esdot;"
+  },
+  {
+    "Entity Name": "≂",
+    "Decimal": "&#8770;",
+    "Hexadecimal": "&#x2242;",
+    "Character": "&esim;"
+  },
+  {
+    "Entity Name": "η",
+    "Decimal": "&#951;",
+    "Hexadecimal": "&#x3B7;",
+    "Character": "&eta;"
+  },
+  {
+    "Entity Name": "Η",
+    "Decimal": "&#919;",
+    "Hexadecimal": "&#x397;",
+    "Character": "&Eta;"
+  },
+  {
+    "Entity Name": "ð",
+    "Decimal": "&#240;",
+    "Hexadecimal": "&#xF0;",
+    "Character": "&eth;"
+  },
+  {
+    "Entity Name": "Ð",
+    "Decimal": "&#208;",
+    "Hexadecimal": "&#xD0;",
+    "Character": "&ETH;"
+  },
+  {
+    "Entity Name": "ë",
+    "Decimal": "&#235;",
+    "Hexadecimal": "&#xEB;",
+    "Character": "&euml;"
+  },
+  {
+    "Entity Name": "Ë",
+    "Decimal": "&#203;",
+    "Hexadecimal": "&#xCB;",
+    "Character": "&Euml;"
+  },
+  {
+    "Entity Name": "€",
+    "Decimal": "&#8364;",
+    "Hexadecimal": "&#x20AC;",
+    "Character": "&euro;"
+  },
+  {
+    "Entity Name": "∃",
+    "Decimal": "&#8707;",
+    "Hexadecimal": "&#x2203;",
+    "Character": "&exist;"
+  },
+  {
+    "Entity Name": "ⅇ",
+    "Decimal": "&#8519;",
+    "Hexadecimal": "&#x2147;",
+    "Character": "&ExponentialE;"
+  },
+  {
+    "Entity Name": "ф",
+    "Decimal": "&#1092;",
+    "Hexadecimal": "&#x444;",
+    "Character": "&fcy;"
+  },
+  {
+    "Entity Name": "Ф",
+    "Decimal": "&#1060;",
+    "Hexadecimal": "&#x424;",
+    "Character": "&Fcy;"
+  },
+  {
+    "Entity Name": "♀",
+    "Decimal": "&#9792;",
+    "Hexadecimal": "&#x2640;",
+    "Character": "&female;"
+  },
+  {
+    "Entity Name": "𝔞",
+    "Decimal": "&#120099;",
+    "Hexadecimal": "&#x1D523;",
+    "Character": "&ffr;"
+  },
+  {
+    "Entity Name": "𝔈",
+    "Decimal": "&#120072;",
+    "Hexadecimal": "&#x1D509;",
+    "Character": "&Ffr;"
+  },
+  {
+    "Entity Name": "◼",
+    "Decimal": "&#9724;",
+    "Hexadecimal": "&#x25FC;",
+    "Character": "&FilledSmallSquare;"
+  },
+  {
+    "Entity Name": "♭",
+    "Decimal": "&#9837;",
+    "Hexadecimal": "&#x266D;",
+    "Character": "&flat;"
+  },
+  {
+    "Entity Name": "ƒ",
+    "Decimal": "&#402;",
+    "Hexadecimal": "&#x192;",
+    "Character": "&fnof;"
+  },
+  {
+    "Entity Name": "𝕋",
+    "Decimal": "&#120151;",
+    "Hexadecimal": "&#x1D557;",
+    "Character": "&fopf;"
+  },
+  {
+    "Entity Name": "𝔷",
+    "Decimal": "&#120119;",
+    "Hexadecimal": "&#x1D53D;",
+    "Character": "&Fopf;"
+  },
+  {
+    "Entity Name": "∀",
+    "Decimal": "&#8704;",
+    "Hexadecimal": "&#x2200;",
+    "Character": "&forall;"
+  },
+  {
+    "Entity Name": "⋔",
+    "Decimal": "&#8916;",
+    "Hexadecimal": "&#x22D4;",
+    "Character": "&fork;"
+  },
+  {
+    "Entity Name": "½",
+    "Decimal": "&#189;",
+    "Hexadecimal": "&#xBD;",
+    "Character": "&frac12;"
+  },
+  {
+    "Entity Name": "⅓",
+    "Decimal": "&#8531;",
+    "Hexadecimal": "&#x2153;",
+    "Character": "&frac13;"
+  },
+  {
+    "Entity Name": "¼",
+    "Decimal": "&#188;",
+    "Hexadecimal": "&#xBC;",
+    "Character": "&frac14;"
+  },
+  {
+    "Entity Name": "⅕",
+    "Decimal": "&#8533;",
+    "Hexadecimal": "&#x2155;",
+    "Character": "&frac15;"
+  },
+  {
+    "Entity Name": "⅙",
+    "Decimal": "&#8537;",
+    "Hexadecimal": "&#x2159;",
+    "Character": "&frac16;"
+  },
+  {
+    "Entity Name": "⅛",
+    "Decimal": "&#8539;",
+    "Hexadecimal": "&#x215B;",
+    "Character": "&frac18;"
+  },
+  {
+    "Entity Name": "⅔",
+    "Decimal": "&#8532;",
+    "Hexadecimal": "&#x2154;",
+    "Character": "&frac23;"
+  },
+  {
+    "Entity Name": "⅖",
+    "Decimal": "&#8534;",
+    "Hexadecimal": "&#x2156;",
+    "Character": "&frac25;"
+  },
+  {
+    "Entity Name": "¾",
+    "Decimal": "&#190;",
+    "Hexadecimal": "&#xBE;",
+    "Character": "&frac34;"
+  },
+  {
+    "Entity Name": "⅗",
+    "Decimal": "&#8535;",
+    "Hexadecimal": "&#x2157;",
+    "Character": "&frac35;"
+  },
+  {
+    "Entity Name": "⅜",
+    "Decimal": "&#8540;",
+    "Hexadecimal": "&#x215C;",
+    "Character": "&frac38;"
+  },
+  {
+    "Entity Name": "⅘",
+    "Decimal": "&#8536;",
+    "Hexadecimal": "&#x2158;",
+    "Character": "&frac45;"
+  },
+  {
+    "Entity Name": "⅚",
+    "Decimal": "&#8538;",
+    "Hexadecimal": "&#x215A;",
+    "Character": "&frac56;"
+  },
+  {
+    "Entity Name": "⅝",
+    "Decimal": "&#8541;",
+    "Hexadecimal": "&#x215D;",
+    "Character": "&frac58;"
+  },
+  {
+    "Entity Name": "⅞",
+    "Decimal": "&#8542;",
+    "Hexadecimal": "&#x215E;",
+    "Character": "&frac78;"
+  },
+  {
+    "Entity Name": "⁄",
+    "Decimal": "&#8260;",
+    "Hexadecimal": "&#x2044;",
+    "Character": "&frasl;"
+  },
+  {
+    "Entity Name": "⌢",
+    "Decimal": "&#8994;",
+    "Hexadecimal": "&#x2322;",
+    "Character": "&frown;"
+  },
+  {
+    "Entity Name": "𝒺",
+    "Decimal": "&#119994;",
+    "Hexadecimal": "&#x1D4BB;",
+    "Character": "&fscr;"
+  },
+  {
+    "Entity Name": "𝒡",
+    "Decimal": "&#8481;",
+    "Hexadecimal": "&#x2131;",
+    "Character": "&Fscr;"
+  },
+  {
+    "Entity Name": "γ",
+    "Decimal": "&#947;",
+    "Hexadecimal": "&#x3B3;",
+    "Character": "&gamma;"
+  },
+  {
+    "Entity Name": "Γ",
+    "Decimal": "&#915;",
+    "Hexadecimal": "&#x393;",
+    "Character": "&Gamma;"
+  },
+  {
+    "Entity Name": "Ϝ",
+    "Decimal": "&#988;",
+    "Hexadecimal": "&#x3DC;",
+    "Character": "&Gammad;"
+  },
+  {
+    "Entity Name": "ϝ",
+    "Decimal": "&#989;",
+    "Hexadecimal": "&#x3DD;",
+    "Character": "&gammad;"
+  },
+  {
+    "Entity Name": "ğ",
+    "Decimal": "&#287;",
+    "Hexadecimal": "&#x11F;",
+    "Character": "&gbreve;"
+  },
+  {
+    "Entity Name": "Ğ",
+    "Decimal": "&#286;",
+    "Hexadecimal": "&#x11E;",
+    "Character": "&Gbreve;"
+  },
+  {
+    "Entity Name": "Ģ",
+    "Decimal": "&#290;",
+    "Hexadecimal": "&#x122;",
+    "Character": "&Gcedil;"
+  },
+  {
+    "Entity Name": "ĝ",
+    "Decimal": "&#285;",
+    "Hexadecimal": "&#x11D;",
+    "Character": "&gcirc;"
+  },
+  {
+    "Entity Name": "Ĝ",
+    "Decimal": "&#284;",
+    "Hexadecimal": "&#x11C;",
+    "Character": "&Gcirc;"
+  },
+  {
+    "Entity Name": "г",
+    "Decimal": "&#1075;",
+    "Hexadecimal": "&#x433;",
+    "Character": "&gcy;"
+  },
+  {
+    "Entity Name": "Г",
+    "Decimal": "&#1043;",
+    "Hexadecimal": "&#x413;",
+    "Character": "&Gcy;"
+  },
+  {
+    "Entity Name": "ġ",
+    "Decimal": "&#289;",
+    "Hexadecimal": "&#x121;",
+    "Character": "&gdot;"
+  },
+  {
+    "Entity Name": "Ġ",
+    "Decimal": "&#288;",
+    "Hexadecimal": "&#x120;",
+    "Character": "&Gdot;"
+  },
+  {
+    "Entity Name": "≥",
+    "Decimal": "&#8805;",
+    "Hexadecimal": "&#x2265;",
+    "Character": "&ge;"
+  },
+  {
+    "Entity Name": "≧",
+    "Decimal": "&#8807;",
+    "Hexadecimal": "&#x2267;",
+    "Character": "&gE;"
+  },
+  {
+    "Entity Name": "⋛",
+    "Decimal": "&#8923;",
+    "Hexadecimal": "&#x22DB;",
+    "Character": "&gel;"
+  },
+  {
+    "Entity Name": "⪌",
+    "Decimal": "&#10764;",
+    "Hexadecimal": "&#x2A8C;",
+    "Character": "&gEl;"
+  },
+  {
+    "Entity Name": "⩾",
+    "Decimal": "&#10878;",
+    "Hexadecimal": "&#x2A7E;",
+    "Character": "&ges;"
+  },
+  {
+    "Entity Name": "𝔟",
+    "Decimal": "&#120100;",
+    "Hexadecimal": "&#x1D524;",
+    "Character": "&gfr;"
+  },
+  {
+    "Entity Name": "𝔉",
+    "Decimal": "&#120073;",
+    "Hexadecimal": "&#x1D50A;",
+    "Character": "&Gfr;"
+  },
+  {
+    "Entity Name": "⋙",
+    "Decimal": "&#8921;",
+    "Hexadecimal": "&#x22D9;",
+    "Character": "&Gg;"
+  },
+  {
+    "Entity Name": "ℷ",
+    "Decimal": "&#8503;",
+    "Hexadecimal": "&#x2137;",
+    "Character": "&gimel;"
+  },
+  {
+    "Entity Name": "ѓ",
+    "Decimal": "&#1107;",
+    "Hexadecimal": "&#x453;",
+    "Character": "&gjcy;"
+  },
+  {
+    "Entity Name": "Ѓ",
+    "Decimal": "&#1027;",
+    "Hexadecimal": "&#x403;",
+    "Character": "&GJcy;"
+  },
+  {
+    "Entity Name": "≷",
+    "Decimal": "&#8823;",
+    "Hexadecimal": "&#x2277;",
+    "Character": "&gl;"
+  },
+  {
+    "Entity Name": "⪒",
+    "Decimal": "&#10770;",
+    "Hexadecimal": "&#x2A92;",
+    "Character": "&glE;"
+  },
+  {
+    "Entity Name": "𝕌",
+    "Decimal": "&#120152;",
+    "Hexadecimal": "&#x1D558;",
+    "Character": "&gopf;"
+  },
+  {
+    "Entity Name": "𝔸",
+    "Decimal": "&#120120;",
+    "Hexadecimal": "&#x1D53E;",
+    "Character": "&Gopf;"
+  },
+  {
+    "Entity Name": "``",
+    "Decimal": "&#96;",
+    "Hexadecimal": "&#x60;",
+    "Character": "&grave;"
+  },
+  {
+    "Entity Name": "ℊ",
+    "Decimal": "&#8458;",
+    "Hexadecimal": "&#x210A;",
+    "Character": "&gscr;"
+  },
+  {
+    "Entity Name": "𝒢",
+    "Decimal": "&#119970;",
+    "Hexadecimal": "&#x1D4A2;",
+    "Character": "&Gscr;"
+  },
+  {
+    "Entity Name": "≳",
+    "Decimal": "&#8819;",
+    "Hexadecimal": "&#x2273;",
+    "Character": "&gsim;"
+  },
+  {
+    "Entity Name": "≫",
+    "Decimal": "&#8811;",
+    "Hexadecimal": "&#x226B;",
+    "Character": "&Gt;"
+  },
+  {
+    "Entity Name": "ĥ",
+    "Decimal": "&#293;",
+    "Hexadecimal": "&#x125;",
+    "Character": "&hcirc;"
+  },
+  {
+    "Entity Name": "Ĥ",
+    "Decimal": "&#292;",
+    "Hexadecimal": "&#x124;",
+    "Character": "&Hcirc;"
+  },
+  {
+    "Entity Name": "♥",
+    "Decimal": "&#9829;",
+    "Hexadecimal": "&#x2665;",
+    "Character": "&hearts;"
+  },
+  {
+    "Entity Name": "…",
+    "Decimal": "&#8230;",
+    "Hexadecimal": "&#x2026;",
+    "Character": "&hellip;"
+  },
+  {
+    "Entity Name": "⊹",
+    "Decimal": "&#8889;",
+    "Hexadecimal": "&#x22B9;",
+    "Character": "&hercon;"
+  },
+  {
+    "Entity Name": "𝔠",
+    "Decimal": "&#120101;",
+    "Hexadecimal": "&#x1D525;",
+    "Character": "&hfr;"
+  },
+  {
+    "Entity Name": "ℌ",
+    "Decimal": "&#8460;",
+    "Hexadecimal": "&#x210C;",
+    "Character": "&Hfr;"
+  },
+  {
+    "Entity Name": "⇿",
+    "Decimal": "&#8703;",
+    "Hexadecimal": "&#x21FF;",
+    "Character": "&hoarr;"
+  },
+  {
+    "Entity Name": "∻",
+    "Decimal": "&#8763;",
+    "Hexadecimal": "&#x223B;",
+    "Character": "&homtht;"
+  },
+  {
+    "Entity Name": "𝕍",
+    "Decimal": "&#120153;",
+    "Hexadecimal": "&#x1D559;",
+    "Character": "&hopf;"
+  },
+  {
+    "Entity Name": "―",
+    "Decimal": "&#8213;",
+    "Hexadecimal": "&#x2015;",
+    "Character": "&horbar;"
+  },
+  {
+    "Entity Name": "𝒻",
+    "Decimal": "&#119995;",
+    "Hexadecimal": "&#x1D4BD;",
+    "Character": "&hscr;"
+  },
+  {
+    "Entity Name": "ħ",
+    "Decimal": "&#295;",
+    "Hexadecimal": "&#x127;",
+    "Character": "&hstrok;"
+  },
+  {
+    "Entity Name": "Ħ",
+    "Decimal": "&#294;",
+    "Hexadecimal": "&#x126;",
+    "Character": "&Hstrok;"
+  },
+  {
+    "Entity Name": "í",
+    "Decimal": "&#237;",
+    "Hexadecimal": "&#xED;",
+    "Character": "&iacute;"
+  },
+  {
+    "Entity Name": "Í",
+    "Decimal": "&#205;",
+    "Hexadecimal": "&#xCD;",
+    "Character": "&Iacute;"
+  },
+  {
+    "Entity Name": "î",
+    "Decimal": "&#238;",
+    "Hexadecimal": "&#xEE;",
+    "Character": "&icirc;"
+  },
+  {
+    "Entity Name": "Î",
+    "Decimal": "&#206;",
+    "Hexadecimal": "&#xCE;",
+    "Character": "&Icirc;"
+  },
+  {
+    "Entity Name": "и",
+    "Decimal": "&#1080;",
+    "Hexadecimal": "&#x438;",
+    "Character": "&icy;"
+  },
+  {
+    "Entity Name": "И",
+    "Decimal": "&#1048;",
+    "Hexadecimal": "&#x418;",
+    "Character": "&Icy;"
+  },
+  {
+    "Entity Name": "İ",
+    "Decimal": "&#304;",
+    "Hexadecimal": "&#x130;",
+    "Character": "&Idot;"
+  },
+  {
+    "Entity Name": "е",
+    "Decimal": "&#1077;",
+    "Hexadecimal": "&#x435;",
+    "Character": "&iecy;"
+  },
+  {
+    "Entity Name": "Е",
+    "Decimal": "&#1045;",
+    "Hexadecimal": "&#x415;",
+    "Character": "&IEcy;"
+  },
+  {
+    "Entity Name": "¡",
+    "Decimal": "&#161;",
+    "Hexadecimal": "&#xA1;",
+    "Character": "&iexcl;"
+  },
+  {
+    "Entity Name": "𝔡",
+    "Decimal": "&#120102;",
+    "Hexadecimal": "&#x1D526;",
+    "Character": "&ifr;"
+  },
+  {
+    "Entity Name": "ì",
+    "Decimal": "&#236;",
+    "Hexadecimal": "&#xEC;",
+    "Character": "&igrave;"
+  },
+  {
+    "Entity Name": "Ì",
+    "Decimal": "&#204;",
+    "Hexadecimal": "&#xCC;",
+    "Character": "&Igrave;"
+  },
+  {
+    "Entity Name": "℩",
+    "Decimal": "&#8489;",
+    "Hexadecimal": "&#x2129;",
+    "Character": "&iiota;"
+  },
+  {
+    "Entity Name": "ĳ",
+    "Decimal": "&#307;",
+    "Hexadecimal": "&#x133;",
+    "Character": "&ijlig;"
+  },
+  {
+    "Entity Name": "Ĳ",
+    "Decimal": "&#306;",
+    "Hexadecimal": "&#x132;",
+    "Character": "&IJlig;"
+  },
+  {
+    "Entity Name": "ī",
+    "Decimal": "&#299;",
+    "Hexadecimal": "&#x12B;",
+    "Character": "&imacr;"
+  },
+  {
+    "Entity Name": "Ī",
+    "Decimal": "&#298;",
+    "Hexadecimal": "&#x12A;",
+    "Character": "&Imacr;"
+  },
+  {
+    "Entity Name": "ℑ",
+    "Decimal": "&#8465;",
+    "Hexadecimal": "&#x2111;",
+    "Character": "&image;"
+  },
+  {
+    "Entity Name": "ⅈ",
+    "Decimal": "&#8520;",
+    "Hexadecimal": "&#x2148;",
+    "Character": "&ImaginaryI;"
+  },
+  {
+    "Entity Name": "ı",
+    "Decimal": "&#305;",
+    "Hexadecimal": "&#x131;",
+    "Character": "&imath;"
+  },
+  {
+    "Entity Name": "⊷",
+    "Decimal": "&#8887;",
+    "Hexadecimal": "&#x22B7;",
+    "Character": "&imof;"
+  },
+  {
+    "Entity Name": "Ƶ",
+    "Decimal": "&#437;",
+    "Hexadecimal": "&#x1B5;",
+    "Character": "&imped;"
+  },
+  {
+    "Entity Name": "℅",
+    "Decimal": "&#8453;",
+    "Hexadecimal": "&#x2105;",
+    "Character": "&incare;"
+  },
+  {
+    "Entity Name": "∞",
+    "Decimal": "&#8734;",
+    "Hexadecimal": "&#x221E;",
+    "Character": "&infin;"
+  },
+  {
+    "Entity Name": "∬",
+    "Decimal": "&#8748;",
+    "Hexadecimal": "&#x222C;",
+    "Character": "&Int;"
+  },
+  {
+    "Entity Name": "∫",
+    "Decimal": "&#8747;",
+    "Hexadecimal": "&#x222B;",
+    "Character": "&int;"
+  },
+  {
+    "Entity Name": "⊺",
+    "Decimal": "&#8890;",
+    "Hexadecimal": "&#x22BA;",
+    "Character": "&intcal;"
+  },
+  {
+    "Entity Name": "ℤ",
+    "Decimal": "&#8484;",
+    "Hexadecimal": "&#x2124;",
+    "Character": "&integers;"
+  },
+  {
+    "Entity Name": "ё",
+    "Decimal": "&#1105;",
+    "Hexadecimal": "&#x451;",
+    "Character": "&iocy;"
+  },
+  {
+    "Entity Name": "Ё",
+    "Decimal": "&#1025;",
+    "Hexadecimal": "&#x401;",
+    "Character": "&IOcy;"
+  },
+  {
+    "Entity Name": "į",
+    "Decimal": "&#303;",
+    "Hexadecimal": "&#x12F;",
+    "Character": "&iogon;"
+  },
+  {
+    "Entity Name": "Į",
+    "Decimal": "&#302;",
+    "Hexadecimal": "&#x12E;",
+    "Character": "&Iogon;"
+  },
+  {
+    "Entity Name": "𝕎",
+    "Decimal": "&#120154;",
+    "Hexadecimal": "&#x1D55A;",
+    "Character": "&iopf;"
+  },
+  {
+    "Entity Name": "𝔹",
+    "Decimal": "&#120121;",
+    "Hexadecimal": "&#x1D540;",
+    "Character": "&Iopf;"
+  },
+  {
+    "Entity Name": "ι",
+    "Decimal": "&#953;",
+    "Hexadecimal": "&#x3B9;",
+    "Character": "&iota;"
+  },
+  {
+    "Entity Name": "Ι",
+    "Decimal": "&#921;",
+    "Hexadecimal": "&#x399;",
+    "Character": "&Iota;"
+  },
+  {
+    "Entity Name": "⨼",
+    "Decimal": "&#10812;",
+    "Hexadecimal": "&#x2A3C;",
+    "Character": "&iprod;"
+  },
+  {
+    "Entity Name": "¿",
+    "Decimal": "&#191;",
+    "Hexadecimal": "&#xBF;",
+    "Character": "&iquest;"
+  },
+  {
+    "Entity Name": "𝒾",
+    "Decimal": "&#119997;",
+    "Hexadecimal": "&#x1D4C0;",
+    "Character": "&iscr;"
+  },
+  {
+    "Entity Name": "𝒠",
+    "Decimal": "&#8480;",
+    "Hexadecimal": "&#x2110;",
+    "Character": "&Iscr;"
+  },
+  {
+    "Entity Name": "∈",
+    "Decimal": "&#8712;",
+    "Hexadecimal": "&#x2208;",
+    "Character": "&isin;"
+  },
+  {
+    "Entity Name": "ĩ",
+    "Decimal": "&#297;",
+    "Hexadecimal": "&#x129;",
+    "Character": "&itilde;"
+  },
+  {
+    "Entity Name": "Ĩ",
+    "Decimal": "&#296;",
+    "Hexadecimal": "&#x128;",
+    "Character": "&Itilde;"
+  },
+  {
+    "Entity Name": "і",
+    "Decimal": "&#1110;",
+    "Hexadecimal": "&#x456;",
+    "Character": "&iukcy;"
+  },
+  {
+    "Entity Name": "І",
+    "Decimal": "&#1030;",
+    "Hexadecimal": "&#x406;",
+    "Character": "&Iukcy;"
+  },
+  {
+    "Entity Name": "ï",
+    "Decimal": "&#239;",
+    "Hexadecimal": "&#xEF;",
+    "Character": "&iuml;"
+  },
+  {
+    "Entity Name": "Ï",
+    "Decimal": "&#207;",
+    "Hexadecimal": "&#xCF;",
+    "Character": "&Iuml;"
+  },
+  {
+    "Entity Name": "ĵ",
+    "Decimal": "&#309;",
+    "Hexadecimal": "&#x135;",
+    "Character": "&jcirc;"
+  },
+  {
+    "Entity Name": "Ĵ",
+    "Decimal": "&#308;",
+    "Hexadecimal": "&#x134;",
+    "Character": "&Jcirc;"
+  },
+  {
+    "Entity Name": "й",
+    "Decimal": "&#1081;",
+    "Hexadecimal": "&#x439;",
+    "Character": "&jcy;"
+  },
+  {
+    "Entity Name": "Й",
+    "Decimal": "&#1049;",
+    "Hexadecimal": "&#x419;",
+    "Character": "&Jcy;"
+  },
+  {
+    "Entity Name": "𝔢",
+    "Decimal": "&#120103;",
+    "Hexadecimal": "&#x1D527;",
+    "Character": "&jfr;"
+  },
+  {
+    "Entity Name": "𝔊",
+    "Decimal": "&#120074;",
+    "Hexadecimal": "&#x1D50D;",
+    "Character": "&Jfr;"
+  },
+  {
+    "Entity Name": "ȷ",
+    "Decimal": "&#567;",
+    "Hexadecimal": "&#x237;",
+    "Character": "&jmath;"
+  },
+  {
+    "Entity Name": "𝕏",
+    "Decimal": "&#120155;",
+    "Hexadecimal": "&#x1D55B;",
+    "Character": "&jopf;"
+  },
+  {
+    "Entity Name": "𝔺",
+    "Decimal": "&#120122;",
+    "Hexadecimal": "&#x1D541;",
+    "Character": "&Jopf;"
+  },
+  {
+    "Entity Name": "𝒽",
+    "Decimal": "&#119996;",
+    "Hexadecimal": "&#x1D4BF;",
+    "Character": "&jscr;"
+  },
+  {
+    "Entity Name": "𝒥",
+    "Decimal": "&#119973;",
+    "Hexadecimal": "&#x1D4A5;",
+    "Character": "&Jscr;"
+  },
+  {
+    "Entity Name": "ј",
+    "Decimal": "&#1112;",
+    "Hexadecimal": "&#x458;",
+    "Character": "&jsercy;"
+  },
+  {
+    "Entity Name": "Ј",
+    "Decimal": "&#1032;",
+    "Hexadecimal": "&#x408;",
+    "Character": "&Jsercy;"
+  },
+  {
+    "Entity Name": "є",
+    "Decimal": "&#1108;",
+    "Hexadecimal": "&#x454;",
+    "Character": "&jukcy;"
+  },
+  {
+    "Entity Name": "Є",
+    "Decimal": "&#1028;",
+    "Hexadecimal": "&#x404;",
+    "Character": "&Jukcy;"
+  },
+  {
+    "Entity Name": "κ",
+    "Decimal": "&#954;",
+    "Hexadecimal": "&#x3BA;",
+    "Character": "&kappa;"
+  },
+  {
+    "Entity Name": "Κ",
+    "Decimal": "&#922;",
+    "Hexadecimal": "&#x39A;",
+    "Character": "&Kappa;"
+  },
+  {
+    "Entity Name": "ϰ",
+    "Decimal": "&#1008;",
+    "Hexadecimal": "&#x3F0;",
+    "Character": "&kappav;"
+  },
+  {
+    "Entity Name": "ķ",
+    "Decimal": "&#311;",
+    "Hexadecimal": "&#x137;",
+    "Character": "&kcedil;"
+  },
+  {
+    "Entity Name": "Ķ",
+    "Decimal": "&#310;",
+    "Hexadecimal": "&#x136;",
+    "Character": "&Kcedil;"
+  },
+  {
+    "Entity Name": "к",
+    "Decimal": "&#1082;",
+    "Hexadecimal": "&#x43A;",
+    "Character": "&kcy;"
+  },
+  {
+    "Entity Name": "К",
+    "Decimal": "&#1050;",
+    "Hexadecimal": "&#x41A;",
+    "Character": "&Kcy;"
+  },
+  {
+    "Entity Name": "𝔣",
+    "Decimal": "&#120104;",
+    "Hexadecimal": "&#x1D528;",
+    "Character": "&kfr;"
+  },
+  {
+    "Entity Name": "𝔋",
+    "Decimal": "&#120075;",
+    "Hexadecimal": "&#x1D50E;",
+    "Character": "&Kfr;"
+  },
+  {
+    "Entity Name": "ĸ",
+    "Decimal": "&#312;",
+    "Hexadecimal": "&#x138;",
+    "Character": "&kgreen;"
+  },
+  {
+    "Entity Name": "х",
+    "Decimal": "&#1093;",
+    "Hexadecimal": "&#x445;",
+    "Character": "&khcy;"
+  },
+  {
+    "Entity Name": "Х",
+    "Decimal": "&#1061;",
+    "Hexadecimal": "&#x425;",
+    "Character": "&KHcy;"
+  },
+  {
+    "Entity Name": "ќ",
+    "Decimal": "&#1116;",
+    "Hexadecimal": "&#x45C;",
+    "Character": "&kjcy;"
+  },
+  {
+    "Entity Name": "Ќ",
+    "Decimal": "&#1036;",
+    "Hexadecimal": "&#x40C;",
+    "Character": "&KJcy;"
+  },
+  {
+    "Entity Name": "𝕐",
+    "Decimal": "&#120156;",
+    "Hexadecimal": "&#x1D55C;",
+    "Character": "&kopf;"
+  },
+  {
+    "Entity Name": "𝔻",
+    "Decimal": "&#120123;",
+    "Hexadecimal": "&#x1D542;",
+    "Character": "&Kopf;"
+  },
+  {
+    "Entity Name": "𝒾",
+    "Decimal": "&#119997;",
+    "Hexadecimal": "&#x1D4C0;",
+    "Character": "&kscr;"
+  },
+  {
+    "Entity Name": "𝒦",
+    "Decimal": "&#119974;",
+    "Hexadecimal": "&#x1D4A6;",
+    "Character": "&Kscr;"
+  },
+  {
+    "Entity Name": "⇚",
+    "Decimal": "&#8666;",
+    "Hexadecimal": "&#x21DA;",
+    "Character": "&lAarr;"
+  },
+  {
+    "Entity Name": "ĺ",
+    "Decimal": "&#314;",
+    "Hexadecimal": "&#x13A;",
+    "Character": "&lacute;"
+  },
+  {
+    "Entity Name": "Ĺ",
+    "Decimal": "&#313;",
+    "Hexadecimal": "&#x139;",
+    "Character": "&Lacute;"
+  },
+  {
+    "Entity Name": "λ",
+    "Decimal": "&#955;",
+    "Hexadecimal": "&#x3BB;",
+    "Character": "&lambda;"
+  },
+  {
+    "Entity Name": "Λ",
+    "Decimal": "&#923;",
+    "Hexadecimal": "&#x39B;",
+    "Character": "&Lambda;"
+  },
+  {
+    "Entity Name": "⟨",
+    "Decimal": "&#10216;",
+    "Hexadecimal": "&#x27E8;",
+    "Character": "&lang;"
+  },
+  {
+    "Entity Name": "«",
+    "Decimal": "&#171;",
+    "Hexadecimal": "&#xAB;",
+    "Character": "&laquo;"
+  },
+  {
+    "Entity Name": "⇐",
+    "Decimal": "&#8656;",
+    "Hexadecimal": "&#x21D0;",
+    "Character": "&lArr;"
+  },
+  {
+    "Entity Name": "←",
+    "Decimal": "&#8592;",
+    "Hexadecimal": "&#x2190;",
+    "Character": "&larr;"
+  },
+  {
+    "Entity Name": "↞",
+    "Decimal": "&#8606;",
+    "Hexadecimal": "&#x219E;",
+    "Character": "&Larr;"
+  },
+  {
+    "Entity Name": "⇤",
+    "Decimal": "&#8676;",
+    "Hexadecimal": "&#x21E4;",
+    "Character": "&larrb;"
+  },
+  {
+    "Entity Name": "↩",
+    "Decimal": "&#8617;",
+    "Hexadecimal": "&#x21A9;",
+    "Character": "&larrhk;"
+  },
+  {
+    "Entity Name": "↫",
+    "Decimal": "&#8619;",
+    "Hexadecimal": "&#x21AB;",
+    "Character": "&larrlp;"
+  },
+  {
+    "Entity Name": "↢",
+    "Decimal": "&#8610;",
+    "Hexadecimal": "&#x21A2;",
+    "Character": "&larrtl;"
+  },
+  {
+    "Entity Name": "⌈",
+    "Decimal": "&#8968;",
+    "Hexadecimal": "&#x2308;",
+    "Character": "&lceil;"
+  },
+  {
+    "Entity Name": "л",
+    "Decimal": "&#1083;",
+    "Hexadecimal": "&#x43B;",
+    "Character": "&lcy;"
+  },
+  {
+    "Entity Name": "Л",
+    "Decimal": "&#1051;",
+    "Hexadecimal": "&#x41B;",
+    "Character": "&Lcy;"
+  },
+  {
+    "Entity Name": "“",
+    "Decimal": "&#8220;",
+    "Hexadecimal": "&#x201C;",
+    "Character": "&ldquo;"
+  },
+  {
+    "Entity Name": "≤",
+    "Decimal": "&#8804;",
+    "Hexadecimal": "&#x2264;",
+    "Character": "&le;"
+  },
+  {
+    "Entity Name": "≦",
+    "Decimal": "&#8806;",
+    "Hexadecimal": "&#x2266;",
+    "Character": "&lE;"
+  },
+  {
+    "Entity Name": "↤",
+    "Decimal": "&#8612;",
+    "Hexadecimal": "&#x21A4;",
+    "Character": "&LeftTeeArrow;"
+  },
+  {
+    "Entity Name": "⪋",
+    "Decimal": "&#10763;",
+    "Hexadecimal": "&#x2A8B;",
+    "Character": "&lEg;"
+  },
+  {
+    "Entity Name": "⋚",
+    "Decimal": "&#8922;",
+    "Hexadecimal": "&#x22DA;",
+    "Character": "&leg;"
+  },
+  {
+    "Entity Name": "⩽",
+    "Decimal": "&#10877;",
+    "Hexadecimal": "&#x2A7D;",
+    "Character": "&les;"
+  },
+  {
+    "Entity Name": "⌊",
+    "Decimal": "&#8970;",
+    "Hexadecimal": "&#x230A;",
+    "Character": "&lfloor;"
+  },
+  {
+    "Entity Name": "𝔤",
+    "Decimal": "&#120105;",
+    "Hexadecimal": "&#x1D529;",
+    "Character": "&lfr;"
+  },
+  {
+    "Entity Name": "𝔌",
+    "Decimal": "&#120076;",
+    "Hexadecimal": "&#x1D50F;",
+    "Character": "&Lfr;"
+  },
+  {
+    "Entity Name": "≶",
+    "Decimal": "&#8822;",
+    "Hexadecimal": "&#x2276;",
+    "Character": "&lg;"
+  },
+  {
+    "Entity Name": "↽",
+    "Decimal": "&#8637;",
+    "Hexadecimal": "&#x21BD;",
+    "Character": "&lhard;"
+  },
+  {
+    "Entity Name": "↼",
+    "Decimal": "&#8636;",
+    "Hexadecimal": "&#x21BC;",
+    "Character": "&lharu;"
+  },
+  {
+    "Entity Name": "▄",
+    "Decimal": "&#9604;",
+    "Hexadecimal": "&#x2584;",
+    "Character": "&lhblk;"
+  },
+  {
+    "Entity Name": "љ",
+    "Decimal": "&#1117;",
+    "Hexadecimal": "&#x459;",
+    "Character": "&ljcy;"
+  },
+  {
+    "Entity Name": "Љ",
+    "Decimal": "&#1037;",
+    "Hexadecimal": "&#x409;",
+    "Character": "&LJcy;"
+  },
+  {
+    "Entity Name": "⋘",
+    "Decimal": "&#8920;",
+    "Hexadecimal": "&#x22D8;",
+    "Character": "&Ll;"
+  },
+  {
+    "Entity Name": "⇇",
+    "Decimal": "&#8647;",
+    "Hexadecimal": "&#x21C7;",
+    "Character": "&llarr;"
+  },
+  {
+    "Entity Name": "ŀ",
+    "Decimal": "&#320;",
+    "Hexadecimal": "&#x140;",
+    "Character": "&lmidot;"
+  },
+  {
+    "Entity Name": "Ŀ",
+    "Decimal": "&#319;",
+    "Hexadecimal": "&#x13F;",
+    "Character": "&Lmidot;"
+  },
+  {
+    "Entity Name": "⎰",
+    "Decimal": "&#9136;",
+    "Hexadecimal": "&#x23B0;",
+    "Character": "&lmoust;"
+  },
+  {
+    "Entity Name": "⪉",
+    "Decimal": "&#10761;",
+    "Hexadecimal": "&#x2A89;",
+    "Character": "&lnap;"
+  },
+  {
+    "Entity Name": "⪇",
+    "Decimal": "&#10759;",
+    "Hexadecimal": "&#x2A87;",
+    "Character": "&lne;"
+  },
+  {
+    "Entity Name": "≨",
+    "Decimal": "&#8808;",
+    "Hexadecimal": "&#x2268;",
+    "Character": "&lnE;"
+  },
+  {
+    "Entity Name": "⋦",
+    "Decimal": "&#8934;",
+    "Hexadecimal": "&#x22E6;",
+    "Character": "&lnsim;"
+  },
+  {
+    "Entity Name": "⟦",
+    "Decimal": "&#10150;",
+    "Hexadecimal": "&#x27E6;",
+    "Character": "&lobrk;"
+  },
+  {
+    "Entity Name": "𝕑",
+    "Decimal": "&#120157;",
+    "Hexadecimal": "&#x1D55D;",
+    "Character": "&lopf;"
+  },
+  {
+    "Entity Name": "𝔼",
+    "Decimal": "&#120124;",
+    "Hexadecimal": "&#x1D543;",
+    "Character": "&Lopf;"
+  },
+  {
+    "Entity Name": "⨭",
+    "Decimal": "&#10797;",
+    "Hexadecimal": "&#x2A2D;",
+    "Character": "&loplus;"
+  },
+  {
+    "Entity Name": "⨴",
+    "Decimal": "&#10804;",
+    "Hexadecimal": "&#x2A34;",
+    "Character": "&lotimes;"
+  },
+  {
+    "Entity Name": "∗",
+    "Decimal": "&#8727;",
+    "Hexadecimal": "&#x2217;",
+    "Character": "&lowast;"
+  },
+  {
+    "Entity Name": "_",
+    "Decimal": "&#95;",
+    "Hexadecimal": "&#x5F;",
+    "Character": "&lowbar;"
+  },
+  {
+    "Entity Name": "◊",
+    "Decimal": "&#9674;",
+    "Hexadecimal": "&#x25CA;",
+    "Character": "&loz;"
+  },
+  {
+    "Entity Name": "⧫",
+    "Decimal": "&#10795;",
+    "Hexadecimal": "&#x29EB;",
+    "Character": "&lozf;"
+  },
+  {
+    "Entity Name": "⇆",
+    "Decimal": "&#8646;",
+    "Hexadecimal": "&#x21C6;",
+    "Character": "&lrarr;"
+  },
+  {
+    "Entity Name": "⇋",
+    "Decimal": "&#8651;",
+    "Hexadecimal": "&#x21CB;",
+    "Character": "&lrhar;"
+  },
+  {
+    "Entity Name": "‎",
+    "Decimal": "&#8206;",
+    "Hexadecimal": "&#x200E;",
+    "Character": "&lrm;"
+  },
+  {
+    "Entity Name": "⊿",
+    "Decimal": "&#8895;",
+    "Hexadecimal": "&#x22BF;",
+    "Character": "&lrtri;"
+  },
+  {
+    "Entity Name": "‹",
+    "Decimal": "&#8249;",
+    "Hexadecimal": "&#x2039;",
+    "Character": "&lsaquo;"
+  },
+  {
+    "Entity Name": "𝓁",
+    "Decimal": "&#119998;",
+    "Hexadecimal": "&#x1D4C1;",
+    "Character": "&lscr;"
+  },
+  {
+    "Entity Name": "𝒧",
+    "Decimal": "&#8482;",
+    "Hexadecimal": "&#x2112;",
+    "Character": "&Lscr;"
+  },
+  {
+    "Entity Name": "↰",
+    "Decimal": "&#8624;",
+    "Hexadecimal": "&#x21B0;",
+    "Character": "&lsh;"
+  },
+  {
+    "Entity Name": "≲",
+    "Decimal": "&#8818;",
+    "Hexadecimal": "&#x2272;",
+    "Character": "&lsim;"
+  },
+  {
+    "Entity Name": "‘",
+    "Decimal": "&#8216;",
+    "Hexadecimal": "&#x2018;",
+    "Character": "&lsquo;"
+  },
+  {
+    "Entity Name": "ł",
+    "Decimal": "&#322;",
+    "Hexadecimal": "&#x142;",
+    "Character": "&lstrok;"
+  },
+  {
+    "Entity Name": "Ł",
+    "Decimal": "&#321;",
+    "Hexadecimal": "&#x141;",
+    "Character": "&Lstrok;"
+  },
+  {
+    "Entity Name": "≪",
+    "Decimal": "&#8810;",
+    "Hexadecimal": "&#x226A;",
+    "Character": "&Lt;"
+  },
+  {
+    "Entity Name": "⋋",
+    "Decimal": "&#8907;",
+    "Hexadecimal": "&#x22CB;",
+    "Character": "&lthree;"
+  },
+  {
+    "Entity Name": "⋉",
+    "Decimal": "&#8905;",
+    "Hexadecimal": "&#x22C9;",
+    "Character": "&ltimes;"
+  },
+  {
+    "Entity Name": "◃",
+    "Decimal": "&#9667;",
+    "Hexadecimal": "&#x25C3;",
+    "Character": "&ltri;"
+  },
+  {
+    "Entity Name": "⊴",
+    "Decimal": "&#8884;",
+    "Hexadecimal": "&#x22B4;",
+    "Character": "&ltrie;"
+  },
+  {
+    "Entity Name": "◂",
+    "Decimal": "&#9666;",
+    "Hexadecimal": "&#x25C2;",
+    "Character": "&ltrif;"
+  },
+  {
+    "Entity Name": "¯",
+    "Decimal": "&#175;",
+    "Hexadecimal": "&#xAF;",
+    "Character": "&macr;"
+  },
+  {
+    "Entity Name": "♂",
+    "Decimal": "&#9794;",
+    "Hexadecimal": "&#x2642;",
+    "Character": "&male;"
+  },
+  {
+    "Entity Name": "✠",
+    "Decimal": "&#10016;",
+    "Hexadecimal": "&#x2720;",
+    "Character": "&malt;"
+  },
+  {
+    "Entity Name": "↦",
+    "Decimal": "&#8614;",
+    "Hexadecimal": "&#x21A6;",
+    "Character": "&map;"
+  },
+  {
+    "Entity Name": "▮",
+    "Decimal": "&#9646;",
+    "Hexadecimal": "&#x25AE;",
+    "Character": "&marker;"
+  },
+  {
+    "Entity Name": "м",
+    "Decimal": "&#1084;",
+    "Hexadecimal": "&#x43C;",
+    "Character": "&mcy;"
+  },
+  {
+    "Entity Name": "М",
+    "Decimal": "&#1052;",
+    "Hexadecimal": "&#x41C;",
+    "Character": "&Mcy;"
+  },
+  {
+    "Entity Name": "—",
+    "Decimal": "&#8212;",
+    "Hexadecimal": "&#x2014;",
+    "Character": "&mdash;"
+  },
+  {
+    "Entity Name": "∺",
+    "Decimal": "&#8762;",
+    "Hexadecimal": "&#x223A;",
+    "Character": "&mDDot;"
+  },
+  {
+    "Entity Name": "𝔥",
+    "Decimal": "&#120106;",
+    "Hexadecimal": "&#x1D52A;",
+    "Character": "&mfr;"
+  },
+  {
+    "Entity Name": "𝔍",
+    "Decimal": "&#120077;",
+    "Hexadecimal": "&#x1D510;",
+    "Character": "&Mfr;"
+  },
+  {
+    "Entity Name": "℧",
+    "Decimal": "&#8487;",
+    "Hexadecimal": "&#x2127;",
+    "Character": "&mho;"
+  },
+  {
+    "Entity Name": "µ",
+    "Decimal": "&#181;",
+    "Hexadecimal": "&#xB5;",
+    "Character": "&micro;"
+  },
+  {
+    "Entity Name": "∣",
+    "Decimal": "&#8739;",
+    "Hexadecimal": "&#x2223;",
+    "Character": "&mid;"
+  },
+  {
+    "Entity Name": "·",
+    "Decimal": "&#183;",
+    "Hexadecimal": "&#xB7;",
+    "Character": "&middot;"
+  },
+  {
+    "Entity Name": "−",
+    "Decimal": "&#8722;",
+    "Hexadecimal": "&#x2212;",
+    "Character": "&minus;"
+  },
+  {
+    "Entity Name": "⊟",
+    "Decimal": "&#8863;",
+    "Hexadecimal": "&#x229F;",
+    "Character": "&minusb;"
+  },
+  {
+    "Entity Name": "∸",
+    "Decimal": "&#8760;",
+    "Hexadecimal": "&#x2238;",
+    "Character": "&minusd;"
+  },
+  {
+    "Entity Name": "∓",
+    "Decimal": "&#8739;",
+    "Hexadecimal": "&#x2213;",
+    "Character": "&mnplus;"
+  },
+  {
+    "Entity Name": "⊧",
+    "Decimal": "&#8871;",
+    "Hexadecimal": "&#x22A7;",
+    "Character": "&models;"
+  },
+  {
+    "Entity Name": "𝕒",
+    "Decimal": "&#120158;",
+    "Hexadecimal": "&#x1D55E;",
+    "Character": "&mopf;"
+  },
+  {
+    "Entity Name": "𝔽",
+    "Decimal": "&#120125;",
+    "Hexadecimal": "&#x1D544;",
+    "Character": "&Mopf;"
+  },
+  {
+    "Entity Name": "𝒿",
+    "Decimal": "&#119999;",
+    "Hexadecimal": "&#x1D4C2;",
+    "Character": "&mscr;"
+  },
+  {
+    "Entity Name": "μ",
+    "Decimal": "&#956;",
+    "Hexadecimal": "&#x3BC;",
+    "Character": "&mu;"
+  },
+  {
+    "Entity Name": "Μ",
+    "Decimal": "&#924;",
+    "Hexadecimal": "&#x39C;",
+    "Character": "&Mu;"
+  },
+  {
+    "Entity Name": "⊸",
+    "Decimal": "&#8888;",
+    "Hexadecimal": "&#x22B8;",
+    "Character": "&mumap;"
+  },
+  {
+    "Entity Name": "∇",
+    "Decimal": "&#8711;",
+    "Hexadecimal": "&#x2207;",
+    "Character": "&nabla;"
+  },
+  {
+    "Entity Name": "ń",
+    "Decimal": "&#324;",
+    "Hexadecimal": "&#x144;",
+    "Character": "&nacute;"
+  },
+  {
+    "Entity Name": "Ń",
+    "Decimal": "&#323;",
+    "Hexadecimal": "&#x143;",
+    "Character": "&Nacute;"
+  },
+  {
+    "Entity Name": "♮",
+    "Decimal": "&#9838;",
+    "Hexadecimal": "&#x266E;",
+    "Character": "&natur;"
+  },
+  {
+    "Entity Name": "ň",
+    "Decimal": "&#328;",
+    "Hexadecimal": "&#x148;",
+    "Character": "&ncaron;"
+  },
+  {
+    "Entity Name": "Ň",
+    "Decimal": "&#327;",
+    "Hexadecimal": "&#x147;",
+    "Character": "&Ncaron;"
+  },
+  {
+    "Entity Name": "ņ",
+    "Decimal": "&#326;",
+    "Hexadecimal": "&#x146;",
+    "Character": "&ncedil;"
+  },
+  {
+    "Entity Name": "Ņ",
+    "Decimal": "&#325;",
+    "Hexadecimal": "&#x145;",
+    "Character": "&Ncedil;"
+  },
+  {
+    "Entity Name": "≇",
+    "Decimal": "&#8775;",
+    "Hexadecimal": "&#x2247;",
+    "Character": "&ncong;"
+  },
+  {
+    "Entity Name": "н",
+    "Decimal": "&#1085;",
+    "Hexadecimal": "&#x43D;",
+    "Character": "&ncy;"
+  },
+  {
+    "Entity Name": "Н",
+    "Decimal": "&#1053;",
+    "Hexadecimal": "&#x41D;",
+    "Character": "&Ncy;"
+  },
+  {
+    "Entity Name": "–",
+    "Decimal": "&#8211;",
+    "Hexadecimal": "&#x2013;",
+    "Character": "&ndash;"
+  },
+  {
+    "Entity Name": "≠",
+    "Decimal": "&#8800;",
+    "Hexadecimal": "&#x2260;",
+    "Character": "&ne;"
+  },
+  {
+    "Entity Name": "↗",
+    "Decimal": "&#8599;",
+    "Hexadecimal": "&#x2197;",
+    "Character": "&nearr;"
+  },
+  {
+    "Entity Name": "≢",
+    "Decimal": "&#8802;",
+    "Hexadecimal": "&#x2262;",
+    "Character": "&nequiv;"
+  },
+  {
+    "Entity Name": "𝔦",
+    "Decimal": "&#120107;",
+    "Hexadecimal": "&#x1D52B;",
+    "Character": "&nfr;"
+  },
+  {
+    "Entity Name": "𝔎",
+    "Decimal": "&#120078;",
+    "Hexadecimal": "&#x1D511;",
+    "Character": "&Nfr;"
+  },
+  {
+    "Entity Name": "≱",
+    "Decimal": "&#8817;",
+    "Hexadecimal": "&#x2271;",
+    "Character": "&nge;"
+  },
+  {
+    "Entity Name": "≯",
+    "Decimal": "&#8815;",
+    "Hexadecimal": "&#x226F;",
+    "Character": "&ngt;"
+  },
+  {
+    "Entity Name": "↮",
+    "Decimal": "&#8622;",
+    "Hexadecimal": "&#x21AE;",
+    "Character": "&nharr;"
+  },
+  {
+    "Entity Name": "⇎",
+    "Decimal": "&#8654;",
+    "Hexadecimal": "&#x21CE;",
+    "Character": "&nhArr;"
+  },
+  {
+    "Entity Name": "∋",
+    "Decimal": "&#8715;",
+    "Hexadecimal": "&#x220B;",
+    "Character": "&niv;"
+  },
+  {
+    "Entity Name": "њ",
+    "Decimal": "&#1114;",
+    "Hexadecimal": "&#x45A;",
+    "Character": "&njcy;"
+  },
+  {
+    "Entity Name": "Њ",
+    "Decimal": "&#1034;",
+    "Hexadecimal": "&#x40A;",
+    "Character": "&NJcy;"
+  },
+  {
+    "Entity Name": "↚",
+    "Decimal": "&#8602;",
+    "Hexadecimal": "&#x219A;",
+    "Character": "&nlarr;"
+  },
+  {
+    "Entity Name": "⇍",
+    "Decimal": "&#8653;",
+    "Hexadecimal": "&#x21CD;",
+    "Character": "&nlArr;"
+  },
+  {
+    "Entity Name": "≰",
+    "Decimal": "&#8816;",
+    "Hexadecimal": "&#x2270;",
+    "Character": "&nle;"
+  },
+  {
+    "Entity Name": "≮",
+    "Decimal": "&#8814;",
+    "Hexadecimal": "&#x226E;",
+    "Character": "&nlt;"
+  },
+  {
+    "Entity Name": "⋪",
+    "Decimal": "&#8938;",
+    "Hexadecimal": "&#x22EA;",
+    "Character": "&nltri;"
+  },
+  {
+    "Entity Name": "⋬",
+    "Decimal": "&#8940;",
+    "Hexadecimal": "&#x22EC;",
+    "Character": "&nltrie;"
+  },
+  {
+    "Entity Name": "∤",
+    "Decimal": "&#8740;",
+    "Hexadecimal": "&#x2224;",
+    "Character": "&nmid;"
+  },
+  {
+    "Entity Name": "𝕓",
+    "Decimal": "&#120159;",
+    "Hexadecimal": "&#x1D55F;",
+    "Character": "&nopf;"
+  },
+  {
+    "Entity Name": "ℕ",
+    "Decimal": "&#8469;",
+    "Hexadecimal": "&#x2115;",
+    "Character": "&Nopf;"
+  },
+  {
+    "Entity Name": "¬",
+    "Decimal": "&#172;",
+    "Hexadecimal": "&#xAC;",
+    "Character": "&not;"
+  },
+  {
+    "Entity Name": "∉",
+    "Decimal": "&#8713;",
+    "Hexadecimal": "&#x2209;",
+    "Character": "&notin;"
+  },
+  {
+    "Entity Name": "∌",
+    "Decimal": "&#8716;",
+    "Hexadecimal": "&#x220C;",
+    "Character": "&notni;"
+  },
+  {
+    "Entity Name": "∦",
+    "Decimal": "&#8742;",
+    "Hexadecimal": "&#x2226;",
+    "Character": "&npar;"
+  },
+  {
+    "Entity Name": "⊀",
+    "Decimal": "&#8832;",
+    "Hexadecimal": "&#x2280;",
+    "Character": "&npr;"
+  },
+  {
+    "Entity Name": "⋠",
+    "Decimal": "&#8928;",
+    "Hexadecimal": "&#x22E0;",
+    "Character": "&nprcue;"
+  },
+  {
+    "Entity Name": "↛",
+    "Decimal": "&#8603;",
+    "Hexadecimal": "&#x219B;",
+    "Character": "&nrarr;"
+  },
+  {
+    "Entity Name": "⇏",
+    "Decimal": "&#8655;",
+    "Hexadecimal": "&#x21CF;",
+    "Character": "&nrArr;"
+  },
+  {
+    "Entity Name": "⋫",
+    "Decimal": "&#8939;",
+    "Hexadecimal": "&#x22EB;",
+    "Character": "&nrtri;"
+  },
+  {
+    "Entity Name": "⋭",
+    "Decimal": "&#8941;",
+    "Hexadecimal": "&#x22ED;",
+    "Character": "&nrtrie;"
+  },
+  {
+    "Entity Name": "⊁",
+    "Decimal": "&#8833;",
+    "Hexadecimal": "&#x2281;",
+    "Character": "&nsc;"
+  },
+  {
+    "Entity Name": "⋡",
+    "Decimal": "&#8929;",
+    "Hexadecimal": "&#x22E1;",
+    "Character": "&nsccue;"
+  },
+  {
+    "Entity Name": "𝓀",
+    "Decimal": "&#120000;",
+    "Hexadecimal": "&#x1D4C3;",
+    "Character": "&nscr;"
+  },
+  {
+    "Entity Name": "𝒩",
+    "Decimal": "&#119977;",
+    "Hexadecimal": "&#x1D4A9;",
+    "Character": "&Nscr;"
+  },
+  {
+    "Entity Name": "≁",
+    "Decimal": "&#8769;",
+    "Hexadecimal": "&#x2241;",
+    "Character": "&nsim;"
+  },
+  {
+    "Entity Name": "≄",
+    "Decimal": "&#8772;",
+    "Hexadecimal": "&#x2244;",
+    "Character": "&nsime;"
+  },
+  {
+    "Entity Name": "⋢",
+    "Decimal": "&#8930;",
+    "Hexadecimal": "&#x22E2;",
+    "Character": "&nsqsube;"
+  },
+  {
+    "Entity Name": "⋣",
+    "Decimal": "&#8931;",
+    "Hexadecimal": "&#x22E3;",
+    "Character": "&nsqsupe;"
+  },
+  {
+    "Entity Name": "⊄",
+    "Decimal": "&#8836;",
+    "Hexadecimal": "&#x2284;",
+    "Character": "&nsub;"
+  },
+  {
+    "Entity Name": "⊈",
+    "Decimal": "&#8840;",
+    "Hexadecimal": "&#x2288;",
+    "Character": "&nsube;"
+  },
+  {
+    "Entity Name": "⊅",
+    "Decimal": "&#8837;",
+    "Hexadecimal": "&#x2285;",
+    "Character": "&nsup;"
+  },
+  {
+    "Entity Name": "⊉",
+    "Decimal": "&#8841;",
+    "Hexadecimal": "&#x2289;",
+    "Character": "&nsupe;"
+  },
+  {
+    "Entity Name": "ñ",
+    "Decimal": "&#241;",
+    "Hexadecimal": "&#xF1;",
+    "Character": "&ntilde;"
+  },
+  {
+    "Entity Name": "Ñ",
+    "Decimal": "&#209;",
+    "Hexadecimal": "&#xD1;",
+    "Character": "&Ntilde;"
+  },
+  {
+    "Entity Name": "ν",
+    "Decimal": "&#957;",
+    "Hexadecimal": "&#x3BD;",
+    "Character": "&nu;"
+  },
+  {
+    "Entity Name": "Ν",
+    "Decimal": "&#925;",
+    "Hexadecimal": "&#x39D;",
+    "Character": "&Nu;"
+  },
+  {
+    "Entity Name": "#",
+    "Decimal": "&#35;",
+    "Hexadecimal": "&#x23;",
+    "Character": "&num;"
+  },
+  {
+    "Entity Name": "№",
+    "Decimal": "&#8470;",
+    "Hexadecimal": "&#x2116;",
+    "Character": "&numero;"
+  },
+  {
+    "Entity Name": "⊬",
+    "Decimal": "&#8876;",
+    "Hexadecimal": "&#x22AC;",
+    "Character": "&nvdash;"
+  },
+  {
+    "Entity Name": "⊭",
+    "Decimal": "&#8877;",
+    "Hexadecimal": "&#x22AD;",
+    "Character": "&nvDash;"
+  },
+  {
+    "Entity Name": "⊮",
+    "Decimal": "&#8878;",
+    "Hexadecimal": "&#x22AE;",
+    "Character": "&nVdash;"
+  },
+  {
+    "Entity Name": "⊯",
+    "Decimal": "&#8879;",
+    "Hexadecimal": "&#x22AF;",
+    "Character": "&nVDash;"
+  },
+  {
+    "Entity Name": "↖",
+    "Decimal": "&#8598;",
+    "Hexadecimal": "&#x2196;",
+    "Character": "&nwarr;"
+  },
+  {
+    "Entity Name": "ó",
+    "Decimal": "&#243;",
+    "Hexadecimal": "&#xF3;",
+    "Character": "&oacute;"
+  },
+  {
+    "Entity Name": "Ó",
+    "Decimal": "&#211;",
+    "Hexadecimal": "&#xD3;",
+    "Character": "&Oacute;"
+  },
+  {
+    "Entity Name": "⊛",
+    "Decimal": "&#8859;",
+    "Hexadecimal": "&#x229B;",
+    "Character": "&oast;"
+  },
+  {
+    "Entity Name": "⊚",
+    "Decimal": "&#8858;",
+    "Hexadecimal": "&#x229A;",
+    "Character": "&ocir;"
+  },
+  {
+    "Entity Name": "ô",
+    "Decimal": "&#244;",
+    "Hexadecimal": "&#xF4;",
+    "Character": "&ocirc;"
+  },
+  {
+    "Entity Name": "Ô",
+    "Decimal": "&#212;",
+    "Hexadecimal": "&#xD4;",
+    "Character": "&Ocirc;"
+  },
+  {
+    "Entity Name": "о",
+    "Decimal": "&#1086;",
+    "Hexadecimal": "&#x43E;",
+    "Character": "&ocy;"
+  },
+  {
+    "Entity Name": "О",
+    "Decimal": "&#1054;",
+    "Hexadecimal": "&#x41E;",
+    "Character": "&Ocy;"
+  },
+  {
+    "Entity Name": "⊝",
+    "Decimal": "&#8861;",
+    "Hexadecimal": "&#x229D;",
+    "Character": "&odash;"
+  },
+  {
+    "Entity Name": "ő",
+    "Decimal": "&#337;",
+    "Hexadecimal": "&#x151;",
+    "Character": "&odblac;"
+  },
+  {
+    "Entity Name": "Ő",
+    "Decimal": "&#336;",
+    "Hexadecimal": "&#x150;",
+    "Character": "&Odblac;"
+  },
+  {
+    "Entity Name": "⊙",
+    "Decimal": "&#8857;",
+    "Hexadecimal": "&#x2299;",
+    "Character": "&odot;"
+  },
+  {
+    "Entity Name": "œ",
+    "Decimal": "&#339;",
+    "Hexadecimal": "&#x153;",
+    "Character": "&oelig;"
+  },
+  {
+    "Entity Name": "Œ",
+    "Decimal": "&#338;",
+    "Hexadecimal": "&#x152;",
+    "Character": "&OElig;"
+  },
+  {
+    "Entity Name": "𝔧",
+    "Decimal": "&#120108;",
+    "Hexadecimal": "&#x1D52C;",
+    "Character": "&ofr;"
+  },
+  {
+    "Entity Name": "𝔏",
+    "Decimal": "&#120079;",
+    "Hexadecimal": "&#x1D512;",
+    "Character": "&Ofr;"
+  },
+  {
+    "Entity Name": "˛",
+    "Decimal": "&#731;",
+    "Hexadecimal": "&#x2DB;",
+    "Character": "&ogon;"
+  },
+  {
+    "Entity Name": "ò",
+    "Decimal": "&#242;",
+    "Hexadecimal": "&#xF2;",
+    "Character": "&ograve;"
+  },
+  {
+    "Entity Name": "Ò",
+    "Decimal": "&#210;",
+    "Hexadecimal": "&#xD2;",
+    "Character": "&Ograve;"
+  },
+  {
+    "Entity Name": "↺",
+    "Decimal": "&#8634;",
+    "Hexadecimal": "&#x21BA;",
+    "Character": "&olarr;"
+  },
+  {
+    "Entity Name": "‾",
+    "Decimal": "&#8254;",
+    "Hexadecimal": "&#x203E;",
+    "Character": "&oline;"
+  },
+  {
+    "Entity Name": "ō",
+    "Decimal": "&#333;",
+    "Hexadecimal": "&#x14D;",
+    "Character": "&omacr;"
+  },
+  {
+    "Entity Name": "Ō",
+    "Decimal": "&#332;",
+    "Hexadecimal": "&#x14C;",
+    "Character": "&Omacr;"
+  },
+  {
+    "Entity Name": "ω",
+    "Decimal": "&#969;",
+    "Hexadecimal": "&#x3C9;",
+    "Character": "&omega;"
+  },
+  {
+    "Entity Name": "Ω",
+    "Decimal": "&#937;",
+    "Hexadecimal": "&#x3A9;",
+    "Character": "&Omega;"
+  },
+  {
+    "Entity Name": "ο",
+    "Decimal": "&#959;",
+    "Hexadecimal": "&#x3BF;",
+    "Character": "&omicron;"
+  },
+  {
+    "Entity Name": "Ο",
+    "Decimal": "&#927;",
+    "Hexadecimal": "&#x39F;",
+    "Character": "&Omicron;"
+  },
+  {
+    "Entity Name": "⊖",
+    "Decimal": "&#8854;",
+    "Hexadecimal": "&#x2296;",
+    "Character": "&ominus;"
+  },
+  {
+    "Entity Name": "𝕔",
+    "Decimal": "&#120160;",
+    "Hexadecimal": "&#x1D560;",
+    "Character": "&oopf;"
+  },
+  {
+    "Entity Name": "𝔾",
+    "Decimal": "&#120126;",
+    "Hexadecimal": "&#x1D546;",
+    "Character": "&Oopf;"
+  },
+  {
+    "Entity Name": "⊕",
+    "Decimal": "&#8853;",
+    "Hexadecimal": "&#x2295;",
+    "Character": "&oplus;"
+  },
+  {
+    "Entity Name": "∨",
+    "Decimal": "&#8744;",
+    "Hexadecimal": "&#x2228;",
+    "Character": "&or;"
+  },
+  {
+    "Entity Name": "↻",
+    "Decimal": "&#8635;",
+    "Hexadecimal": "&#x21BB;",
+    "Character": "&orarr;"
+  },
+  {
+    "Entity Name": "ℴ",
+    "Decimal": "&#8500;",
+    "Hexadecimal": "&#x2134;",
+    "Character": "&order;"
+  },
+  {
+    "Entity Name": "ª",
+    "Decimal": "&#170;",
+    "Hexadecimal": "&#xAA;",
+    "Character": "&ordf;"
+  },
+  {
+    "Entity Name": "º",
+    "Decimal": "&#186;",
+    "Hexadecimal": "&#xBA;",
+    "Character": "&ordm;"
+  },
+  {
+    "Entity Name": "⊶",
+    "Decimal": "&#8886;",
+    "Hexadecimal": "&#x22B6;",
+    "Character": "&origof;"
+  },
+  {
+    "Entity Name": "Ⓢ",
+    "Decimal": "&#9416;",
+    "Hexadecimal": "&#x24C8;",
+    "Character": "&oS;"
+  },
+  {
+    "Entity Name": "𝒪",
+    "Decimal": "&#119978;",
+    "Hexadecimal": "&#x1D4AA;",
+    "Character": "&Oscr;"
+  },
+  {
+    "Entity Name": "ø",
+    "Decimal": "&#248;",
+    "Hexadecimal": "&#xF8;",
+    "Character": "&oslash;"
+  },
+  {
+    "Entity Name": "Ø",
+    "Decimal": "&#216;",
+    "Hexadecimal": "&#xD8;",
+    "Character": "&Oslash;"
+  },
+  {
+    "Entity Name": "⊘",
+    "Decimal": "&#8856;",
+    "Hexadecimal": "&#x2298;",
+    "Character": "&osol;"
+  },
+  {
+    "Entity Name": "õ",
+    "Decimal": "&#245;",
+    "Hexadecimal": "&#xF5;",
+    "Character": "&otilde;"
+  },
+  {
+    "Entity Name": "Õ",
+    "Decimal": "&#213;",
+    "Hexadecimal": "&#xD5;",
+    "Character": "&Otilde;"
+  },
+  {
+    "Entity Name": "⊗",
+    "Decimal": "&#8855;",
+    "Hexadecimal": "&#x2297;",
+    "Character": "&otimes;"
+  },
+  {
+    "Entity Name": "ö",
+    "Decimal": "&#246;",
+    "Hexadecimal": "&#xF6;",
+    "Character": "&ouml;"
+  },
+  {
+    "Entity Name": "Ö",
+    "Decimal": "&#214;",
+    "Hexadecimal": "&#xD6;",
+    "Character": "&Ouml;"
+  },
+  {
+    "Entity Name": "∥",
+    "Decimal": "&#8741;",
+    "Hexadecimal": "&#x2225;",
+    "Character": "&par;"
+  },
+  {
+    "Entity Name": "¶",
+    "Decimal": "&#182;",
+    "Hexadecimal": "&#xB6;",
+    "Character": "&para;"
+  },
+  {
+    "Entity Name": "∂",
+    "Decimal": "&#8706;",
+    "Hexadecimal": "&#x2202;",
+    "Character": "&part;"
+  },
+  {
+    "Entity Name": "п",
+    "Decimal": "&#1087;",
+    "Hexadecimal": "&#x43F;",
+    "Character": "&pcy;"
+  },
+  {
+    "Entity Name": "П",
+    "Decimal": "&#1055;",
+    "Hexadecimal": "&#x41F;",
+    "Character": "&Pcy;"
+  },
+  {
+    "Entity Name": "‰",
+    "Decimal": "&#8240;",
+    "Hexadecimal": "&#x2030;",
+    "Character": "&permil;"
+  },
+  {
+    "Entity Name": "‱",
+    "Decimal": "&#8241;",
+    "Hexadecimal": "&#x2031;",
+    "Character": "&pertenk;"
+  },
+  {
+    "Entity Name": "𝔨",
+    "Decimal": "&#120109;",
+    "Hexadecimal": "&#x1D52D;",
+    "Character": "&pfr;"
+  },
+  {
+    "Entity Name": "𝔐",
+    "Decimal": "&#120080;",
+    "Hexadecimal": "&#x1D513;",
+    "Character": "&Pfr;"
+  },
+  {
+    "Entity Name": "φ",
+    "Decimal": "&#966;",
+    "Hexadecimal": "&#x3C6;",
+    "Character": "&phi;"
+  },
+  {
+    "Entity Name": "Φ",
+    "Decimal": "&#934;",
+    "Hexadecimal": "&#x3A6;",
+    "Character": "&Phi;"
+  },
+  {
+    "Entity Name": "𝒨",
+    "Decimal": "&#8488;",
+    "Hexadecimal": "&#x2133;",
+    "Character": "&phmmat;"
+  },
+  {
+    "Entity Name": "☎",
+    "Decimal": "&#9742;",
+    "Hexadecimal": "&#x260E;",
+    "Character": "&phone;"
+  },
+  {
+    "Entity Name": "π",
+    "Decimal": "&#960;",
+    "Hexadecimal": "&#x3C0;",
+    "Character": "&pi;"
+  },
+  {
+    "Entity Name": "Π",
+    "Decimal": "&#928;",
+    "Hexadecimal": "&#x3A0;",
+    "Character": "&Pi;"
+  },
+  {
+    "Entity Name": "ϖ",
+    "Decimal": "&#982;",
+    "Hexadecimal": "&#x3D6;",
+    "Character": "&piv;"
+  },
+  {
+    "Entity Name": "ℏ",
+    "Decimal": "&#8463;",
+    "Hexadecimal": "&#x210F;",
+    "Character": "&planck;"
+  },
+  {
+    "Entity Name": "⊞",
+    "Decimal": "&#8862;",
+    "Hexadecimal": "&#x229E;",
+    "Character": "&plusb;"
+  },
+  {
+    "Entity Name": "∔",
+    "Decimal": "&#8724;",
+    "Hexadecimal": "&#x2214;",
+    "Character": "&plusdo;"
+  },
+  {
+    "Entity Name": "±",
+    "Decimal": "&#177;",
+    "Hexadecimal": "&#xB1;",
+    "Character": "&plusmn;"
+  },
+  {
+    "Entity Name": "𝕕",
+    "Decimal": "&#120161;",
+    "Hexadecimal": "&#x1D561;",
+    "Character": "&popf;"
+  },
+  {
+    "Entity Name": "ℙ",
+    "Decimal": "&#8473;",
+    "Hexadecimal": "&#x2119;",
+    "Character": "&Popf;"
+  },
+  {
+    "Entity Name": "£",
+    "Decimal": "&#163;",
+    "Hexadecimal": "&#xA3;",
+    "Character": "&pound;"
+  },
+  {
+    "Entity Name": "≺",
+    "Decimal": "&#8826;",
+    "Hexadecimal": "&#x227A;",
+    "Character": "&pr;"
+  },
+  {
+    "Entity Name": "≼",
+    "Decimal": "&#8828;",
+    "Hexadecimal": "&#x227C;",
+    "Character": "&prcue;"
+  },
+  {
+    "Entity Name": "⪯",
+    "Decimal": "&#10799;",
+    "Hexadecimal": "&#x2AAF;",
+    "Character": "&pre;"
+  },
+  {
+    "Entity Name": "′",
+    "Decimal": "&#8242;",
+    "Hexadecimal": "&#x2032;",
+    "Character": "&prime;"
+  },
+  {
+    "Entity Name": "″",
+    "Decimal": "&#8243;",
+    "Hexadecimal": "&#x2033;",
+    "Character": "&Prime;"
+  },
+  {
+    "Entity Name": "∏",
+    "Decimal": "&#8719;",
+    "Hexadecimal": "&#x220F;",
+    "Character": "&prod;"
+  },
+  {
+    "Entity Name": "∝",
+    "Decimal": "&#8733;",
+    "Hexadecimal": "&#x221D;",
+    "Character": "&prop;"
+  },
+  {
+    "Entity Name": "≾",
+    "Decimal": "&#8830;",
+    "Hexadecimal": "&#x227E;",
+    "Character": "&prsim;"
+  },
+  {
+    "Entity Name": "⊰",
+    "Decimal": "&#8880;",
+    "Hexadecimal": "&#x22B0;",
+    "Character": "&prurel;"
+  },
+  {
+    "Entity Name": "𝓅",
+    "Decimal": "&#120001;",
+    "Hexadecimal": "&#x1D4C5;",
+    "Character": "&pscr;"
+  },
+  {
+    "Entity Name": "𝒫",
+    "Decimal": "&#119979;",
+    "Hexadecimal": "&#x1D4AB;",
+    "Character": "&Pscr;"
+  },
+  {
+    "Entity Name": "ψ",
+    "Decimal": "&#968;",
+    "Hexadecimal": "&#x3C8;",
+    "Character": "&psi;"
+  },
+  {
+    "Entity Name": "Ψ",
+    "Decimal": "&#936;",
+    "Hexadecimal": "&#x3A8;",
+    "Character": "&Psi;"
+  },
+  {
+    "Entity Name": "𝔩",
+    "Decimal": "&#120110;",
+    "Hexadecimal": "&#x1D52E;",
+    "Character": "&qfr;"
+  },
+  {
+    "Entity Name": "𝔑",
+    "Decimal": "&#120081;",
+    "Hexadecimal": "&#x1D514;",
+    "Character": "&Qfr;"
+  },
+  {
+    "Entity Name": "⨌",
+    "Decimal": "&#10764;",
+    "Hexadecimal": "&#x2A0C;",
+    "Character": "&qint;"
+  },
+  {
+    "Entity Name": "𝕖",
+    "Decimal": "&#120162;",
+    "Hexadecimal": "&#x1D562;",
+    "Character": "&qopf;"
+  },
+  {
+    "Entity Name": "𝓆",
+    "Decimal": "&#120002;",
+    "Hexadecimal": "&#x1D4C6;",
+    "Character": "&qscr;"
+  },
+  {
+    "Entity Name": "𝒬",
+    "Decimal": "&#119980;",
+    "Hexadecimal": "&#x1D4AC;",
+    "Character": "&Qscr;"
+  },
+  {
+    "Entity Name": "ℍ",
+    "Decimal": "&#8461;",
+    "Hexadecimal": "&#x210D;",
+    "Character": "&quaternions;"
+  },
+  {
+    "Entity Name": "\"\"",
+    "Decimal": "&#34;",
+    "Hexadecimal": "&#x22;",
+    "Character": "&quot;"
+  },
+  {
+    "Entity Name": "⇛",
+    "Decimal": "&#8667;",
+    "Hexadecimal": "&#x21DB;",
+    "Character": "&rAarr;"
+  },
+  {
+    "Entity Name": "ŕ",
+    "Decimal": "&#341;",
+    "Hexadecimal": "&#x155;",
+    "Character": "&racute;"
+  },
+  {
+    "Entity Name": "Ŕ",
+    "Decimal": "&#340;",
+    "Hexadecimal": "&#x154;",
+    "Character": "&Racute;"
+  },
+  {
+    "Entity Name": "√",
+    "Decimal": "&#8730;",
+    "Hexadecimal": "&#x221A;",
+    "Character": "&radic;"
+  },
+  {
+    "Entity Name": "⟩",
+    "Decimal": "&#10217;",
+    "Hexadecimal": "&#x27E9;",
+    "Character": "&rang;"
+  },
+  {
+    "Entity Name": "»",
+    "Decimal": "&#187;",
+    "Hexadecimal": "&#xBB;",
+    "Character": "&raquo;"
+  },
+  {
+    "Entity Name": "⇒",
+    "Decimal": "&#8658;",
+    "Hexadecimal": "&#x21D2;",
+    "Character": "&rArr;"
+  },
+  {
+    "Entity Name": "→",
+    "Decimal": "&#8594;",
+    "Hexadecimal": "&#x2192;",
+    "Character": "&rarr;"
+  },
+  {
+    "Entity Name": "↠",
+    "Decimal": "&#8608;",
+    "Hexadecimal": "&#x21A0;",
+    "Character": "&Rarr;"
+  },
+  {
+    "Entity Name": "⇥",
+    "Decimal": "&#8677;",
+    "Hexadecimal": "&#x21E5;",
+    "Character": "&rarrb;"
+  },
+  {
+    "Entity Name": "↪",
+    "Decimal": "&#8618;",
+    "Hexadecimal": "&#x21AA;",
+    "Character": "&rarrhk;"
+  },
+  {
+    "Entity Name": "↬",
+    "Decimal": "&#8620;",
+    "Hexadecimal": "&#x21AC;",
+    "Character": "&rarrlp;"
+  },
+  {
+    "Entity Name": "↣",
+    "Decimal": "&#8611;",
+    "Hexadecimal": "&#x21A3;",
+    "Character": "&rarrtl;"
+  },
+  {
+    "Entity Name": "↝",
+    "Decimal": "&#8605;",
+    "Hexadecimal": "&#x219D;",
+    "Character": "&rarrw;"
+  },
+  {
+    "Entity Name": "∶",
+    "Decimal": "&#8758;",
+    "Hexadecimal": "&#x2236;",
+    "Character": "&ratio;"
+  },
+  {
+    "Entity Name": "ℚ",
+    "Decimal": "&#8474;",
+    "Hexadecimal": "&#x211A;",
+    "Character": "&rationals;"
+  },
+  {
+    "Entity Name": "ř",
+    "Decimal": "&#345;",
+    "Hexadecimal": "&#x159;",
+    "Character": "&rcaron;"
+  },
+  {
+    "Entity Name": "Ř",
+    "Decimal": "&#344;",
+    "Hexadecimal": "&#x158;",
+    "Character": "&Rcaron;"
+  },
+  {
+    "Entity Name": "ŗ",
+    "Decimal": "&#343;",
+    "Hexadecimal": "&#x157;",
+    "Character": "&rcedil;"
+  },
+  {
+    "Entity Name": "Ŗ",
+    "Decimal": "&#342;",
+    "Hexadecimal": "&#x156;",
+    "Character": "&Rcedil;"
+  },
+  {
+    "Entity Name": "⌉",
+    "Decimal": "&#8969;",
+    "Hexadecimal": "&#x2309;",
+    "Character": "&rceil;"
+  },
+  {
+    "Entity Name": "р",
+    "Decimal": "&#1088;",
+    "Hexadecimal": "&#x440;",
+    "Character": "&rcy;"
+  },
+  {
+    "Entity Name": "Р",
+    "Decimal": "&#1056;",
+    "Hexadecimal": "&#x420;",
+    "Character": "&Rcy;"
+  },
+  {
+    "Entity Name": "”",
+    "Decimal": "&#8221;",
+    "Hexadecimal": "&#x201D;",
+    "Character": "&rdquo;"
+  },
+  {
+    "Entity Name": "ℜ",
+    "Decimal": "&#8476;",
+    "Hexadecimal": "&#x211C;",
+    "Character": "&real;"
+  },
+  {
+    "Entity Name": "ℝ",
+    "Decimal": "&#8477;",
+    "Hexadecimal": "&#x211D;",
+    "Character": "&reals;"
+  },
+  {
+    "Entity Name": "▭",
+    "Decimal": "&#9645;",
+    "Hexadecimal": "&#x25AD;",
+    "Character": "&rect;"
+  },
+  {
+    "Entity Name": "®",
+    "Decimal": "&#174;",
+    "Hexadecimal": "&#xAE;",
+    "Character": "&reg;"
+  },
+  {
+    "Entity Name": "⌋",
+    "Decimal": "&#8971;",
+    "Hexadecimal": "&#x230B;",
+    "Character": "&rfloor;"
+  },
+  {
+    "Entity Name": "𝔪",
+    "Decimal": "&#120111;",
+    "Hexadecimal": "&#x1D52F;",
+    "Character": "&rfr;"
+  },
+  {
+    "Entity Name": "⇁",
+    "Decimal": "&#8641;",
+    "Hexadecimal": "&#x21C1;",
+    "Character": "&rhard;"
+  },
+  {
+    "Entity Name": "⇀",
+    "Decimal": "&#8640;",
+    "Hexadecimal": "&#x21C0;",
+    "Character": "&rharu;"
+  },
+  {
+    "Entity Name": "ρ",
+    "Decimal": "&#961;",
+    "Hexadecimal": "&#x3C1;",
+    "Character": "&rho;"
+  },
+  {
+    "Entity Name": "Ρ",
+    "Decimal": "&#929;",
+    "Hexadecimal": "&#x3A1;",
+    "Character": "&Rho;"
+  },
+  {
+    "Entity Name": "ϱ",
+    "Decimal": "&#1009;",
+    "Hexadecimal": "&#x3F1;",
+    "Character": "&rhov;"
+  },
+  {
+    "Entity Name": "˚",
+    "Decimal": "&#730;",
+    "Hexadecimal": "&#x2DA;",
+    "Character": "&ring;"
+  },
+  {
+    "Entity Name": "⇄",
+    "Decimal": "&#8644;",
+    "Hexadecimal": "&#x21C4;",
+    "Character": "&rlarr;"
+  },
+  {
+    "Entity Name": "⇌",
+    "Decimal": "&#8652;",
+    "Hexadecimal": "&#x21CC;",
+    "Character": "&rlhar;"
+  },
+  {
+    "Entity Name": "‏",
+    "Decimal": "&#8207;",
+    "Hexadecimal": "&#x200F;",
+    "Character": "&rlm;"
+  },
+  {
+    "Entity Name": "⎱",
+    "Decimal": "&#9137;",
+    "Hexadecimal": "&#x23B1;",
+    "Character": "&rmoust;"
+  },
+  {
+    "Entity Name": "𝕗",
+    "Decimal": "&#120163;",
+    "Hexadecimal": "&#x1D563;",
+    "Character": "&ropf;"
+  },
+  {
+    "Entity Name": "⨮",
+    "Decimal": "&#10798;",
+    "Hexadecimal": "&#x2A2E;",
+    "Character": "&roplus;"
+  },
+  {
+    "Entity Name": "⨵",
+    "Decimal": "&#10805;",
+    "Hexadecimal": "&#x2A35;",
+    "Character": "&rotimes;"
+  },
+  {
+    "Entity Name": "⇉",
+    "Decimal": "&#8649;",
+    "Hexadecimal": "&#x21C9;",
+    "Character": "&rrarr;"
+  },
+  {
+    "Entity Name": "›",
+    "Decimal": "&#8250;",
+    "Hexadecimal": "&#x203A;",
+    "Character": "&rsaquo;"
+  },
+  {
+    "Entity Name": "𝓇",
+    "Decimal": "&#120003;",
+    "Hexadecimal": "&#x1D4C7;",
+    "Character": "&rscr;"
+  },
+  {
+    "Entity Name": "𝒭",
+    "Decimal": "&#8491;",
+    "Hexadecimal": "&#x211B;",
+    "Character": "&Rscr;"
+  },
+  {
+    "Entity Name": "↱",
+    "Decimal": "&#8625;",
+    "Hexadecimal": "&#x21B1;",
+    "Character": "&rsh;"
+  },
+  {
+    "Entity Name": "’",
+    "Decimal": "&#8217;",
+    "Hexadecimal": "&#x2019;",
+    "Character": "&rsquo;"
+  },
+  {
+    "Entity Name": "⋌",
+    "Decimal": "&#8908;",
+    "Hexadecimal": "&#x22CC;",
+    "Character": "&rthree;"
+  },
+  {
+    "Entity Name": "⋊",
+    "Decimal": "&#8906;",
+    "Hexadecimal": "&#x22CA;",
+    "Character": "&rtimes;"
+  },
+  {
+    "Entity Name": "▹",
+    "Decimal": "&#9657;",
+    "Hexadecimal": "&#x25B9;",
+    "Character": "&rtri;"
+  },
+  {
+    "Entity Name": "⊵",
+    "Decimal": "&#8885;",
+    "Hexadecimal": "&#x22B5;",
+    "Character": "&rtrie;"
+  },
+  {
+    "Entity Name": "▸",
+    "Decimal": "&#9656;",
+    "Hexadecimal": "&#x25B8;",
+    "Character": "&rtrif;"
+  },
+  {
+    "Entity Name": "℞",
+    "Decimal": "&#8478;",
+    "Hexadecimal": "&#x211E;",
+    "Character": "&rx;"
+  },
+  {
+    "Entity Name": "ś",
+    "Decimal": "&#347;",
+    "Hexadecimal": "&#x15B;",
+    "Character": "&sacute;"
+  },
+  {
+    "Entity Name": "Ś",
+    "Decimal": "&#346;",
+    "Hexadecimal": "&#x15A;",
+    "Character": "&Sacute;"
+  },
+  {
+    "Entity Name": "‚",
+    "Decimal": "&#8218;",
+    "Hexadecimal": "&#x201A;",
+    "Character": "&sbquo;"
+  },
+  {
+    "Entity Name": "≻",
+    "Decimal": "&#8827;",
+    "Hexadecimal": "&#x227B;",
+    "Character": "&sc;"
+  },
+  {
+    "Entity Name": "š",
+    "Decimal": "&#353;",
+    "Hexadecimal": "&#x161;",
+    "Character": "&scaron;"
+  },
+  {
+    "Entity Name": "Š",
+    "Decimal": "&#352;",
+    "Hexadecimal": "&#x160;",
+    "Character": "&Scaron;"
+  },
+  {
+    "Entity Name": "≽",
+    "Decimal": "&#8829;",
+    "Hexadecimal": "&#x227D;",
+    "Character": "&sccue;"
+  },
+  {
+    "Entity Name": "⪰",
+    "Decimal": "&#10800;",
+    "Hexadecimal": "&#x2AB0;",
+    "Character": "&sce;"
+  },
+  {
+    "Entity Name": "ş",
+    "Decimal": "&#351;",
+    "Hexadecimal": "&#x15F;",
+    "Character": "&scedil;"
+  },
+  {
+    "Entity Name": "Ş",
+    "Decimal": "&#350;",
+    "Hexadecimal": "&#x15E;",
+    "Character": "&Scedil;"
+  },
+  {
+    "Entity Name": "ŝ",
+    "Decimal": "&#349;",
+    "Hexadecimal": "&#x15D;",
+    "Character": "&scirc;"
+  },
+  {
+    "Entity Name": "Ŝ",
+    "Decimal": "&#348;",
+    "Hexadecimal": "&#x15C;",
+    "Character": "&Scirc;"
+  },
+  {
+    "Entity Name": "с",
+    "Decimal": "&#1089;",
+    "Hexadecimal": "&#x441;",
+    "Character": "&scy;"
+  },
+  {
+    "Entity Name": "С",
+    "Decimal": "&#1057;",
+    "Hexadecimal": "&#x421;",
+    "Character": "&Scy;"
+  },
+  {
+    "Entity Name": "⋅",
+    "Decimal": "&#8901;",
+    "Hexadecimal": "&#x22C5;",
+    "Character": "&sdot;"
+  },
+  {
+    "Entity Name": "⊡",
+    "Decimal": "&#8865;",
+    "Hexadecimal": "&#x22A1;",
+    "Character": "&sdotb;"
+  },
+  {
+    "Entity Name": "↘",
+    "Decimal": "&#8600;",
+    "Hexadecimal": "&#x2198;",
+    "Character": "&searr;"
+  },
+  {
+    "Entity Name": "§",
+    "Decimal": "&#167;",
+    "Hexadecimal": "&#xA7;",
+    "Character": "&sect;"
+  },
+  {
+    "Entity Name": "\\",
+    "Decimal": "&#8726;",
+    "Hexadecimal": "&#x2216;",
+    "Character": "&setmn;"
+  },
+  {
+    "Entity Name": "✶",
+    "Decimal": "&#10038;",
+    "Hexadecimal": "&#x2736;",
+    "Character": "&sext;"
+  },
+  {
+    "Entity Name": "𝔫",
+    "Decimal": "&#120112;",
+    "Hexadecimal": "&#x1D530;",
+    "Character": "&sfr;"
+  },
+  {
+    "Entity Name": "𝔒",
+    "Decimal": "&#120082;",
+    "Hexadecimal": "&#x1D516;",
+    "Character": "&Sfr;"
+  },
+  {
+    "Entity Name": "♯",
+    "Decimal": "&#9839;",
+    "Hexadecimal": "&#x266F;",
+    "Character": "&sharp;"
+  },
+  {
+    "Entity Name": "ъ",
+    "Decimal": "&#1097;",
+    "Hexadecimal": "&#x449;",
+    "Character": "&shchcy;"
+  },
+  {
+    "Entity Name": "Ъ",
+    "Decimal": "&#1065;",
+    "Hexadecimal": "&#x429;",
+    "Character": "&SHCHcy;"
+  },
+  {
+    "Entity Name": "ш",
+    "Decimal": "&#1096;",
+    "Hexadecimal": "&#x448;",
+    "Character": "&shcy;"
+  },
+  {
+    "Entity Name": "Ш",
+    "Decimal": "&#1064;",
+    "Hexadecimal": "&#x428;",
+    "Character": "&SHcy;"
+  },
+  {
+    "Entity Name": "­",
+    "Decimal": "&#173;",
+    "Hexadecimal": "&#xAD;",
+    "Character": "&shy;"
+  },
+  {
+    "Entity Name": "σ",
+    "Decimal": "&#963;",
+    "Hexadecimal": "&#x3C3;",
+    "Character": "&sigma;"
+  },
+  {
+    "Entity Name": "Σ",
+    "Decimal": "&#931;",
+    "Hexadecimal": "&#x3A3;",
+    "Character": "&Sigma;"
+  },
+  {
+    "Entity Name": "ς",
+    "Decimal": "&#962;",
+    "Hexadecimal": "&#x3C2;",
+    "Character": "&sigmav;"
+  },
+  {
+    "Entity Name": "∼",
+    "Decimal": "&#8764;",
+    "Hexadecimal": "&#x223C;",
+    "Character": "&sim;"
+  },
+  {
+    "Entity Name": "≃",
+    "Decimal": "&#8771;",
+    "Hexadecimal": "&#x2243;",
+    "Character": "&sime;"
+  },
+  {
+    "Entity Name": "⌢",
+    "Decimal": "&#8995;",
+    "Hexadecimal": "&#x2323;",
+    "Character": "&smile;"
+  },
+  {
+    "Entity Name": "ь",
+    "Decimal": "&#1083;",
+    "Hexadecimal": "&#x44C;",
+    "Character": "&softcy;"
+  },
+  {
+    "Entity Name": "Ь",
+    "Decimal": "&#1060;",
+    "Hexadecimal": "&#x42C;",
+    "Character": "&SOFTcy;"
+  },
+  {
+    "Entity Name": "𝕘",
+    "Decimal": "&#120164;",
+    "Hexadecimal": "&#x1D564;",
+    "Character": "&sopf;"
+  },
+  {
+    "Entity Name": "𝔿",
+    "Decimal": "&#120127;",
+    "Hexadecimal": "&#x1D54A;",
+    "Character": "&Sopf;"
+  },
+  {
+    "Entity Name": "♠",
+    "Decimal": "&#9824;",
+    "Hexadecimal": "&#x2660;",
+    "Character": "&spades;"
+  },
+  {
+    "Entity Name": "⊓",
+    "Decimal": "&#8851;",
+    "Hexadecimal": "&#x2293;",
+    "Character": "&sqcap;"
+  },
+  {
+    "Entity Name": "⊔",
+    "Decimal": "&#8852;",
+    "Hexadecimal": "&#x2294;",
+    "Character": "&sqcup;"
+  },
+  {
+    "Entity Name": "⊏",
+    "Decimal": "&#8847;",
+    "Hexadecimal": "&#x228F;",
+    "Character": "&sqsub;"
+  },
+  {
+    "Entity Name": "⊑",
+    "Decimal": "&#8849;",
+    "Hexadecimal": "&#x2291;",
+    "Character": "&sqsube;"
+  },
+  {
+    "Entity Name": "⊐",
+    "Decimal": "&#8848;",
+    "Hexadecimal": "&#x2290;",
+    "Character": "&sqsup;"
+  },
+  {
+    "Entity Name": "⊒",
+    "Decimal": "&#8850;",
+    "Hexadecimal": "&#x2292;",
+    "Character": "&sqsupe;"
+  },
+  {
+    "Entity Name": "□",
+    "Decimal": "&#9633;",
+    "Hexadecimal": "&#x25A1;",
+    "Character": "&squ;"
+  },
+  {
+    "Entity Name": "▪",
+    "Decimal": "&#9642;",
+    "Hexadecimal": "&#x25AA;",
+    "Character": "&squf;"
+  },
+  {
+    "Entity Name": "𝓈",
+    "Decimal": "&#120004;",
+    "Hexadecimal": "&#x1D4C8;",
+    "Character": "&sscr;"
+  },
+  {
+    "Entity Name": "𝒮",
+    "Decimal": "&#119982;",
+    "Hexadecimal": "&#x1D4AE;",
+    "Character": "&Sscr;"
+  },
+  {
+    "Entity Name": "⋆",
+    "Decimal": "&#8902;",
+    "Hexadecimal": "&#x22C6;",
+    "Character": "&sstarf;"
+  },
+  {
+    "Entity Name": "☆",
+    "Decimal": "&#9734;",
+    "Hexadecimal": "&#x2606;",
+    "Character": "&star;"
+  },
+  {
+    "Entity Name": "★",
+    "Decimal": "&#9733;",
+    "Hexadecimal": "&#x2605;",
+    "Character": "&starf;"
+  },
+  {
+    "Entity Name": "ϕ",
+    "Decimal": "&#981;",
+    "Hexadecimal": "&#x3D5;",
+    "Character": "&straightphi;"
+  },
+  {
+    "Entity Name": "⊂",
+    "Decimal": "&#8834;",
+    "Hexadecimal": "&#x2282;",
+    "Character": "&sub;"
+  },
+  {
+    "Entity Name": "⋐",
+    "Decimal": "&#8912;",
+    "Hexadecimal": "&#x22D0;",
+    "Character": "&Sub;"
+  },
+  {
+    "Entity Name": "⪽",
+    "Decimal": "&#10749;",
+    "Hexadecimal": "&#x2ABD;",
+    "Character": "&subdot;"
+  },
+  {
+    "Entity Name": "⫅",
+    "Decimal": "&#10949;",
+    "Hexadecimal": "&#x2AC5;",
+    "Character": "&subE;"
+  },
+  {
+    "Entity Name": "⊆",
+    "Decimal": "&#8838;",
+    "Hexadecimal": "&#x2286;",
+    "Character": "&sube;"
+  },
+  {
+    "Entity Name": "⊊",
+    "Decimal": "&#8842;",
+    "Hexadecimal": "&#x228A;",
+    "Character": "&subne;"
+  },
+  {
+    "Entity Name": "∑",
+    "Decimal": "&#8721;",
+    "Hexadecimal": "&#x2211;",
+    "Character": "&sum;"
+  },
+  {
+    "Entity Name": "♩",
+    "Decimal": "&#9833;",
+    "Hexadecimal": "&#x2669;",
+    "Character": "&sung;"
+  },
+  {
+    "Entity Name": "⋑",
+    "Decimal": "&#8913;",
+    "Hexadecimal": "&#x22D1;",
+    "Character": "&Sup;"
+  },
+  {
+    "Entity Name": "⊃",
+    "Decimal": "&#8835;",
+    "Hexadecimal": "&#x2283;",
+    "Character": "&sup;"
+  },
+  {
+    "Entity Name": "¹",
+    "Decimal": "&#185;",
+    "Hexadecimal": "&#xB9;",
+    "Character": "&sup1;"
+  },
+  {
+    "Entity Name": "²",
+    "Decimal": "&#178;",
+    "Hexadecimal": "&#xB2;",
+    "Character": "&sup2;"
+  },
+  {
+    "Entity Name": "³",
+    "Decimal": "&#179;",
+    "Hexadecimal": "&#xB3;",
+    "Character": "&sup3;"
+  },
+  {
+    "Entity Name": "⊇",
+    "Decimal": "&#8839;",
+    "Hexadecimal": "&#x2287;",
+    "Character": "&supe;"
+  },
+  {
+    "Entity Name": "⫆",
+    "Decimal": "&#10950;",
+    "Hexadecimal": "&#x2AC6;",
+    "Character": "&supE;"
+  },
+  {
+    "Entity Name": "⊋",
+    "Decimal": "&#8843;",
+    "Hexadecimal": "&#x228B;",
+    "Character": "&supne;"
+  },
+  {
+    "Entity Name": "ß",
+    "Decimal": "&#223;",
+    "Hexadecimal": "&#xDF;",
+    "Character": "&szlig;"
+  },
+  {
+    "Entity Name": "τ",
+    "Decimal": "&#964;",
+    "Hexadecimal": "&#x3C4;",
+    "Character": "&tau;"
+  },
+  {
+    "Entity Name": "Τ",
+    "Decimal": "&#932;",
+    "Hexadecimal": "&#x3A4;",
+    "Character": "&Tau;"
+  },
+  {
+    "Entity Name": "ť",
+    "Decimal": "&#357;",
+    "Hexadecimal": "&#x165;",
+    "Character": "&tcaron;"
+  },
+  {
+    "Entity Name": "Ť",
+    "Decimal": "&#356;",
+    "Hexadecimal": "&#x164;",
+    "Character": "&Tcaron;"
+  },
+  {
+    "Entity Name": "ţ",
+    "Decimal": "&#355;",
+    "Hexadecimal": "&#x163;",
+    "Character": "&tcedil;"
+  },
+  {
+    "Entity Name": "Ţ",
+    "Decimal": "&#354;",
+    "Hexadecimal": "&#x162;",
+    "Character": "&Tcedil;"
+  },
+  {
+    "Entity Name": "т",
+    "Decimal": "&#1090;",
+    "Hexadecimal": "&#x442;",
+    "Character": "&tcy;"
+  },
+  {
+    "Entity Name": "Т",
+    "Decimal": "&#1058;",
+    "Hexadecimal": "&#x422;",
+    "Character": "&Tcy;"
+  },
+  {
+    "Entity Name": "𝔬",
+    "Decimal": "&#120113;",
+    "Hexadecimal": "&#x1D531;",
+    "Character": "&tfr;"
+  },
+  {
+    "Entity Name": "𝔓",
+    "Decimal": "&#120083;",
+    "Hexadecimal": "&#x1D517;",
+    "Character": "&Tfr;"
+  },
+  {
+    "Entity Name": "∴",
+    "Decimal": "&#8756;",
+    "Hexadecimal": "&#x2234;",
+    "Character": "&there4;"
+  },
+  {
+    "Entity Name": "θ",
+    "Decimal": "&#952;",
+    "Hexadecimal": "&#x3B8;",
+    "Character": "&theta;"
+  },
+  {
+    "Entity Name": "Θ",
+    "Decimal": "&#920;",
+    "Hexadecimal": "&#x398;",
+    "Character": "&Theta;"
+  },
+  {
+    "Entity Name": "ϑ",
+    "Decimal": "&#977;",
+    "Hexadecimal": "&#x3D1;",
+    "Character": "&thetav;"
+  },
+  {
+    "Entity Name": "þ",
+    "Decimal": "&#254;",
+    "Hexadecimal": "&#xFE;",
+    "Character": "&thorn;"
+  },
+  {
+    "Entity Name": "Þ",
+    "Decimal": "&#222;",
+    "Hexadecimal": "&#xDE;",
+    "Character": "&THORN;"
+  },
+  {
+    "Entity Name": "˜",
+    "Decimal": "&#732;",
+    "Hexadecimal": "&#x2DC;",
+    "Character": "&tilde;"
+  },
+  {
+    "Entity Name": "×",
+    "Decimal": "&#215;",
+    "Hexadecimal": "&#xD7;",
+    "Character": "&times;"
+  },
+  {
+    "Entity Name": "⊠",
+    "Decimal": "&#8864;",
+    "Hexadecimal": "&#x22A0;",
+    "Character": "&timesb;"
+  },
+  {
+    "Entity Name": "∭",
+    "Decimal": "&#8749;",
+    "Hexadecimal": "&#x222D;",
+    "Character": "&tint;"
+  },
+  {
+    "Entity Name": "⊤",
+    "Decimal": "&#8868;",
+    "Hexadecimal": "&#x22A4;",
+    "Character": "&top;"
+  },
+  {
+    "Entity Name": "⌶",
+    "Decimal": "&#9014;",
+    "Hexadecimal": "&#x2336;",
+    "Character": "&topbot;"
+  },
+  {
+    "Entity Name": "𝕙",
+    "Decimal": "&#120165;",
+    "Hexadecimal": "&#x1D565;",
+    "Character": "&topf;"
+  },
+  {
+    "Entity Name": "𝕀",
+    "Decimal": "&#120128;",
+    "Hexadecimal": "&#x1D54B;",
+    "Character": "&Topf;"
+  },
+  {
+    "Entity Name": "‴",
+    "Decimal": "&#8244;",
+    "Hexadecimal": "&#x2034;",
+    "Character": "&tprime;"
+  },
+  {
+    "Entity Name": "™",
+    "Decimal": "&#8482;",
+    "Hexadecimal": "&#x2122;",
+    "Character": "&trade;"
+  },
+  {
+    "Entity Name": "≜",
+    "Decimal": "&#8796;",
+    "Hexadecimal": "&#x225C;",
+    "Character": "&trie;"
+  },
+  {
+    "Entity Name": "𝓉",
+    "Decimal": "&#120005;",
+    "Hexadecimal": "&#x1D4C9;",
+    "Character": "&tscr;"
+  },
+  {
+    "Entity Name": "𝒯",
+    "Decimal": "&#119983;",
+    "Hexadecimal": "&#x1D4AF;",
+    "Character": "&Tscr;"
+  },
+  {
+    "Entity Name": "ц",
+    "Decimal": "&#1094;",
+    "Hexadecimal": "&#x446;",
+    "Character": "&tscy;"
+  },
+  {
+    "Entity Name": "Ц",
+    "Decimal": "&#1062;",
+    "Hexadecimal": "&#x426;",
+    "Character": "&TScy;"
+  },
+  {
+    "Entity Name": "ѓ",
+    "Decimal": "&#1115;",
+    "Hexadecimal": "&#x45B;",
+    "Character": "&tshcy;"
+  },
+  {
+    "Entity Name": "Ѓ",
+    "Decimal": "&#1035;",
+    "Hexadecimal": "&#x40B;",
+    "Character": "&TSHcy;"
+  },
+  {
+    "Entity Name": "ŧ",
+    "Decimal": "&#359;",
+    "Hexadecimal": "&#x167;",
+    "Character": "&tstrok;"
+  },
+  {
+    "Entity Name": "Ŧ",
+    "Decimal": "&#358;",
+    "Hexadecimal": "&#x166;",
+    "Character": "&Tstrok;"
+  },
+  {
+    "Entity Name": "≬",
+    "Decimal": "&#8812;",
+    "Hexadecimal": "&#x226C;",
+    "Character": "&twixt;"
+  },
+  {
+    "Entity Name": "ú",
+    "Decimal": "&#250;",
+    "Hexadecimal": "&#xFA;",
+    "Character": "&uacute;"
+  },
+  {
+    "Entity Name": "Ú",
+    "Decimal": "&#218;",
+    "Hexadecimal": "&#xDA;",
+    "Character": "&Uacute;"
+  },
+  {
+    "Entity Name": "↑",
+    "Decimal": "&#8593;",
+    "Hexadecimal": "&#x2191;",
+    "Character": "&uarr;"
+  },
+  {
+    "Entity Name": "⇑",
+    "Decimal": "&#8657;",
+    "Hexadecimal": "&#x21D1;",
+    "Character": "&uArr;"
+  },
+  {
+    "Entity Name": "ŭ",
+    "Decimal": "&#365;",
+    "Hexadecimal": "&#x16D;",
+    "Character": "&ubreve;"
+  },
+  {
+    "Entity Name": "Ŭ",
+    "Decimal": "&#364;",
+    "Hexadecimal": "&#x16C;",
+    "Character": "&Ubreve;"
+  },
+  {
+    "Entity Name": "û",
+    "Decimal": "&#251;",
+    "Hexadecimal": "&#xFB;",
+    "Character": "&ucirc;"
+  },
+  {
+    "Entity Name": "Û",
+    "Decimal": "&#219;",
+    "Hexadecimal": "&#xDB;",
+    "Character": "&Ucirc;"
+  },
+  {
+    "Entity Name": "у",
+    "Decimal": "&#1091;",
+    "Hexadecimal": "&#x443;",
+    "Character": "&ucy;"
+  },
+  {
+    "Entity Name": "У",
+    "Decimal": "&#1059;",
+    "Hexadecimal": "&#x423;",
+    "Character": "&Ucy;"
+  },
+  {
+    "Entity Name": "⇅",
+    "Decimal": "&#8645;",
+    "Hexadecimal": "&#x21C5;",
+    "Character": "&udarr;"
+  },
+  {
+    "Entity Name": "ű",
+    "Decimal": "&#369;",
+    "Hexadecimal": "&#x171;",
+    "Character": "&udblac;"
+  },
+  {
+    "Entity Name": "Ű",
+    "Decimal": "&#368;",
+    "Hexadecimal": "&#x170;",
+    "Character": "&Udblac;"
+  },
+  {
+    "Entity Name": "𝔭",
+    "Decimal": "&#120114;",
+    "Hexadecimal": "&#x1D532;",
+    "Character": "&ufr;"
+  },
+  {
+    "Entity Name": "𝔔",
+    "Decimal": "&#120084;",
+    "Hexadecimal": "&#x1D518;",
+    "Character": "&Ufr;"
+  },
+  {
+    "Entity Name": "ù",
+    "Decimal": "&#249;",
+    "Hexadecimal": "&#xF9;",
+    "Character": "&ugrave;"
+  },
+  {
+    "Entity Name": "Ù",
+    "Decimal": "&#217;",
+    "Hexadecimal": "&#xD9;",
+    "Character": "&Ugrave;"
+  },
+  {
+    "Entity Name": "↿",
+    "Decimal": "&#8639;",
+    "Hexadecimal": "&#x21BF;",
+    "Character": "&uharl;"
+  },
+  {
+    "Entity Name": "↾",
+    "Decimal": "&#8638;",
+    "Hexadecimal": "&#x21BE;",
+    "Character": "&uharr;"
+  },
+  {
+    "Entity Name": "▀",
+    "Decimal": "&#9600;",
+    "Hexadecimal": "&#x2580;",
+    "Character": "&uhblk;"
+  },
+  {
+    "Entity Name": "⌜",
+    "Decimal": "&#8988;",
+    "Hexadecimal": "&#x231C;",
+    "Character": "&ulcorn;"
+  },
+  {
+    "Entity Name": "ū",
+    "Decimal": "&#363;",
+    "Hexadecimal": "&#x16B;",
+    "Character": "&umacr;"
+  },
+  {
+    "Entity Name": "Ū",
+    "Decimal": "&#362;",
+    "Hexadecimal": "&#x16A;",
+    "Character": "&Umacr;"
+  },
+  {
+    "Entity Name": "ų",
+    "Decimal": "&#371;",
+    "Hexadecimal": "&#x173;",
+    "Character": "&uogon;"
+  },
+  {
+    "Entity Name": "Ų",
+    "Decimal": "&#370;",
+    "Hexadecimal": "&#x172;",
+    "Character": "&Uogon;"
+  },
+  {
+    "Entity Name": "𝕚",
+    "Decimal": "&#120166;",
+    "Hexadecimal": "&#x1D566;",
+    "Character": "&uopf;"
+  },
+  {
+    "Entity Name": "𝕁",
+    "Decimal": "&#120129;",
+    "Hexadecimal": "&#x1D54C;",
+    "Character": "&Uopf;"
+  },
+  {
+    "Entity Name": "⊎",
+    "Decimal": "&#8846;",
+    "Hexadecimal": "&#x228E;",
+    "Character": "&uplus;"
+  },
+  {
+    "Entity Name": "ϒ",
+    "Decimal": "&#978;",
+    "Hexadecimal": "&#x3D2;",
+    "Character": "&Upsi;"
+  },
+  {
+    "Entity Name": "υ",
+    "Decimal": "&#965;",
+    "Hexadecimal": "&#x3C5;",
+    "Character": "&upsi;"
+  },
+  {
+    "Entity Name": "Υ",
+    "Decimal": "&#933;",
+    "Hexadecimal": "&#x3A5;",
+    "Character": "&Upsilon;"
+  },
+  {
+    "Entity Name": "↥",
+    "Decimal": "&#8613;",
+    "Hexadecimal": "&#x21A5;",
+    "Character": "&UpTeeArrow;"
+  },
+  {
+    "Entity Name": "ů",
+    "Decimal": "&#367;",
+    "Hexadecimal": "&#x16F;",
+    "Character": "&uring;"
+  },
+  {
+    "Entity Name": "Ů",
+    "Decimal": "&#366;",
+    "Hexadecimal": "&#x16E;",
+    "Character": "&Uring;"
+  },
+  {
+    "Entity Name": "𝓊",
+    "Decimal": "&#120006;",
+    "Hexadecimal": "&#x1D4CA;",
+    "Character": "&uscr;"
+  },
+  {
+    "Entity Name": "𝒰",
+    "Decimal": "&#119984;",
+    "Hexadecimal": "&#x1D4B0;",
+    "Character": "&Uscr;"
+  },
+  {
+    "Entity Name": "⋰",
+    "Decimal": "&#8944;",
+    "Hexadecimal": "&#x22F0;",
+    "Character": "&utdot;"
+  },
+  {
+    "Entity Name": "ũ",
+    "Decimal": "&#361;",
+    "Hexadecimal": "&#x169;",
+    "Character": "&utilde;"
+  },
+  {
+    "Entity Name": "Ũ",
+    "Decimal": "&#360;",
+    "Hexadecimal": "&#x168;",
+    "Character": "&Utilde;"
+  },
+  {
+    "Entity Name": "▵",
+    "Decimal": "&#9653;",
+    "Hexadecimal": "&#x25B5;",
+    "Character": "&utri;"
+  },
+  {
+    "Entity Name": "▴",
+    "Decimal": "&#9652;",
+    "Hexadecimal": "&#x25B4;",
+    "Character": "&utrif;"
+  },
+  {
+    "Entity Name": "⇈",
+    "Decimal": "&#8648;",
+    "Hexadecimal": "&#x21C8;",
+    "Character": "&uuarr;"
+  },
+  {
+    "Entity Name": "ü",
+    "Decimal": "&#252;",
+    "Hexadecimal": "&#xFC;",
+    "Character": "&uuml;"
+  },
+  {
+    "Entity Name": "Ü",
+    "Decimal": "&#220;",
+    "Hexadecimal": "&#xDC;",
+    "Character": "&Uuml;"
+  },
+  {
+    "Entity Name": "⇕",
+    "Decimal": "&#8661;",
+    "Hexadecimal": "&#x21D5;",
+    "Character": "&vArr;"
+  },
+  {
+    "Entity Name": "↕",
+    "Decimal": "&#8597;",
+    "Hexadecimal": "&#x2195;",
+    "Character": "&varr;"
+  },
+  {
+    "Entity Name": "в",
+    "Decimal": "&#1074;",
+    "Hexadecimal": "&#x432;",
+    "Character": "&vcy;"
+  },
+  {
+    "Entity Name": "В",
+    "Decimal": "&#1042;",
+    "Hexadecimal": "&#x412;",
+    "Character": "&Vcy;"
+  },
+  {
+    "Entity Name": "⊨",
+    "Decimal": "&#8872;",
+    "Hexadecimal": "&#x22A8;",
+    "Character": "&vDash;"
+  },
+  {
+    "Entity Name": "⊢",
+    "Decimal": "&#8866;",
+    "Hexadecimal": "&#x22A2;",
+    "Character": "&vdash;"
+  },
+  {
+    "Entity Name": "⊻",
+    "Decimal": "&#8891;",
+    "Hexadecimal": "&#x22BB;",
+    "Character": "&veebar;"
+  },
+  {
+    "Entity Name": "≚",
+    "Decimal": "&#8794;",
+    "Hexadecimal": "&#x225A;",
+    "Character": "&veeeq;"
+  },
+  {
+    "Entity Name": "⋮",
+    "Decimal": "&#8942;",
+    "Hexadecimal": "&#x22EE;",
+    "Character": "&vellip;"
+  },
+  {
+    "Entity Name": "‖",
+    "Decimal": "&#8214;",
+    "Hexadecimal": "&#x2016;",
+    "Character": "&Verbar;"
+  },
+  {
+    "Entity Name": "|",
+    "Decimal": "&#124;",
+    "Hexadecimal": "&#x7C;",
+    "Character": "&verbar;"
+  },
+  {
+    "Entity Name": "𝔮",
+    "Decimal": "&#120115;",
+    "Hexadecimal": "&#x1D533;",
+    "Character": "&vfr;"
+  },
+  {
+    "Entity Name": "𝔕",
+    "Decimal": "&#120085;",
+    "Hexadecimal": "&#x1D519;",
+    "Character": "&Vfr;"
+  },
+  {
+    "Entity Name": "⊲",
+    "Decimal": "&#8882;",
+    "Hexadecimal": "&#x22B2;",
+    "Character": "&vltri;"
+  },
+  {
+    "Entity Name": "𝕛",
+    "Decimal": "&#120167;",
+    "Hexadecimal": "&#x1D567;",
+    "Character": "&vopf;"
+  },
+  {
+    "Entity Name": "𝕂",
+    "Decimal": "&#120130;",
+    "Hexadecimal": "&#x1D54D;",
+    "Character": "&Vopf;"
+  },
+  {
+    "Entity Name": "⊳",
+    "Decimal": "&#8883;",
+    "Hexadecimal": "&#x22B3;",
+    "Character": "&vrtri;"
+  },
+  {
+    "Entity Name": "𝓋",
+    "Decimal": "&#120007;",
+    "Hexadecimal": "&#x1D4CB;",
+    "Character": "&vscr;"
+  },
+  {
+    "Entity Name": "𝒱",
+    "Decimal": "&#119985;",
+    "Hexadecimal": "&#x1D4B1;",
+    "Character": "&Vscr;"
+  },
+  {
+    "Entity Name": "⊪",
+    "Decimal": "&#8874;",
+    "Hexadecimal": "&#x22AA;",
+    "Character": "&Vvdash;"
+  },
+  {
+    "Entity Name": "ŵ",
+    "Decimal": "&#373;",
+    "Hexadecimal": "&#x175;",
+    "Character": "&wcirc;"
+  },
+  {
+    "Entity Name": "Ŵ",
+    "Decimal": "&#372;",
+    "Hexadecimal": "&#x174;",
+    "Character": "&Wcirc;"
+  },
+  {
+    "Entity Name": "≙",
+    "Decimal": "&#8793;",
+    "Hexadecimal": "&#x2259;",
+    "Character": "&wedgeq;"
+  },
+  {
+    "Entity Name": "℘",
+    "Decimal": "&#8472;",
+    "Hexadecimal": "&#x2118;",
+    "Character": "&weierp;"
+  },
+  {
+    "Entity Name": "𝔯",
+    "Decimal": "&#120116;",
+    "Hexadecimal": "&#x1D534;",
+    "Character": "&wfr;"
+  },
+  {
+    "Entity Name": "𝔖",
+    "Decimal": "&#120086;",
+    "Hexadecimal": "&#x1D51A;",
+    "Character": "&Wfr;"
+  },
+  {
+    "Entity Name": "𝕜",
+    "Decimal": "&#120168;",
+    "Hexadecimal": "&#x1D568;",
+    "Character": "&wopf;"
+  },
+  {
+    "Entity Name": "𝕃",
+    "Decimal": "&#120131;",
+    "Hexadecimal": "&#x1D54E;",
+    "Character": "&Wopf;"
+  },
+  {
+    "Entity Name": "≀",
+    "Decimal": "&#8768;",
+    "Hexadecimal": "&#x2240;",
+    "Character": "&wreath;"
+  },
+  {
+    "Entity Name": "𝓌",
+    "Decimal": "&#120008;",
+    "Hexadecimal": "&#x1D4CC;",
+    "Character": "&wscr;"
+  },
+  {
+    "Entity Name": "𝒲",
+    "Decimal": "&#119986;",
+    "Hexadecimal": "&#x1D4B2;",
+    "Character": "&Wscr;"
+  },
+  {
+    "Entity Name": "⋂",
+    "Decimal": "&#8898;",
+    "Hexadecimal": "&#x22C2;",
+    "Character": "&xcap;"
+  },
+  {
+    "Entity Name": "◯",
+    "Decimal": "&#9711;",
+    "Hexadecimal": "&#x25EF;",
+    "Character": "&xcirc;"
+  },
+  {
+    "Entity Name": "⋃",
+    "Decimal": "&#8899;",
+    "Hexadecimal": "&#x22C3;",
+    "Character": "&xcup;"
+  },
+  {
+    "Entity Name": "▽",
+    "Decimal": "&#9661;",
+    "Hexadecimal": "&#x25BD;",
+    "Character": "&xdtri;"
+  },
+  {
+    "Entity Name": "𝔰",
+    "Decimal": "&#120117;",
+    "Hexadecimal": "&#x1D535;",
+    "Character": "&xfr;"
+  },
+  {
+    "Entity Name": "𝔗",
+    "Decimal": "&#120087;",
+    "Hexadecimal": "&#x1D51B;",
+    "Character": "&Xfr;"
+  },
+  {
+    "Entity Name": "⟷",
+    "Decimal": "&#10231;",
+    "Hexadecimal": "&#x27F7;",
+    "Character": "&xharr;"
+  },
+  {
+    "Entity Name": "ξ",
+    "Decimal": "&#958;",
+    "Hexadecimal": "&#x3BE;",
+    "Character": "&xi;"
+  },
+  {
+    "Entity Name": "Ξ",
+    "Decimal": "&#926;",
+    "Hexadecimal": "&#x39E;",
+    "Character": "&Xi;"
+  },
+  {
+    "Entity Name": "⟵",
+    "Decimal": "&#10229;",
+    "Hexadecimal": "&#x27F5;",
+    "Character": "&xlarr;"
+  },
+  {
+    "Entity Name": "⟼",
+    "Decimal": "&#10236;",
+    "Hexadecimal": "&#x27FC;",
+    "Character": "&xmap;"
+  },
+  {
+    "Entity Name": "𝕝",
+    "Decimal": "&#120169;",
+    "Hexadecimal": "&#x1D569;",
+    "Character": "&xopf;"
+  },
+  {
+    "Entity Name": "𝕄",
+    "Decimal": "&#120132;",
+    "Hexadecimal": "&#x1D54F;",
+    "Character": "&Xopf;"
+  },
+  {
+    "Entity Name": "⟶",
+    "Decimal": "&#10230;",
+    "Hexadecimal": "&#x27F6;",
+    "Character": "&xrarr;"
+  },
+  {
+    "Entity Name": "𝓍",
+    "Decimal": "&#120009;",
+    "Hexadecimal": "&#x1D4CD;",
+    "Character": "&xscr;"
+  },
+  {
+    "Entity Name": "𝒳",
+    "Decimal": "&#119987;",
+    "Hexadecimal": "&#x1D4B3;",
+    "Character": "&Xscr;"
+  },
+  {
+    "Entity Name": "△",
+    "Decimal": "&#9651;",
+    "Hexadecimal": "&#x25B3;",
+    "Character": "&xutri;"
+  },
+  {
+    "Entity Name": "⋁",
+    "Decimal": "&#8897;",
+    "Hexadecimal": "&#x22C1;",
+    "Character": "&xvee;"
+  },
+  {
+    "Entity Name": "⋀",
+    "Decimal": "&#8896;",
+    "Hexadecimal": "&#x22C0;",
+    "Character": "&xwedge;"
+  },
+  {
+    "Entity Name": "ý",
+    "Decimal": "&#253;",
+    "Hexadecimal": "&#xFD;",
+    "Character": "&yacute;"
+  },
+  {
+    "Entity Name": "Ý",
+    "Decimal": "&#221;",
+    "Hexadecimal": "&#xDD;",
+    "Character": "&Yacute;"
+  },
+  {
+    "Entity Name": "я",
+    "Decimal": "&#1103;",
+    "Hexadecimal": "&#x44F;",
+    "Character": "&yacy;"
+  },
+  {
+    "Entity Name": "Я",
+    "Decimal": "&#1055;",
+    "Hexadecimal": "&#x42F;",
+    "Character": "&YAcy;"
+  },
+  {
+    "Entity Name": "ŷ",
+    "Decimal": "&#375;",
+    "Hexadecimal": "&#x177;",
+    "Character": "&ycirc;"
+  },
+  {
+    "Entity Name": "Ŷ",
+    "Decimal": "&#374;",
+    "Hexadecimal": "&#x176;",
+    "Character": "&Ycirc;"
+  },
+  {
+    "Entity Name": "ы",
+    "Decimal": "&#1099;",
+    "Hexadecimal": "&#x44B;",
+    "Character": "&ycy;"
+  },
+  {
+    "Entity Name": "Ы",
+    "Decimal": "&#1067;",
+    "Hexadecimal": "&#x42B;",
+    "Character": "&Ycy;"
+  },
+  {
+    "Entity Name": "¥",
+    "Decimal": "&#165;",
+    "Hexadecimal": "&#xA5;",
+    "Character": "&yen;"
+  },
+  {
+    "Entity Name": "𝔱",
+    "Decimal": "&#120118;",
+    "Hexadecimal": "&#x1D536;",
+    "Character": "&yfr;"
+  },
+  {
+    "Entity Name": "𝔘",
+    "Decimal": "&#120088;",
+    "Hexadecimal": "&#x1D51C;",
+    "Character": "&Yfr;"
+  },
+  {
+    "Entity Name": "ї",
+    "Decimal": "&#1111;",
+    "Hexadecimal": "&#x457;",
+    "Character": "&yicy;"
+  },
+  {
+    "Entity Name": "Ї",
+    "Decimal": "&#1031;",
+    "Hexadecimal": "&#x407;",
+    "Character": "&YIcy;"
+  },
+  {
+    "Entity Name": "𝕞",
+    "Decimal": "&#120170;",
+    "Hexadecimal": "&#x1D56A;",
+    "Character": "&yopf;"
+  },
+  {
+    "Entity Name": "𝕅",
+    "Decimal": "&#120133;",
+    "Hexadecimal": "&#x1D550;",
+    "Character": "&Yopf;"
+  },
+  {
+    "Entity Name": "𝓎",
+    "Decimal": "&#120010;",
+    "Hexadecimal": "&#x1D4CE;",
+    "Character": "&yscr;"
+  },
+  {
+    "Entity Name": "𝒴",
+    "Decimal": "&#119988;",
+    "Hexadecimal": "&#x1D4B4;",
+    "Character": "&Yscr;"
+  },
+  {
+    "Entity Name": "ю",
+    "Decimal": "&#1102;",
+    "Hexadecimal": "&#44E;",
+    "Character": "&yucy;"
+  },
+  {
+    "Entity Name": "Ю",
+    "Decimal": "&#1070;",
+    "Hexadecimal": "&#42E;",
+    "Character": "&YUcy;"
+  },
+  {
+    "Entity Name": "ÿ",
+    "Decimal": "&#255;",
+    "Hexadecimal": "&#FF;",
+    "Character": "&yuml;"
+  },
+  {
+    "Entity Name": "Ÿ",
+    "Decimal": "&#376;",
+    "Hexadecimal": "&#178;",
+    "Character": "&Yuml;"
+  },
+  {
+    "Entity Name": "ź",
+    "Decimal": "&#378;",
+    "Hexadecimal": "&#17A;",
+    "Character": "&zacute;"
+  },
+  {
+    "Entity Name": "Ź",
+    "Decimal": "&#377;",
+    "Hexadecimal": "&#179;",
+    "Character": "&Zacute;"
+  },
+  {
+    "Entity Name": "ž",
+    "Decimal": "&#382;",
+    "Hexadecimal": "&#17E;",
+    "Character": "&zcaron;"
+  },
+  {
+    "Entity Name": "Ž",
+    "Decimal": "&#381;",
+    "Hexadecimal": "&#17D;",
+    "Character": "&Zcaron;"
+  },
+  {
+    "Entity Name": "з",
+    "Decimal": "&#1087;",
+    "Hexadecimal": "&#437;",
+    "Character": "&zcy;"
+  },
+  {
+    "Entity Name": "З",
+    "Decimal": "&#1055;",
+    "Hexadecimal": "&#417;",
+    "Character": "&Zcy;"
+  },
+  {
+    "Entity Name": "ż",
+    "Decimal": "&#380;",
+    "Hexadecimal": "&#17C;",
+    "Character": "&zdot;"
+  },
+  {
+    "Entity Name": "Ż",
+    "Decimal": "&#379;",
+    "Hexadecimal": "&#17B;",
+    "Character": "&Zdot;"
+  },
+  {
+    "Entity Name": "ζ",
+    "Decimal": "&#950;",
+    "Hexadecimal": "&#3B6;",
+    "Character": "&zeta;"
+  },
+  {
+    "Entity Name": "Ζ",
+    "Decimal": "&#918;",
+    "Hexadecimal": "&#396;",
+    "Character": "&Zeta;"
+  },
+  {
+    "Entity Name": "𝔲",
+    "Decimal": "&#120119;",
+    "Hexadecimal": "&#1D537;",
+    "Character": "&zfr;"
+  },
+  {
+    "Entity Name": "ℨ",
+    "Decimal": "&#8488;",
+    "Hexadecimal": "&#2128;",
+    "Character": "&Zfr;"
+  },
+  {
+    "Entity Name": "ж",
+    "Decimal": "&#1094;",
+    "Hexadecimal": "&#436;",
+    "Character": "&zhcy;"
+  },
+  {
+    "Entity Name": "Ж",
+    "Decimal": "&#1062;",
+    "Hexadecimal": "&#416;",
+    "Character": "&ZHcy;"
+  },
+  {
+    "Entity Name": "⇝",
+    "Decimal": "&#8669;",
+    "Hexadecimal": "&#21DD;",
+    "Character": "&zigrarr;"
+  },
+  {
+    "Entity Name": "𝕟",
+    "Decimal": "&#120171;",
+    "Hexadecimal": "&#1D56B;",
+    "Character": "&zopf;"
+  },
+  {
+    "Entity Name": "𝓏",
+    "Decimal": "&#120011;",
+    "Hexadecimal": "&#1D4CF;",
+    "Character": "&zscr;"
+  },
+  {
+    "Entity Name": "𝒵",
+    "Decimal": "&#119989;",
+    "Hexadecimal": "&#1D4B5;",
+    "Character": "&Zscr;"
+  }
+]

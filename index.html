@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>E-pub CUP QC Validator</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-left">
+    <img src="logo.webp" class="brand-logo" alt="QC Validator"
+      onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+    <div class="brand-mark-fallback" style="display:none;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 17H7A5 5 0 0 1 7 7h2"/>
+        <path d="M15 7h2a5 5 0 1 1 0 10h-2"/>
+        <line x1="8" y1="12" x2="16" y2="12"/>
+      </svg>
+    </div>
+    <span class="topbar-title">QC Validator</span>
+    <div class="topbar-mini-summary" id="topbarMiniSummary" hidden></div>
+  </div>
+
+  <nav class="topbar-stepper" id="topbarStepper">
+    <div class="stepper-item active" data-step="1">
+      <span class="stepper-dot">1</span>
+      <span class="stepper-label">Folder</span>
+    </div>
+    <div class="stepper-line"></div>
+    <div class="stepper-item" data-step="2">
+      <span class="stepper-dot">2</span>
+      <span class="stepper-label">Files</span>
+    </div>
+    <div class="stepper-line"></div>
+    <div class="stepper-item" data-step="3">
+      <span class="stepper-dot">3</span>
+      <span class="stepper-label">Rules</span>
+    </div>
+    <div class="stepper-line"></div>
+    <div class="stepper-item" data-step="4">
+      <span class="stepper-dot">4</span>
+      <span class="stepper-label">Results</span>
+      <span class="stepper-badge" id="stepperResultsBadge" hidden></span>
+    </div>
+  </nav>
+
+  <div class="topbar-right">
+    <button type="button" class="btn-icon" id="btnThemeToggle" title="Toggle theme" aria-label="Toggle theme"></button>
+    <button type="button" class="btn-icon" id="btnShortcuts" title="Keyboard shortcuts" aria-label="Keyboard shortcuts"></button>
+    <button type="button" id="btnResetAll" class="btn-icon" title="Reset" aria-label="Reset"></button>
+  </div>
+</header>
+
+<div class="breadcrumb" id="breadcrumb" hidden></div>
+
+<main class="content-container">
+
+  <section class="step-panel active" data-step="1">
+    <h1 class="panel-title">Select Project Folder</h1>
+    <p class="panel-desc">Choose the folder containing your XHTML files and images folder.</p>
+
+    <div id="uploadBox" class="upload-box">
+      <label class="upload-label">
+        <span id="uploadIcon"></span>
+        <span class="upload-title">Drop your project folder here</span>
+        <span class="upload-sub">or click to browse</span>
+        <span class="upload-hint">Looking for .xhtml files and images</span>
+        <input type="file" id="folderInput" webkitdirectory multiple hidden />
+      </label>
+    </div>
+    <div id="folderSummary"></div>
+
+    <div id="recentFoldersSection" class="recent-folders" hidden>
+      <div class="recent-folders-label">Recent</div>
+      <div id="recentFoldersList" class="recent-folders-list"></div>
+    </div>
+
+    <div class="panel-actions">
+      <button id="btnToStep2" class="btn btn-primary" disabled>
+        Next <span id="iconArrowRight"></span>
+      </button>
+    </div>
+  </section>
+
+  <section class="step-panel" data-step="2">
+    <h1 class="panel-title">Project Files</h1>
+    <p class="panel-desc">Review the files found in your project folder.</p>
+
+    <div class="search-box">
+      <span class="search-icon" id="iconSearch2"></span>
+      <input type="text" id="fileSearchInput" placeholder="Filter files by name..." />
+    </div>
+
+    <div class="files-toolbar">
+      <div class="filter-chips" id="fileTypeChips">
+        <button class="filter-chip active" data-type="all">All <span class="chip-count" id="chipCountAll">0</span></button>
+        <button class="filter-chip" data-type="xhtml">XHTML <span class="chip-count" id="chipCountXhtml">0</span></button>
+        <button class="filter-chip" data-type="image">Images <span class="chip-count" id="chipCountImage">0</span></button>
+      </div>
+      <div class="sort-select-wrap">
+        <label for="fileSortSelect" class="sort-label">Sort</label>
+        <select id="fileSortSelect" class="sort-select">
+          <option value="name">Name</option>
+          <option value="size">Size</option>
+          <option value="type">Type</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="files-meta" id="filesMeta"></div>
+
+    <div id="unifiedFileList" class="file-list"></div>
+
+    <div class="panel-actions">
+      <button id="btnBackTo1" class="btn btn-secondary"><span id="iconArrowLeft1"></span> Back</button>
+      <button id="btnToStep3" class="btn btn-primary">Next <span id="iconArrowRight2"></span></button>
+    </div>
+  </section>
+
+  <section class="step-panel" data-step="3">
+    <h1 class="panel-title">Validation Rules</h1>
+    <p class="panel-desc">These checks will run against all your XHTML files.</p>
+
+    <div class="rules-toolbar">
+      <div class="search-box">
+        <span class="search-icon" id="iconSearch3"></span>
+        <input type="text" id="ruleSearchInput" placeholder="Search rules..." />
+      </div>
+      <div class="rules-toolbar-actions">
+        <div class="filter-chips" id="ruleSeverityChips">
+          <button class="filter-chip active" data-severity="all">All</button>
+          <button class="filter-chip" data-severity="error">Errors</button>
+          <button class="filter-chip" data-severity="warn">Warnings</button>
+        </div>
+        <button type="button" id="btnEnableAll" class="btn btn-secondary btn-sm">Enable all</button>
+        <button type="button" id="btnDisableAll" class="btn btn-secondary btn-sm">Disable all</button>
+        <div class="dropdown" id="presetDropdown">
+          <button type="button" class="btn btn-secondary btn-sm" id="btnPresetToggle">
+            <span id="iconSparkles"></span> Recommended <span id="iconChevronDown1"></span>
+          </button>
+          <div class="dropdown-menu" id="presetMenu" hidden></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="count-chip count-chip-accent" id="rulesActiveChip">0 of 0 rules active</div>
+
+    <div id="rulesList" class="rules-list"></div>
+
+    <div class="panel-actions">
+      <button id="btnBackTo2" class="btn btn-secondary"><span id="iconArrowLeft2"></span> Back</button>
+      <button id="btnValidate" class="btn btn-primary"><span id="iconSliders"></span> Validate</button>
+    </div>
+  </section>
+
+  <section class="step-panel" data-step="4">
+    <h1 class="panel-title">Validation Results</h1>
+
+    <div class="results-layout">
+      <div class="results-header" id="resultsHeader">
+        <div class="results-header-top">
+          <div class="results-stats">
+            <div class="stat-card">
+              <div class="stat-value" id="statFiles">0</div>
+              <div class="stat-label">Files checked</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value" id="statRules">0</div>
+              <div class="stat-label">Rules run</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value" id="statIssues">0</div>
+              <div class="stat-label">Total issues</div>
+            </div>
+          </div>
+          <div class="status-pill" id="statusPill"></div>
+        </div>
+        <div class="results-header-bottom">
+          <span class="meta-line" id="resultsMetaLine"></span>
+          <span class="severity-legend">
+            <span class="legend-item"><span class="severity-dot dot-error"></span>Error</span>
+            <span class="legend-item"><span class="severity-dot dot-warn"></span>Warning</span>
+            <span class="legend-item"><span class="severity-dot"></span>Passed</span>
+          </span>
+        </div>
+      </div>
+
+      <div id="celebrationHost"></div>
+
+      <div class="results-body">
+        <aside class="results-sidebar">
+          <div class="results-sidebar-title">Files <span id="sidebarFileCount"></span></div>
+          <div id="resultsSidebarList" class="results-sidebar-list"></div>
+        </aside>
+
+        <div class="results-main">
+          <div class="results-toolbar">
+            <div class="filter-tabs" id="filterTabs">
+              <button class="filter-tab active" data-filter="all">All</button>
+              <button class="filter-tab" data-filter="errors">Errors</button>
+              <button class="filter-tab" data-filter="warnings">Warnings</button>
+              <button class="filter-tab" data-filter="passed">Passed</button>
+            </div>
+            <div class="segmented" id="groupBySegment">
+              <button class="segmented-btn active" data-group="rule">By Rule</button>
+              <button class="segmented-btn" data-group="file">By File</button>
+            </div>
+            <div class="results-toolbar-actions">
+              <button type="button" id="btnExpandAll" class="btn btn-ghost btn-sm">Expand all</button>
+              <button type="button" id="btnCollapseAll" class="btn btn-ghost btn-sm">Collapse all</button>
+              <div class="dropdown" id="exportDropdown">
+                <button type="button" class="btn btn-secondary btn-sm" id="btnExportToggle">
+                  <span id="iconDownload"></span> Export <span id="iconChevronDown2"></span>
+                </button>
+                <div class="dropdown-menu" id="exportMenu" hidden>
+                  <button type="button" class="dropdown-item" id="btnExportJson">Export JSON</button>
+                  <button type="button" class="dropdown-item" id="btnExportText">Export text summary</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="resultList" class="result-list"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-actions">
+      <button id="btnBackTo3" class="btn btn-secondary"><span id="iconArrowLeft3"></span> Back</button>
+      <button id="btnRevalidate" class="btn btn-primary"><span id="iconRefresh"></span> Validate Again</button>
+    </div>
+  </section>
+
+</main>
+
+<div class="toast-container" id="toastContainer"></div>
+
+<div class="modal-overlay" id="shortcutsModal" hidden>
+  <div class="modal-card">
+    <div class="modal-header">
+      <span class="modal-title">Keyboard shortcuts</span>
+      <button type="button" class="btn-icon" id="btnCloseShortcuts" aria-label="Close"></button>
+    </div>
+    <div class="shortcuts-list">
+      <div class="shortcut-row"><kbd>Enter</kbd><span>Go to next step</span></div>
+      <div class="shortcut-row"><kbd>Esc</kbd><span>Go to previous step / close dialogs</span></div>
+      <div class="shortcut-row"><kbd>/</kbd><span>Focus search</span></div>
+      <div class="shortcut-row"><kbd>Ctrl/⌘ K</kbd><span>Focus search</span></div>
+      <div class="shortcut-row"><kbd>?</kbd><span>Open this dialog</span></div>
+      <div class="shortcut-row"><kbd>t</kbd><span>Toggle theme</span></div>
+      <div class="shortcut-row"><kbd>e</kbd><span>Export report (results step)</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="validation-overlay" id="validationOverlay" hidden>
+  <div class="validation-card">
+    <svg class="tree-svg" id="treeSvg" width="140" height="140" viewBox="0 0 140 140" fill="none">
+      <path id="treeTrunk" d="M70 130 L70 75" stroke="#1E3A8A" stroke-width="6" stroke-linecap="round" />
+      <path class="tree-branch" id="branch1" d="M70 100 L45 80" stroke="#1E3A8A" stroke-width="4" stroke-linecap="round" />
+      <path class="tree-branch" id="branch2" d="M70 100 L95 80" stroke="#1E3A8A" stroke-width="4" stroke-linecap="round" />
+      <path class="tree-branch" id="branch3" d="M70 85 L50 60" stroke="#1E3A8A" stroke-width="4" stroke-linecap="round" />
+      <path class="tree-branch" id="branch4" d="M70 85 L90 60" stroke="#1E3A8A" stroke-width="4" stroke-linecap="round" />
+      <path class="tree-branch" id="branch5" d="M70 75 L70 50" stroke="#1E3A8A" stroke-width="4" stroke-linecap="round" />
+      <circle class="tree-leaf" cx="45" cy="80" r="7" fill="#15803D" />
+      <circle class="tree-leaf" cx="95" cy="80" r="7" fill="#15803D" />
+      <circle class="tree-leaf" cx="50" cy="60" r="7" fill="#15803D" />
+      <circle class="tree-leaf" cx="90" cy="60" r="7" fill="#15803D" />
+      <circle class="tree-leaf" cx="70" cy="45" r="8" fill="#15803D" />
+    </svg>
+    <div class="validation-heading">Validating your files&hellip;</div>
+    <div class="validation-progress-track"><div class="validation-progress-bar" id="validationProgressBar"></div></div>
+    <div class="validation-live-text" id="validationLiveText">Preparing&hellip;</div>
+  </div>
+</div>
+
+<script>
+window.ENTITY_MAP = null;
+fetch('entities.json')
+  .then(r => r.json())
+  .then(data => {
+    window.ENTITY_MAP = {};
+    data.forEach(entry => {
+      const ch = entry['Entity Name'];
+      if (!ch || ch.length === 0) return;
+      window.ENTITY_MAP[ch] = {
+        decimal: entry['Decimal'],
+        hex: entry['Hexadecimal'],
+        character: entry['Character']
+      };
+    });
+    console.log('ENTITY_MAP loaded:', Object.keys(window.ENTITY_MAP).length, 'entries');
+  })
+  .catch(err => console.error('Failed to load entities.json:', err));
+</script>
+<script src="config.js"></script>
+<script src="parser.js"></script>
+<script src="rules.js"></script>
+<script src="validator.js"></script>
+<script src="reporter.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
