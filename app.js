@@ -98,6 +98,13 @@ async function parsePageDataFromExcel(allFiles) {
     image: '<rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>',
     check: '<polyline points="20 6 9 17 4 12"/>',
     'check-circle': '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>',
+    link: '<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>',
+    hash: '<line x1="4" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="20" y2="15"/><line x1="10" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="14" y2="21"/>',
+    code: '<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>',
+    bookmark: '<path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/>',
+    book: '<path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/>',
+    layout: '<rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/>',
+    'file-check': '<path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="m9 15 2 2 4-4"/>',
     check: '<polyline points="20 6 9 17 4 12"/>',
     'x-circle': '<circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>',
     'alert-triangle': '<path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>',
@@ -233,7 +240,10 @@ async function parsePageDataFromExcel(allFiles) {
 
   function seedRuleState() {
     ruleState = {};
-    getRulesConfig().forEach(rule => { ruleState[rule.id] = rule.enabled; });
+    const savedRuleState = (() => { try { return JSON.parse(localStorage.getItem('vpqc.ruleState') || '{}'); } catch(e) { return {}; } })();
+    getRulesConfig().forEach(rule => {
+      ruleState[rule.id] = rule.id in savedRuleState ? savedRuleState[rule.id] : rule.enabled;
+    });
   }
 
   function getRulesConfig() {
@@ -449,21 +459,124 @@ async function parsePageDataFromExcel(allFiles) {
   function renderFolderSummary() {
     els.uploadBox.style.display = 'none';
     const totalBytes = allFiles.reduce((sum, f) => sum + (f.size || 0), 0);
+    const totalCount = xhtmlFiles.length + imageFiles.length;
+    const xhtmlPct = totalCount > 0 ? Math.round((xhtmlFiles.length / totalCount) * 100) : 100;
+    const imagePct = 100 - xhtmlPct;
+
+    // Detect group counts for preview
+    const fmCount = xhtmlFiles.filter(f => {
+      const l = f.name.toLowerCase();
+      return l.includes('_cv') || l.includes('_fm') || l.startsWith('cv') || l.startsWith('fm');
+    }).length;
+    const chCount = xhtmlFiles.filter(f => {
+      const l = f.name.toLowerCase();
+      return l.includes('_ch') || l.startsWith('ch');
+    }).length;
+    const bmCount = xhtmlFiles.filter(f => {
+      const l = f.name.toLowerCase();
+      return l.includes('_bm') || l.startsWith('bm') || l.includes('_app') || l.includes('_ref') || l.includes('_idx');
+    }).length;
+
     els.folderSummary.innerHTML = `
-      <div class="folder-summary-card">
-        <div class="folder-summary-icon">${icon('folder', 22)}</div>
-        <div class="folder-summary-body">
-          <div class="folder-summary-name">${escapeHtml(folderName)}</div>
-          <div class="folder-summary-counts">
-            <span class="chip">${xhtmlFiles.length} XHTML</span>
-            <span class="chip chip-neutral">${imageFiles.length} Images</span>
-            <span class="chip chip-neutral">${formatBytes(totalBytes)}</span>
+      <div class="project-dashboard-card">
+        <div class="project-card-header">
+          <div class="project-header-left">
+            <div class="project-avatar-icon">${icon('folder', 24)}</div>
+            <div class="project-header-meta">
+              <div class="project-title-row">
+                <span class="project-name">${escapeHtml(folderName)}</span>
+                <span class="project-status-badge">
+                  <span class="status-pulse-dot"></span>
+                  Ready to Validate
+                </span>
+              </div>
+              <div class="project-subtext">Project workspace loaded with ${allFiles.length} detected files</div>
+            </div>
+          </div>
+          <button type="button" id="btnChangeFolder" class="btn btn-secondary btn-sm">
+            ${icon('refresh-cw', 14)} Change Folder
+          </button>
+        </div>
+
+        <div class="project-metrics-grid">
+          <div class="project-metric-box">
+            <div class="metric-top">
+              <span class="metric-icon-wrap icon-blue">${icon('file-text', 16)}</span>
+              <span class="metric-label">XHTML Files</span>
+            </div>
+            <div class="metric-val-row">
+              <span class="metric-value">${xhtmlFiles.length}</span>
+              <span class="metric-unit">documents</span>
+            </div>
+            <div class="metric-tags">
+              <span class="metric-pill">${fmCount} FM</span>
+              <span class="metric-pill">${chCount} CH</span>
+              <span class="metric-pill">${bmCount} BM</span>
+            </div>
+          </div>
+
+          <div class="project-metric-box">
+            <div class="metric-top">
+              <span class="metric-icon-wrap icon-green">${icon('image', 16)}</span>
+              <span class="metric-label">Image Assets</span>
+            </div>
+            <div class="metric-val-row">
+              <span class="metric-value">${imageFiles.length}</span>
+              <span class="metric-unit">images</span>
+            </div>
+            <div class="metric-tags">
+              <span class="metric-pill">JPG, PNG, SVG</span>
+            </div>
+          </div>
+
+          <div class="project-metric-box">
+            <div class="metric-top">
+              <span class="metric-icon-wrap icon-purple">${icon('layers', 16)}</span>
+              <span class="metric-label">Total Size</span>
+            </div>
+            <div class="metric-val-row">
+              <span class="metric-value">${formatBytes(totalBytes)}</span>
+            </div>
+            <div class="metric-tags">
+              <span class="metric-pill">${allFiles.length} items scanned</span>
+            </div>
           </div>
         </div>
-        <button type="button" id="btnChangeFolder" class="btn btn-ghost btn-sm">Change</button>
+
+        <div class="project-dist-bar-section">
+          <div class="dist-bar-header">
+            <span class="dist-label">File Composition</span>
+            <div class="dist-legend">
+              <span><span class="dist-dot dot-xhtml"></span>XHTML (${xhtmlPct}%)</span>
+              <span><span class="dist-dot dot-image"></span>Images (${imagePct}%)</span>
+            </div>
+          </div>
+          <div class="dist-track">
+            <div class="dist-bar-xhtml" style="width:${xhtmlPct}%"></div>
+            <div class="dist-bar-image" style="width:${imagePct}%"></div>
+          </div>
+        </div>
       </div>
     `;
     document.getElementById('btnChangeFolder').addEventListener('click', resetAll);
+  }
+
+  // Read all files fresh from a directory handle
+  async function readFilesFromDirHandle(dirHandle) {
+    const files = [];
+    async function walk(handle, path) {
+      for await (const [name, entry] of handle.entries()) {
+        if (entry.kind === 'file') {
+          const file = await entry.getFile();
+          Object.defineProperty(file, 'webkitRelativePath', { value: path + name });
+          files.push(file);
+        } else if (entry.kind === 'directory') {
+          await walk(entry, path + name + '/');
+        }
+      }
+    }
+    await walk(dirHandle, dirHandle.name + '/');
+    return files;
   }
 
   function handleFolderSelect(e) {
@@ -574,7 +687,12 @@ async function parsePageDataFromExcel(allFiles) {
           } else {
             selectedXhtmlFiles.add(entry.file.name);
           }
+          const scrollTops = {};
+          document.querySelectorAll('.group-card-body').forEach((el, i) => { scrollTops[i] = el.scrollTop; });
+          const sy = window.scrollY;
           renderFileList();
+          window.scrollTo(0, sy);
+          document.querySelectorAll('.group-card-body').forEach((el, i) => { if (scrollTops[i]) el.scrollTop = scrollTops[i]; });
         });
 
         els.unifiedFileList.appendChild(card);
@@ -682,7 +800,12 @@ async function parsePageDataFromExcel(allFiles) {
         } else {
           group.files.forEach(f => selectedXhtmlFiles.add(f.name));
         }
+        const scrollTops = {};
+        document.querySelectorAll('.group-card-body').forEach((el, i) => { scrollTops[i] = el.scrollTop; });
+        const sy = window.scrollY;
         renderFileList();
+        window.scrollTo(0, sy);
+        document.querySelectorAll('.group-card-body').forEach((el, i) => { if (scrollTops[i]) el.scrollTop = scrollTops[i]; });
       });
 
       const body = document.createElement('div');
@@ -712,7 +835,12 @@ async function parsePageDataFromExcel(allFiles) {
             } else {
               selectedXhtmlFiles.add(f.name);
             }
+            const scrollTops = {};
+            document.querySelectorAll('.group-card-body').forEach((el, i) => { scrollTops[i] = el.scrollTop; });
+            const sy = window.scrollY;
             renderFileList();
+            window.scrollTo(0, sy);
+            document.querySelectorAll('.group-card-body').forEach((el, i) => { if (scrollTops[i]) el.scrollTop = scrollTops[i]; });
           });
 
           body.appendChild(item);
@@ -836,37 +964,62 @@ async function parsePageDataFromExcel(allFiles) {
       return;
     }
 
+    const getRuleDomainMeta = (id) => {
+      if (id.startsWith('pagebreak')) return { icon: 'file-check', label: 'Pagebreaks' };
+      if (id.startsWith('sup')) return { icon: 'bookmark', label: 'Superscript' };
+      if (id.includes('image')) return { icon: 'image', label: 'Images' };
+      if (id.includes('link') || id.includes('anchor') || id.includes('unlinked')) return { icon: 'link', label: 'Links' };
+      if (id.includes('id-check')) return { icon: 'hash', label: 'IDs' };
+      if (id.startsWith('p-') || id.startsWith('span')) return { icon: 'code', label: 'Structure' };
+      if (id.startsWith('bm')) return { icon: 'book', label: 'Back Matter' };
+      return { icon: 'sliders', label: 'General' };
+    };
+
     rules.forEach(rule => {
       const on = ruleState[rule.id];
-      const item = document.createElement('div');
-      item.className = 'rule-item ' + (on ? 'rule-enabled' : 'rule-disabled');
-      item.innerHTML = `
-        <button class="toggle-switch ${on ? 'on' : ''}" data-rule-id="${rule.id}" role="switch" aria-checked="${on}"></button>
-        <div class="rule-body">
-          <div class="rule-name">${escapeHtml(rule.name)}</div>
-          <div class="rule-desc">${escapeHtml(rule.description)}</div>
+      const domainMeta = getRuleDomainMeta(rule.id);
+      const card = document.createElement('div');
+      card.className = 'rule-card ' + (on ? 'rule-enabled' : 'rule-disabled');
+      card.innerHTML = `
+        <div class="rule-card-header">
+          <div class="rule-card-icon-wrap">
+            <div class="rule-card-icon">${icon(domainMeta.icon, 18)}</div>
+            <span class="rule-domain-tag">${escapeHtml(domainMeta.label)}</span>
+          </div>
+          <button type="button" class="toggle-switch ${on ? 'on' : ''}" data-rule-id="${rule.id}" role="switch" aria-checked="${on}"></button>
         </div>
-        <div class="rule-severity severity-${rule.severity}">${escapeHtml(rule.severity)}</div>
+        <div class="rule-card-body">
+          <div class="rule-card-title">${escapeHtml(rule.name)}</div>
+          <div class="rule-card-desc">${escapeHtml(rule.description)}</div>
+        </div>
+        <div class="rule-card-footer">
+          <span class="rule-severity severity-${rule.severity}">${escapeHtml(rule.severity)}</span>
+          <span style="font-size:12px;font-weight:600;color:${on ? 'var(--brand-blue)' : 'var(--text-subtle)'};">
+            ${on ? 'Active' : 'Disabled'}
+          </span>
+        </div>
       `;
-      els.rulesList.appendChild(item);
-    });
 
-    els.rulesList.querySelectorAll('.toggle-switch').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const id = btn.dataset.ruleId;
-        ruleState[id] = !ruleState[id];
+      card.addEventListener('click', (e) => {
+        // Toggle when clicking anywhere on card or toggle button
+        ruleState[rule.id] = !ruleState[rule.id];
+        try { localStorage.setItem('vpqc.ruleState', JSON.stringify(ruleState)); } catch(e) {}
         renderRulesList();
       });
+
+      els.rulesList.appendChild(card);
     });
   }
 
   function enableAllRules() {
     getRulesConfig().filter(rule => rule.enabled).forEach(rule => { ruleState[rule.id] = true; });
+    try { localStorage.setItem('vpqc.ruleState', JSON.stringify(ruleState)); } catch(e) {}
     renderRulesList();
   }
 
   function disableAllRules() {
     getRulesConfig().filter(rule => rule.enabled).forEach(rule => { ruleState[rule.id] = false; });
+    try { localStorage.setItem('vpqc.ruleState', JSON.stringify(ruleState)); } catch(e) {}
     renderRulesList();
   }
 
@@ -919,7 +1072,12 @@ async function parsePageDataFromExcel(allFiles) {
 
       // Parse page data from Excel (if present) for pagebreak-check rule
       window._pagebreakLabelMap = null;
-      window.PAGE_DATA = await parsePageDataFromExcel(allFiles);
+      try {
+        const excelResult = await parsePageDataFromExcel(allFiles);
+        if (excelResult !== undefined) window.PAGE_DATA = excelResult;
+      } catch(excelErr) {
+        console.warn('Excel parse skipped:', excelErr);
+      }
 
       // Preload all xhtml files into fileMap (for cross-file checking rules)
       const fileMap = new Map();
@@ -950,6 +1108,11 @@ async function parsePageDataFromExcel(allFiles) {
         filesReport.push({ fileName: file.name, report });
       }
 
+      // Smooth completion indicator: show 100% and "Validation Complete" before closing
+      els.validationProgressBar.style.width = '100%';
+      els.validationLiveText.textContent = 'Validation Complete! Finalizing report…';
+      await new Promise(r => setTimeout(r, 450));
+
       currentReport = { totalIssues, totalRules, files: filesReport };
       validatedAt = Date.now();
       activeFileTab = 'all';
@@ -962,7 +1125,7 @@ async function parsePageDataFromExcel(allFiles) {
       goToStep(4);
     } catch (err) {
       hideValidationOverlay();
-      alert('Could not validate files: ' + err.message);
+      alert('Could not validate files: ' + (err && err.message ? err.message : String(err)));
     }
   }
 
@@ -1066,18 +1229,45 @@ async function parsePageDataFromExcel(allFiles) {
     const imagePct = 100 - xhtmlPct;
 
     const hero = document.createElement('div');
-    hero.className = 'celebration-hero';
+    hero.className = 'celebration-hero celebration-seal-mode';
     hero.innerHTML = `
+      <div class="celebration-seal-bg-glow"></div>
       <div class="celebration-inner">
         <div class="celebration-icon-wrap">
-          <svg class="check-svg" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle class="check-circle-bg" cx="40" cy="40" r="38" stroke="var(--brand-green)" stroke-width="3" fill="none"/>
-            <polyline class="check-mark" points="22,42 34,54 58,28" stroke="var(--brand-green)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-          </svg>
+          <div class="seal-ripple-container">
+            <div class="seal-ripple-ring ring-1"></div>
+            <div class="seal-ripple-ring ring-2"></div>
+            <div class="seal-spark-burst" id="sealSparkBurst"></div>
+          </div>
+          <div class="seal-shield-badge">
+            <svg class="seal-svg" viewBox="0 0 88 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Outer glowing hex/shield base -->
+              <path class="seal-shield-path" d="M44 6L74 18V44C74 62.5 61.2 79.5 44 84C26.8 79.5 14 62.5 14 44V18L44 6Z" stroke="url(#sealGrad)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              <path class="seal-shield-fill" d="M44 9L71 20V44C71 60.8 59.5 76.2 44 80.5C28.5 76.2 17 60.8 17 44V20L44 9Z" fill="url(#sealFillGrad)"/>
+              <!-- Inner certified checkmark -->
+              <path class="seal-check-path" d="M28 44L39 55L60 33" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <defs>
+                <linearGradient id="sealGrad" x1="14" y1="6" x2="74" y2="84" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#10B981"/>
+                  <stop offset="0.5" stop-color="#059669"/>
+                  <stop offset="1" stop-color="#047857"/>
+                </linearGradient>
+                <linearGradient id="sealFillGrad" x1="17" y1="9" x2="71" y2="80.5" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="rgba(16, 185, 129, 0.22)"/>
+                  <stop offset="1" stop-color="rgba(5, 150, 105, 0.08)"/>
+                </linearGradient>
+              </defs>
+            </svg>
+            <div class="seal-certified-tag">PASSED</div>
+          </div>
         </div>
         <div class="celebration-text">
-          <div class="celebration-title">Clean Bill of Health</div>
-          <div class="celebration-sub">All checks passed — your files are clean.</div>
+          <div class="celebration-badge-pill">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            100% Quality Certified
+          </div>
+          <div class="celebration-title">EPUB Quality Approved</div>
+          <div class="celebration-sub">Zero errors or warnings detected across your XHTML files & assets.</div>
           <div class="celebration-stats">
             <div class="cel-stat">
               <span class="cel-stat-value" data-target="${filesChecked}">0</span>
@@ -1090,7 +1280,7 @@ async function parsePageDataFromExcel(allFiles) {
             </div>
             <div class="cel-stat-divider"></div>
             <div class="cel-stat">
-              <span class="cel-stat-value" data-target="0">0</span>
+              <span class="cel-stat-value" style="color:var(--brand-green);">0</span>
               <span class="cel-stat-label">Issues Found</span>
             </div>
           </div>
@@ -1101,7 +1291,7 @@ async function parsePageDataFromExcel(allFiles) {
             ${timestamp}
           </div>
           <div class="cel-filebar">
-            <div class="cel-filebar-label">File Breakdown</div>
+            <div class="cel-filebar-label">Verified Breakdown</div>
             <div class="cel-filebar-track">
               <div class="cel-filebar-xhtml" style="width:${xhtmlPct}%"></div>
               <div class="cel-filebar-image" style="width:${imagePct}%"></div>
@@ -1117,6 +1307,9 @@ async function parsePageDataFromExcel(allFiles) {
     `;
     els.celebrationHost.appendChild(hero);
 
+    // Trigger SVG spark burst
+    triggerSparkBurst(hero.querySelector('#sealSparkBurst'));
+
     // Animate stat counters
     hero.querySelectorAll('.cel-stat-value').forEach(el => {
       const target = parseInt(el.dataset.target, 10);
@@ -1129,26 +1322,21 @@ async function parsePageDataFromExcel(allFiles) {
         if (start >= target) clearInterval(timer);
       }, 16);
     });
-
-    setTimeout(() => fireConfetti(hero), 1100);
   }
 
-  function fireConfetti(container) {
-    const colors = ['#1E3A8A', '#15803D', '#D97706', '#6366F1', '#EC4899'];
-    const shapes = ['square', 'circle', 'rect'];
-    for (let i = 0; i < 40; i++) {
-      const piece = document.createElement('span');
-      piece.className = 'confetti-piece confetti-' + shapes[i % shapes.length];
-      piece.style.left = (20 + Math.random() * 60) + '%';
-      piece.style.background = colors[i % colors.length];
-      piece.style.animationDelay = (Math.random() * 0.6) + 's';
-      piece.style.animationDuration = (1.2 + Math.random() * 0.8) + 's';
-      piece.style.transform = `rotate(${Math.random() * 360}deg)`;
-      container.appendChild(piece);
+  function triggerSparkBurst(container) {
+    if (!container) return;
+    const sparkCount = 12;
+    for (let i = 0; i < sparkCount; i++) {
+      const angle = (i / sparkCount) * 360;
+      const dist = 48 + Math.random() * 24;
+      const spark = document.createElement('span');
+      spark.className = 'seal-spark-particle';
+      spark.style.setProperty('--angle', `${angle}deg`);
+      spark.style.setProperty('--dist', `${dist}px`);
+      spark.style.animationDelay = `${0.65 + Math.random() * 0.15}s`;
+      container.appendChild(spark);
     }
-    setTimeout(() => {
-      container.querySelectorAll('.confetti-piece').forEach(p => p.remove());
-    }, 2500);
   }
 
   function renderResultsSidebar() {
@@ -1162,7 +1350,7 @@ async function parsePageDataFromExcel(allFiles) {
       <span class="sidebar-file-name">All files</span>
       <span class="sidebar-file-count">${currentReport.totalIssues}</span>
     `;
-    allItem.addEventListener('click', () => { activeFileTab = 'all'; renderResults(); });
+    allItem.addEventListener('click', () => { activeFileTab = 'all'; const sy = window.scrollY; renderResults(); window.scrollTo(0, sy); });
     els.resultsSidebarList.appendChild(allItem);
 
     currentReport.files.forEach(f => {
@@ -1175,7 +1363,7 @@ async function parsePageDataFromExcel(allFiles) {
         <span class="sidebar-file-name" title="${escapeHtml(f.fileName)}">${escapeHtml(f.fileName)}</span>
         <span class="sidebar-file-count">${count}</span>
       `;
-      item.addEventListener('click', () => { activeFileTab = f.fileName; renderResults(); });
+      item.addEventListener('click', () => { activeFileTab = f.fileName; const sy = window.scrollY; renderResults(); window.scrollTo(0, sy); });
       els.resultsSidebarList.appendChild(item);
     });
   }
@@ -1529,8 +1717,34 @@ async function parsePageDataFromExcel(allFiles) {
 
   /* ---------- Wiring ---------- */
 
-  els.uploadBox.addEventListener('click', (e) => {
+  els.uploadBox.addEventListener('click', async (e) => {
     if (e.target === els.folderInput) return;
+    // Try File System Access API first (Chrome/Edge)
+    if (window.showDirectoryPicker) {
+      try {
+        const dirHandle = await window.showDirectoryPicker({ mode: 'read' });
+        window._dirHandle = dirHandle;
+        const files = await readFilesFromDirHandle(dirHandle);
+        if (!files.length) return;
+        allFiles = files;
+        xhtmlFiles = files.filter(f => getExt(f.name) === 'xhtml');
+        imageFiles = files.filter(f => IMAGE_EXT.includes(getExt(f.name)));
+        selectedXhtmlFiles = new Set(xhtmlFiles.map(f => f.name));
+        const relPath = files[0].webkitRelativePath || '';
+        folderName = relPath.split('/')[0] || 'Selected folder';
+        renderFolderSummary();
+        const isStep2Disabled = xhtmlFiles.length === 0;
+        els.btnToStep2.disabled = isStep2Disabled;
+        if (els.btnToStep2Top) els.btnToStep2Top.disabled = isStep2Disabled;
+        saveRecentFolder(folderName, xhtmlFiles.length, folderName);
+        renderRecentFolders();
+        return;
+      } catch (err) {
+        if (err.name === 'AbortError') return;
+        // Fall through to input fallback
+      }
+    }
+    // Fallback for Firefox
     els.folderInput.click();
   });
   els.folderInput.addEventListener('change', handleFolderSelect);
@@ -1569,14 +1783,38 @@ async function parsePageDataFromExcel(allFiles) {
   els.btnBackTo3.addEventListener('click', () => goToStep(3));
   if (els.btnBackTo3Top) els.btnBackTo3Top.addEventListener('click', () => goToStep(3));
 
-  els.btnRevalidate.addEventListener('click', () => {
-    resetAll();
-    goToStep(1);
+  els.btnRevalidate.addEventListener('click', async () => {
+    if (window._dirHandle) {
+      try {
+        showToast('Re-reading files from disk…', 'info');
+        const files = await readFilesFromDirHandle(window._dirHandle);
+        allFiles = files;
+        xhtmlFiles = files.filter(f => getExt(f.name) === 'xhtml');
+        imageFiles = files.filter(f => IMAGE_EXT.includes(getExt(f.name)));
+        selectedXhtmlFiles = new Set(xhtmlFiles.map(f => f.name));
+      } catch(err) {
+        showToast('Could not re-read folder: ' + err.message, 'error');
+        return;
+      }
+    }
+    handleValidate();
   });
   if (els.btnRevalidateTop) {
-    els.btnRevalidateTop.addEventListener('click', () => {
-      resetAll();
-      goToStep(1);
+    els.btnRevalidateTop.addEventListener('click', async () => {
+      if (window._dirHandle) {
+        try {
+          showToast('Re-reading files from disk…', 'info');
+          const files = await readFilesFromDirHandle(window._dirHandle);
+          allFiles = files;
+          xhtmlFiles = files.filter(f => getExt(f.name) === 'xhtml');
+          imageFiles = files.filter(f => IMAGE_EXT.includes(getExt(f.name)));
+          selectedXhtmlFiles = new Set(xhtmlFiles.map(f => f.name));
+        } catch(err) {
+          showToast('Could not re-read folder: ' + err.message, 'error');
+          return;
+        }
+      }
+      handleValidate();
     });
   }
 
@@ -1609,7 +1847,9 @@ async function parsePageDataFromExcel(allFiles) {
     if (!btn) return;
     fileTypeFilter = btn.dataset.type;
     els.fileTypeChips.querySelectorAll('.filter-chip').forEach(b => b.classList.toggle('active', b === btn));
+    const sy = window.scrollY;
     renderFileList();
+    window.scrollTo(0, sy);
   });
 
   els.fileSortSelect.addEventListener('change', () => {

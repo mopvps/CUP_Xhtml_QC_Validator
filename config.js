@@ -102,5 +102,13 @@ window.RULES_CONFIG = [
     severity: 'error',
     enabled: true,
     preset: 'recommended'
+  },
+  {
+    id: 'pagebreak-sequence',
+    name: 'Pagebreak Sequence Order',
+    description: 'Checks that pagebreaks appear in ascending order within each file (supports both roman and arabic numerals)',
+    severity: 'error',
+    enabled: true,
+    preset: 'recommended'
   }
 ];

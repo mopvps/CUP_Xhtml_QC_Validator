@@ -860,6 +860,139 @@ window.RULES['pagebreak-wrong-file'] = function (parsed, ruleCfg, fileMap, allFi
   return issues;
 };
 
+window.RULES['pagebreak-sequence'] = {
+  check: function(parsed, ruleCfg, fileMap, allFiles, currentFileName) {
+    const issues = [];
+    const pageData = window.PAGE_DATA;
+
+    if (!pageData || pageData.error || !pageData.files) return issues;
+
+    const fileEntry = pageData.files.find(f => f.filename === currentFileName);
+    if (!fileEntry) return issues;
+    if (fileEntry.flag === 1) return issues;
+
+    function romanToNum(str) {
+      const map = { i:1, v:5, x:10, l:50, c:100, d:500, m:1000 };
+      let result = 0;
+      const s = str.toLowerCase();
+      for (let i = 0; i < s.length; i++) {
+        const curr = map[s[i]];
+        const next = map[s[i+1]];
+        if (!curr) return null;
+        result += next && next > curr ? -curr : curr;
+      }
+      return result;
+    }
+
+    // Collect pagebreaks in document order
+    const pagebreaks = [];
+    parsed.elements.forEach(el => {
+      if (el.tag !== 'span' || el.attrs['epub:type'] !== 'pagebreak') return;
+      const label = (el.attrs['aria-label'] || '').trim().toLowerCase();
+      if (!label) return;
+      let num = fileEntry.type === 'roman' ? romanToNum(label) : parseInt(label, 10);
+      if (isNaN(num)) num = null;
+      pagebreaks.push({ label, num, line: el.line, col: el.col });
+    });
+
+    // Check sequence order
+    for (let i = 1; i < pagebreaks.length; i++) {
+      const prev = pagebreaks[i - 1];
+      const curr = pagebreaks[i];
+      if (prev.num === null || curr.num === null) continue;
+      if (curr.num <= prev.num) {
+        issues.push({
+          ruleId: 'pagebreak-sequence',
+          severity: ruleCfg.severity,
+          line: curr.line,
+          col: curr.col,
+          message: `Pagebreak "page_${curr.label}" is out of order (found after "page_${prev.label}")`,
+          detail: `Expected pagebreaks to be in ascending order`,
+          _custom: {
+            pagebreaks,
+            badIndex: i
+          }
+        });
+      }
+    }
+
+    // Add one synthetic issue to trigger the timeline render even if only one problem
+    if (issues.length > 0) {
+      // Attach full pagebreaks to first issue only for timeline rendering
+      issues[0]._custom = { pagebreaks, badIndices: issues.map(iss => iss._custom?.badIndex).filter(x => x !== undefined) };
+      // Remove _custom from rest to avoid duplicate timelines
+      for (let i = 1; i < issues.length; i++) delete issues[i]._custom;
+    }
+
+    return issues;
+  },
+
+  render: function(issue, fileName) {
+    if (!issue._custom) return null;
+    const { pagebreaks, badIndices } = issue._custom;
+    const badSet = new Set(badIndices);
+
+    const wrap = document.createElement('div');
+    wrap.className = 'pb-timeline-wrap';
+
+    const label = document.createElement('div');
+    label.className = 'pb-timeline-label';
+    label.textContent = 'Pagebreak Sequence';
+    wrap.appendChild(label);
+
+    const track = document.createElement('div');
+    track.className = 'pb-timeline-track';
+
+    pagebreaks.forEach((pb, idx) => {
+      // Node
+      const node = document.createElement('div');
+      node.className = 'pb-node' + (badSet.has(idx) ? ' pb-node-error' : ' pb-node-ok');
+
+      const dot = document.createElement('div');
+      dot.className = 'pb-dot';
+
+      const lbl = document.createElement('div');
+      lbl.className = 'pb-node-label';
+      lbl.textContent = pb.label;
+
+      if (pb.line) {
+        const lineLbl = document.createElement('div');
+        lineLbl.className = 'pb-node-line';
+        lineLbl.textContent = 'L' + pb.line;
+        node.appendChild(dot);
+        node.appendChild(lbl);
+        node.appendChild(lineLbl);
+      } else {
+        node.appendChild(dot);
+        node.appendChild(lbl);
+      }
+
+      track.appendChild(node);
+
+      // Connector arrow between nodes
+      if (idx < pagebreaks.length - 1) {
+        const arrow = document.createElement('div');
+        arrow.className = 'pb-arrow' + (badSet.has(idx + 1) ? ' pb-arrow-error' : '');
+        arrow.innerHTML = '→';
+        track.appendChild(arrow);
+      }
+    });
+
+    wrap.appendChild(track);
+
+    // Legend
+    const legend = document.createElement('div');
+    legend.className = 'pb-legend';
+    legend.innerHTML = `
+      <span class="pb-legend-item"><span class="pb-dot pb-dot-ok"></span> In order</span>
+      <span class="pb-legend-item"><span class="pb-dot pb-dot-error"></span> Out of order</span>
+    `;
+    wrap.appendChild(legend);
+
+    return wrap;
+  }
+};
+
 window.RULES['pagebreak-duplicate'] = function (parsed, ruleCfg, fileMap, allFiles, currentFileName) {
   const issues = [];
 

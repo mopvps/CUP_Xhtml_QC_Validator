@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>E-pub CUP QC Validator</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230284c7'/><path d='M8 6h11l5 5v15H8z' fill='%2338bdf8'/><path d='M19 6v5h5' fill='%230284c7'/><path d='M12 18l3 3 6-7' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/></svg>" />
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css" />
 </head>
@@ -298,22 +299,29 @@
 
 <div class="validation-overlay" id="validationOverlay" hidden>
   <div class="validation-card">
-    <svg class="tree-svg" id="treeSvg" width="140" height="140" viewBox="0 0 140 140" fill="none">
-      <path id="treeTrunk" d="M70 130 L70 75" stroke="#1E3A8A" stroke-width="6" stroke-linecap="round" />
-      <path class="tree-branch" id="branch1" d="M70 100 L45 80" stroke="#1E3A8A" stroke-width="4" stroke-linecap="round" />
-      <path class="tree-branch" id="branch2" d="M70 100 L95 80" stroke="#1E3A8A" stroke-width="4" stroke-linecap="round" />
-      <path class="tree-branch" id="branch3" d="M70 85 L50 60" stroke="#1E3A8A" stroke-width="4" stroke-linecap="round" />
-      <path class="tree-branch" id="branch4" d="M70 85 L90 60" stroke="#1E3A8A" stroke-width="4" stroke-linecap="round" />
-      <path class="tree-branch" id="branch5" d="M70 75 L70 50" stroke="#1E3A8A" stroke-width="4" stroke-linecap="round" />
-      <circle class="tree-leaf" cx="45" cy="80" r="7" fill="#15803D" />
-      <circle class="tree-leaf" cx="95" cy="80" r="7" fill="#15803D" />
-      <circle class="tree-leaf" cx="50" cy="60" r="7" fill="#15803D" />
-      <circle class="tree-leaf" cx="90" cy="60" r="7" fill="#15803D" />
-      <circle class="tree-leaf" cx="70" cy="45" r="8" fill="#15803D" />
-    </svg>
-    <div class="validation-heading">Validating your files&hellip;</div>
+    <div class="scanner-hologram-wrap">
+      <div class="scanner-ambient-glow"></div>
+      <div class="scanner-doc-card">
+        <svg class="scanner-doc-svg" viewBox="0 0 64 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 4C5.79086 4 4 5.79086 4 8V72C4 74.2091 5.79086 76 8 76H56C58.2091 76 60 74.2091 60 72V24L40 4H8Z" fill="var(--surface-alt)" stroke="var(--brand-blue)" stroke-width="2.5"/>
+          <path d="M40 4V24H60" stroke="var(--brand-blue)" stroke-width="2.5" stroke-linejoin="round"/>
+          <line x1="14" y1="36" x2="50" y2="36" stroke="var(--border-strong)" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="14" y1="46" x2="44" y2="46" stroke="var(--border-strong)" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="14" y1="56" x2="38" y2="56" stroke="var(--border-strong)" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="48" cy="56" r="3" fill="var(--brand-green)"/>
+        </svg>
+        <div class="scanner-laser-line"></div>
+      </div>
+      <div class="scanner-particles-host">
+        <span class="scan-particle p1">&lt;/&gt;</span>
+        <span class="scan-particle p2">&#10003;</span>
+        <span class="scan-particle p3">#id</span>
+        <span class="scan-particle p4">&lt;a&gt;</span>
+      </div>
+    </div>
+    <div class="validation-heading">Validating EPUB Files&hellip;</div>
     <div class="validation-progress-track"><div class="validation-progress-bar" id="validationProgressBar"></div></div>
-    <div class="validation-live-text" id="validationLiveText">Preparing&hellip;</div>
+    <div class="validation-live-text" id="validationLiveText">Preparing validator&hellip;</div>
   </div>
 </div>
 
