@@ -70,5 +70,37 @@ window.RULES_CONFIG = [
     severity: 'warn',
     enabled: true,
     preset: 'recommended'
+  },
+  {
+    id: 'bm-unlinked-range-number',
+    name: 'BM Unlinked Range Number',
+    description: 'In _bm* files, numbers after a dash or dash entity must be wrapped in an <a> tag',
+    severity: 'error',
+    enabled: true,
+    preset: 'recommended'
+  },
+  {
+    id: 'pagebreak-check',
+    name: 'Pagebreak Check',
+    description: 'Checks that all expected page breaks (from Excel) exist in each XHTML file',
+    severity: 'error',
+    enabled: true,
+    preset: 'recommended'
+  },
+  {
+    id: 'pagebreak-wrong-file',
+    name: 'Pagebreak in Wrong File',
+    description: 'Flags pagebreaks found in a file that belong to a different file based on Excel page ranges',
+    severity: 'error',
+    enabled: true,
+    preset: 'recommended'
+  },
+  {
+    id: 'pagebreak-duplicate',
+    name: 'Duplicate Pagebreak',
+    description: 'Checks if the same pagebreak aria-label appears in more than one XHTML file',
+    severity: 'error',
+    enabled: true,
+    preset: 'recommended'
   }
 ];

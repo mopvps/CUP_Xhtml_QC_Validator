@@ -24,7 +24,7 @@ window.RULES = {
   },
 
   'sup-serial-check': {
-    check: function(parsed, ruleCfg) {
+    check: function (parsed, ruleCfg) {
       const issues = [];
       const dom = parsed.dom;
       if (!dom) return issues;
@@ -99,7 +99,7 @@ window.RULES = {
       return issues;
     },
 
-    render: function(issue, fileName) {
+    render: function (issue, fileName) {
       const wrap = document.createElement('div');
       wrap.className = 'sup-serial-report';
 
@@ -171,7 +171,7 @@ window.RULES = {
     }
   },
 
-  'sup-link-check': function(parsed, ruleCfg, fileMap) {
+  'sup-link-check': function (parsed, ruleCfg, fileMap) {
     const issues = [];
     const dom = parsed.dom;
     if (!dom) return issues;
@@ -273,7 +273,7 @@ window.RULES = {
     return issues;
   },
 
-  'anchor-link-check': function(parsed, ruleCfg, fileMap, allFiles) {
+  'anchor-link-check': function (parsed, ruleCfg, fileMap, allFiles) {
     const issues = [];
     const dom = parsed.dom;
     if (!dom) return issues;
@@ -401,7 +401,7 @@ window.RULES = {
     return issues;
   },
 
-  'missing-images': function(parsed, ruleCfg, fileMap, allFiles) {
+  'missing-images': function (parsed, ruleCfg, fileMap, allFiles) {
     const issues = [];
     const dom = parsed.dom;
     if (!dom) return issues;
@@ -474,7 +474,7 @@ window.RULES = {
     return issues;
   },
 
-  'duplicate-id-check': function(parsed, ruleCfg, fileMap, allFiles, currentFileName) {
+  'duplicate-id-check': function (parsed, ruleCfg, fileMap, allFiles, currentFileName) {
     const issues = [];
     const dom = parsed.dom;
     if (!dom) return issues;
@@ -548,7 +548,7 @@ window.RULES = {
     return issues;
   },
 
-  'p-missing-class': function(parsed, ruleCfg) {
+  'p-missing-class': function (parsed, ruleCfg) {
     const issues = [];
     const dom = parsed.dom;
     if (!dom) return issues;
@@ -592,7 +592,7 @@ window.RULES = {
     return issues;
   },
 
-  'span-outside-li': function(parsed, ruleCfg) {
+  'span-outside-li': function (parsed, ruleCfg) {
     const issues = [];
     const dom = parsed.dom;
     if (!dom) return issues;
@@ -640,7 +640,7 @@ window.RULES = {
   }
 };
 
-window.RULES['unlinked-reference'] = function(parsed) {
+window.RULES['unlinked-reference'] = function (parsed) {
   const issues = [];
   const REFERENCE_RE = /(?<![A-Za-z])(Figure|Fig\.|Fig|Illustration|Illus\.|Ill\.|Chapter|Ch\.|Section|Sect\.|Sec\.|Appendix|App\.|Algorithm|Algo\.|Exercise|Equation|Eq\.|Footnote|Theorem|Thm\.|Listing|List\.|Problem|Prob\.|Example|Ex\.|Article|Art\.|Exhibit|Formula|Diagram|Sidebar|Annex|Amendment|Schedule|Clause|Specimen|Solution|Sample|Stanza|Scene|Verse|Volume|Vol\.|Plate|Pl\.|Table|Tab\.|Graph|Chart|Image|Scheme|Lemma|Proof|Answer|Panel|Part|Map|Box|Note|Act|Line|Case)(?![A-Za-z])[\s\-\.]*(\d[\d\.]*[A-Za-z]?)/gi;
   // Build a set of line indices that are inside <figcaption>...</figcaption>
@@ -676,5 +676,229 @@ window.RULES['unlinked-reference'] = function(parsed) {
       });
     }
   });
+  return issues;
+};
+
+window.RULES['bm-unlinked-range-number'] = function (parsed, ruleCfg, fileMap, allFiles, currentFileName) {
+  const issues = [];
+
+  // Only run on _bm* files
+  if (!currentFileName || !/_bm[^/]*\.xhtml$/i.test(currentFileName)) return issues;
+
+  const DASH_ENTITIES = /(?:&#x2013;|&#x2014;|&ndash;|&mdash;|-)/g;
+
+  parsed.lines.forEach((line, i) => {
+    DASH_ENTITIES.lastIndex = 0;
+    let match;
+    while ((match = DASH_ENTITIES.exec(line)) !== null) {
+      const matchIndex = match.index;
+
+      // Skip if inside any HTML/XML tag (between < and >)
+      const before = line.slice(0, matchIndex);
+      const lastOpen = before.lastIndexOf('<');
+      const lastClose = before.lastIndexOf('>');
+      if (lastOpen !== -1 && lastOpen > lastClose) continue;
+
+      const afterDash = line.slice(matchIndex + match[0].length).trimStart();
+      const numMatch = afterDash.match(/^(\d+)/);
+      if (!numMatch) continue;
+
+      const isLinked = /^<a[\s>]/.test(afterDash);
+      if (!isLinked) {
+        issues.push({
+          ruleId: 'bm-unlinked-range-number',
+          severity: ruleCfg.severity,
+          line: i + 1,
+          col: matchIndex + match[0].length + 1,
+          message: `Range number "${numMatch[1]}" after dash is not wrapped in an <a> tag`,
+          detail: `In file: ${currentFileName}`
+        });
+      }
+    }
+  });
+
+  return issues;
+};
+
+window.RULES['pagebreak-check'] = function (parsed, ruleCfg, fileMap, allFiles, currentFileName) {
+  const issues = [];
+  const pageData = window.PAGE_DATA;
+
+  // Surface Excel errors as issues
+  if (!pageData) {
+    issues.push({
+      ruleId: 'pagebreak-check',
+      severity: 'error',
+      line: 0, col: 0,
+      message: 'No Excel file found in project folder',
+      detail: 'Place the Excel file alongside your XHTML files'
+    });
+    return issues;
+  }
+
+  if (pageData.error) {
+    issues.push({
+      ruleId: 'pagebreak-check',
+      severity: 'error',
+      line: 0, col: 0,
+      message: pageData.error,
+      detail: 'Fix the Excel file format and revalidate'
+    });
+    return issues;
+  }
+
+  if (!pageData.files) return issues;
+
+  const fileEntry = pageData.files.find(f => f.filename === currentFileName);
+  if (!fileEntry) return issues;
+  if (fileEntry.flag === 1) return issues;
+
+  const expectedPages = [];
+  const start = fileEntry.startPage;
+  const end = fileEntry.endPage;
+  const type = fileEntry.type;
+
+  function toRoman(num) {
+    const val = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1];
+    const syms = ['m', 'cm', 'd', 'cd', 'c', 'xc', 'l', 'xl', 'x', 'ix', 'v', 'iv', 'i'];
+    let result = '';
+    for (let i = 0; i < val.length; i++) {
+      while (num >= val[i]) { result += syms[i]; num -= val[i]; }
+    }
+    return result;
+  }
+
+  for (let p = start; p <= end; p++) {
+    expectedPages.push(type === 'roman' ? toRoman(p) : String(p));
+  }
+
+  // Collect actual pagebreaks from parsed elements
+  const foundPages = new Set();
+  parsed.elements.forEach(el => {
+    if (el.tag === 'span' && el.attrs['epub:type'] === 'pagebreak') {
+      const label = el.attrs['aria-label'] || '';
+      if (label) foundPages.add(label.trim().toLowerCase());
+    }
+  });
+
+  // Check missing pagebreaks
+  expectedPages.forEach(page => {
+    if (!foundPages.has(page.toLowerCase())) {
+      issues.push({
+        ruleId: 'pagebreak-check',
+        severity: ruleCfg.severity,
+        line: 0,
+        col: 0,
+        message: `Missing pagebreak: page "${page}" not found in file`,
+        detail: `Expected pages ${start} to ${end} (${type})`
+      });
+    }
+  });
+
+  return issues;
+};
+
+window.RULES['pagebreak-wrong-file'] = function (parsed, ruleCfg, fileMap, allFiles, currentFileName) {
+  const issues = [];
+  const allSpans = parsed.elements.filter(el => el.tag === 'span');
+  console.log('[wrong-file] spans in', currentFileName, allSpans.map(el => JSON.stringify(el.attrs)));
+  const pageData = window.PAGE_DATA;
+
+  if (!pageData || pageData.error || !pageData.files) return issues;
+
+  const fileEntry = pageData.files.find(f => f.filename === currentFileName);
+  if (!fileEntry) return issues;
+  if (fileEntry.flag === 1) return issues;
+
+  function toRoman(num) {
+    const val = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1];
+    const syms = ['m', 'cm', 'd', 'cd', 'c', 'xc', 'l', 'xl', 'x', 'ix', 'v', 'iv', 'i'];
+    let result = '';
+    for (let i = 0; i < val.length; i++) {
+      while (num >= val[i]) { result += syms[i]; num -= val[i]; }
+    }
+    return result;
+  }
+
+  // Build expected page labels for this file
+  const expectedLabels = new Set();
+  for (let p = fileEntry.startPage; p <= fileEntry.endPage; p++) {
+    expectedLabels.add(fileEntry.type === 'roman' ? toRoman(p) : String(p));
+  }
+
+  // Check each pagebreak found in this file
+  parsed.elements.forEach(el => {
+    if (el.tag !== 'span' || el.attrs['epub:type'] !== 'pagebreak') return;
+    const label = (el.attrs['aria-label'] || '').trim().toLowerCase();
+    if (!label) return;
+    if (expectedLabels.has(label)) return;
+
+    // Find which file it belongs to
+    let belongsTo = null;
+    for (const f of pageData.files) {
+      for (let p = f.startPage; p <= f.endPage; p++) {
+        const expected = f.type === 'roman' ? toRoman(p) : String(p);
+        if (expected === label) { belongsTo = f; break; }
+      }
+      if (belongsTo) break;
+    }
+
+    const detail = belongsTo
+      ? `page_${label} belongs to ${belongsTo.filename} (pages ${belongsTo.startPage}–${belongsTo.endPage})`
+      : `page_${label} does not belong to any file in the Excel`;
+
+    issues.push({
+      ruleId: 'pagebreak-wrong-file',
+      severity: ruleCfg.severity,
+      line: el.line,
+      col: el.col,
+      message: `Pagebreak "page_${label}" found in wrong file`,
+      detail
+    });
+  });
+
+  return issues;
+};
+
+window.RULES['pagebreak-duplicate'] = function (parsed, ruleCfg, fileMap, allFiles, currentFileName) {
+  const issues = [];
+
+  // Build a map of aria-label -> [filenames] across all files
+  if (!window._pagebreakLabelMap) {
+    window._pagebreakLabelMap = {};
+    fileMap.forEach((fileParsed, fileName) => {
+      if (!fileName.endsWith('.xhtml')) return;
+      fileParsed.elements.forEach(el => {
+        if (el.tag !== 'span' || el.attrs['epub:type'] !== 'pagebreak') return;
+        const label = (el.attrs['aria-label'] || '').trim().toLowerCase();
+        if (!label) return;
+        if (!window._pagebreakLabelMap[label]) window._pagebreakLabelMap[label] = [];
+        window._pagebreakLabelMap[label].push(fileName);
+      });
+    });
+  }
+
+  // Check current file's pagebreaks against the map
+  parsed.elements.forEach(el => {
+    if (el.tag !== 'span' || el.attrs['epub:type'] !== 'pagebreak') return;
+    const label = (el.attrs['aria-label'] || '').trim().toLowerCase();
+    if (!label) return;
+
+    const filesWithLabel = window._pagebreakLabelMap[label] || [];
+    if (filesWithLabel.length <= 1) return;
+
+    const otherFiles = filesWithLabel.filter(f => f !== currentFileName);
+    if (!otherFiles.length) return;
+
+    issues.push({
+      ruleId: 'pagebreak-duplicate',
+      severity: ruleCfg.severity,
+      line: el.line,
+      col: el.col,
+      message: `Duplicate pagebreak "page_${label}" also found in: ${otherFiles.join(', ')}`,
+      detail: `Pagebreak aria-label="${label}" appears in ${filesWithLabel.length} files`
+    });
+  });
+
   return issues;
 };

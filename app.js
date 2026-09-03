@@ -1,3 +1,90 @@
+// Find Excel file among uploaded files and parse page data for pagebreak-check rule
+async function parsePageDataFromExcel(allFiles) {
+  const list = Array.isArray(allFiles) ? allFiles : Array.from(allFiles.values());
+  const excelFile = list.find(f => f.name.endsWith('.xlsx'));
+
+  if (!excelFile) {
+    window.PAGE_DATA = { error: 'No Excel file found in project folder' };
+    return;
+  }
+
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      try {
+        const data = new Uint8Array(e.target.result);
+        const workbook = XLSX.read(data, { type: 'array' });
+        const sheet = workbook.Sheets[workbook.SheetNames[0]];
+        const rows = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+
+        // Validate Filename cell
+        const middle = rows[0] && rows[0][3] ? String(rows[0][3]).trim() : '';
+        if (!middle) {
+          resolve({ error: 'Excel missing Filename (middle part) in row 1 column D' });
+          return;
+        }
+
+        // Validate headers row
+        const headers = rows[1] || [];
+        const requiredHeaders = ['File Seq.', 'Component Type', 'Start Page', 'End Page', 'flag', 'type'];
+        const headerRow = headers.map(h => String(h || '').trim());
+        const missingHeaders = requiredHeaders.filter(h => !headerRow.some(rh => rh.toLowerCase().includes(h.toLowerCase())));
+        if (missingHeaders.length) {
+          resolve({ error: `Excel missing required columns: ${missingHeaders.join(', ')}` });
+          return;
+        }
+
+        // Validate data rows
+        const dataRows = rows.slice(2).filter(r => r && r[0]);
+        if (!dataRows.length) {
+          resolve({ error: 'Excel has no data rows' });
+          return;
+        }
+
+        const counters = { cover: 0, fm: 0, chapter: 0, bm: 0 };
+        const files = [];
+
+        for (let i = 2; i < rows.length; i++) {
+          const row = rows[i];
+          if (!row || !row[0]) continue;
+
+          const seq = String(row[0]).padStart(2, '0');
+          const componentType = String(row[1] || '').trim();
+          const startPage = Number(row[2]);
+          const endPage = Number(row[3]);
+          const nameFlag = Number(row[5]) || 0;
+          const flag = Number(row[6]) || 0;
+          const type = String(row[7] || 'number').trim();
+
+          if (!componentType || isNaN(startPage) || isNaN(endPage)) continue;
+          if (startPage > endPage) continue;
+
+          let suffix = '';
+          const ct = componentType.toLowerCase();
+          if (ct === 'cover') { counters.cover++; suffix = 'cv'; }
+          else if (ct === 'fm') { counters.fm++; suffix = 'fm' + counters.fm; }
+          else if (ct === 'chapter') { counters.chapter++; suffix = 'ch' + counters.chapter; }
+          else if (ct === 'bm') { counters.bm++; suffix = 'bm' + counters.bm; }
+
+          let filename = '';
+          if (nameFlag === 1) {
+            filename = componentType + '.xhtml';
+          } else {
+            filename = seq + '_' + middle + '_' + suffix + '.xhtml';
+          }
+
+          files.push({ filename, startPage, endPage, flag, type });
+        }
+
+        resolve({ middle, files });
+      } catch(e) {
+        resolve({ error: 'Excel parse error: ' + e.message });
+      }
+    };
+    reader.readAsArrayBuffer(excelFile);
+  });
+}
+
 // Main controller: stepper nav, folder handling, rules, validation, results
 (function () {
   const IMAGE_EXT = ['jpg', 'jpeg', 'png', 'gif', 'svg', 'webp'];
@@ -610,6 +697,10 @@
       let totalRules = getRulesConfig().length;
       const total = xhtmlFiles.length;
       let i = 0;
+
+      // Parse page data from Excel (if present) for pagebreak-check rule
+      window._pagebreakLabelMap = null;
+      window.PAGE_DATA = await parsePageDataFromExcel(allFiles);
 
       // Preload all xhtml files into fileMap
       const fileMap = new Map();
