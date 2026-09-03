@@ -98,6 +98,7 @@ async function parsePageDataFromExcel(allFiles) {
     image: '<rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>',
     check: '<polyline points="20 6 9 17 4 12"/>',
     'check-circle': '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>',
+    check: '<polyline points="20 6 9 17 4 12"/>',
     'x-circle': '<circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>',
     'alert-triangle': '<path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>',
     'alert-circle': '<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>',
@@ -136,6 +137,7 @@ async function parsePageDataFromExcel(allFiles) {
   let allFiles = [];
   let xhtmlFiles = [];
   let imageFiles = [];
+  let selectedXhtmlFiles = new Set(); // set of file names to validate
   let folderName = '';
   let ruleState = {};
   let currentReport = null; // { totalIssues, totalRules, files: [{fileName, report}] }
@@ -144,7 +146,7 @@ async function parsePageDataFromExcel(allFiles) {
   let groupBy = 'rule';
 
   let fileSearchTerm = '';
-  let fileTypeFilter = 'all';
+  let fileTypeFilter = 'xhtml';
   let fileSort = 'name';
 
   let ruleSearchTerm = '';
@@ -160,15 +162,25 @@ async function parsePageDataFromExcel(allFiles) {
     recentFoldersSection: document.getElementById('recentFoldersSection'),
     recentFoldersList: document.getElementById('recentFoldersList'),
     btnToStep2: document.getElementById('btnToStep2'),
+    btnToStep2Top: document.getElementById('btnToStep2Top'),
     btnBackTo1: document.getElementById('btnBackTo1'),
+    btnBackTo1Top: document.getElementById('btnBackTo1Top'),
     btnToStep3: document.getElementById('btnToStep3'),
+    btnToStep3Top: document.getElementById('btnToStep3Top'),
     btnBackTo2: document.getElementById('btnBackTo2'),
+    btnBackTo2Top: document.getElementById('btnBackTo2Top'),
     rulesList: document.getElementById('rulesList'),
     btnValidate: document.getElementById('btnValidate'),
+    btnValidateTop: document.getElementById('btnValidateTop'),
     btnBackTo3: document.getElementById('btnBackTo3'),
+    btnBackTo3Top: document.getElementById('btnBackTo3Top'),
     btnRevalidate: document.getElementById('btnRevalidate'),
+    btnRevalidateTop: document.getElementById('btnRevalidateTop'),
     unifiedFileList: document.getElementById('unifiedFileList'),
     fileTypeChips: document.getElementById('fileTypeChips'),
+    btnSelectAllFiles: document.getElementById('btnSelectAllFiles'),
+    btnDeselectAllFiles: document.getElementById('btnDeselectAllFiles'),
+    filesSelectionTools: document.getElementById('filesSelectionTools'),
     chipCountAll: document.getElementById('chipCountAll'),
     chipCountXhtml: document.getElementById('chipCountXhtml'),
     chipCountImage: document.getElementById('chipCountImage'),
@@ -319,10 +331,10 @@ async function parsePageDataFromExcel(allFiles) {
     try { return JSON.parse(localStorage.getItem('vpqc.recentFolders') || '[]'); } catch (e) { return []; }
   }
 
-  function saveRecentFolder(name, count) {
+  function saveRecentFolder(name, count, path) {
     let list = getRecentFolders().filter(f => f.name !== name);
-    list.unshift({ name, count, ts: Date.now() });
-    list = list.slice(0, 3);
+    list.unshift({ name, count, path: path || name, ts: Date.now() });
+    list = list.slice(0, 4);
     try { localStorage.setItem('vpqc.recentFolders', JSON.stringify(list)); } catch (e) {}
   }
 
@@ -332,12 +344,21 @@ async function parsePageDataFromExcel(allFiles) {
     els.recentFoldersSection.hidden = false;
     els.recentFoldersList.innerHTML = '';
     list.forEach(f => {
-      const chip = document.createElement('button');
-      chip.type = 'button';
-      chip.className = 'recent-folder-chip';
-      chip.innerHTML = `${icon('folder', 14)}<span class="recent-name">${escapeHtml(f.name)}</span><span class="recent-ts">${relativeTime(f.ts)}</span>`;
-      chip.addEventListener('click', () => showToast('Please reselect the folder', 'info'));
-      els.recentFoldersList.appendChild(chip);
+      const card = document.createElement('button');
+      card.type = 'button';
+      card.className = 'recent-folder-card';
+      const displayPath = f.path || f.name;
+      card.setAttribute('title', displayPath);
+      card.innerHTML = `
+        <div class="recent-card-icon">${icon('folder', 18)}</div>
+        <div class="recent-card-info">
+          <div class="recent-card-name">${escapeHtml(f.name)}</div>
+          <div class="recent-card-meta">${f.count ? f.count + ' files · ' : ''}${relativeTime(f.ts)}</div>
+          <div class="recent-card-path">${escapeHtml(displayPath)}</div>
+        </div>
+      `;
+      card.addEventListener('click', () => showToast('Click upload box above to select this folder', 'info'));
+      els.recentFoldersList.appendChild(card);
     });
   }
 
@@ -402,17 +423,21 @@ async function parsePageDataFromExcel(allFiles) {
     activeFilter = 'all';
     groupBy = 'rule';
     fileSearchTerm = '';
-    fileTypeFilter = 'all';
+    fileTypeFilter = 'xhtml';
     fileSort = 'name';
     ruleSearchTerm = '';
     ruleSeverityFilter = 'all';
     validatedAt = null;
     if (els.fileSearchInput) els.fileSearchInput.value = '';
     if (els.ruleSearchInput) els.ruleSearchInput.value = '';
+    if (els.fileTypeChips) {
+      els.fileTypeChips.querySelectorAll('.filter-chip').forEach(b => b.classList.toggle('active', b.dataset.type === 'xhtml'));
+    }
     els.folderInput.value = '';
     els.folderSummary.innerHTML = '';
     els.uploadBox.style.display = '';
     els.btnToStep2.disabled = true;
+    if (els.btnToStep2Top) els.btnToStep2Top.disabled = true;
     els.stepperResultsBadge.hidden = true;
     seedRuleState();
     document.querySelectorAll('.filter-tab').forEach(btn => btn.classList.toggle('active', btn.dataset.filter === 'all'));
@@ -448,13 +473,16 @@ async function parsePageDataFromExcel(allFiles) {
     allFiles = files;
     xhtmlFiles = files.filter(f => getExt(f.name) === 'xhtml');
     imageFiles = files.filter(f => IMAGE_EXT.includes(getExt(f.name)));
+    selectedXhtmlFiles = new Set(xhtmlFiles.map(f => f.name));
 
     const relPath = files[0].webkitRelativePath || '';
     folderName = relPath.split('/')[0] || 'Selected folder';
 
     renderFolderSummary();
-    els.btnToStep2.disabled = xhtmlFiles.length === 0;
-    saveRecentFolder(folderName, xhtmlFiles.length);
+    const isStep2Disabled = xhtmlFiles.length === 0;
+    els.btnToStep2.disabled = isStep2Disabled;
+    if (els.btnToStep2Top) els.btnToStep2Top.disabled = isStep2Disabled;
+    saveRecentFolder(folderName, xhtmlFiles.length, relPath ? relPath.split('/')[0] : folderName);
     renderRecentFolders();
   }
 
@@ -487,15 +515,32 @@ async function parsePageDataFromExcel(allFiles) {
   }
 
   function renderFileList() {
-    els.chipCountAll.textContent = xhtmlFiles.length + imageFiles.length;
-    els.chipCountXhtml.textContent = xhtmlFiles.length;
-    els.chipCountImage.textContent = imageFiles.length;
+    if (els.chipCountAll) els.chipCountAll.textContent = xhtmlFiles.length + imageFiles.length;
+    if (els.chipCountXhtml) els.chipCountXhtml.textContent = xhtmlFiles.length;
+    if (els.chipCountImage) els.chipCountImage.textContent = imageFiles.length;
+
+    if (els.filesSelectionTools) {
+      els.filesSelectionTools.style.display = (fileTypeFilter === 'xhtml' || fileTypeFilter === 'group') ? 'flex' : 'none';
+    }
 
     const entries = getUnifiedFiles();
+    const xhtmlTotalBytes = xhtmlFiles.reduce((sum, f) => sum + (f.size || 0), 0);
     const totalBytes = entries.reduce((sum, entry) => sum + (entry.file.size || 0), 0);
-    els.filesMeta.textContent = `${entries.length} file${entries.length === 1 ? '' : 's'} · ${formatBytes(totalBytes)}`;
+    
+    if (fileTypeFilter === 'xhtml' || fileTypeFilter === 'group') {
+      const selectedCount = selectedXhtmlFiles.size;
+      els.filesMeta.textContent = `${xhtmlFiles.length} XHTML files (${selectedCount} selected for validation) · ${formatBytes(xhtmlTotalBytes)}`;
+    } else {
+      els.filesMeta.textContent = `${entries.length} file${entries.length === 1 ? '' : 's'} · ${formatBytes(totalBytes)}`;
+    }
 
     els.unifiedFileList.innerHTML = '';
+    els.unifiedFileList.classList.toggle('group-view-grid', fileTypeFilter === 'group');
+
+    if (fileTypeFilter === 'group') {
+      renderGroupedView();
+      return;
+    }
 
     if (entries.length === 0) {
       if (fileSearchTerm.trim()) {
@@ -507,14 +552,184 @@ async function parsePageDataFromExcel(allFiles) {
     }
 
     entries.forEach(entry => {
-      const row = document.createElement('div');
-      row.className = 'file-row';
-      row.innerHTML = `
-        <div class="file-row-icon">${icon(entry.type === 'xhtml' ? 'file-text' : 'image', 15)}</div>
-        <div class="file-row-name">${escapeHtml(entry.file.name)}</div>
-        <div class="file-row-size">${formatBytes(entry.file.size)}</div>
+      if (entry.type === 'xhtml') {
+        const isSelected = selectedXhtmlFiles.has(entry.file.name);
+        const card = document.createElement('div');
+        card.className = 'file-card-xhtml ' + (isSelected ? 'selected' : 'deselected');
+        card.innerHTML = `
+          <div class="file-card-top">
+            <div class="file-card-icon">${icon('file-text', 18)}</div>
+            <div class="file-card-checkbox">${isSelected ? icon('check', 14) : ''}</div>
+          </div>
+          <div class="file-card-title">${escapeHtml(entry.file.name)}</div>
+          <div class="file-card-footer">
+            <span class="file-badge-tag">${isSelected ? 'To Validate' : 'Skipped'}</span>
+            <span>${formatBytes(entry.file.size)}</span>
+          </div>
+        `;
+
+        card.addEventListener('click', () => {
+          if (selectedXhtmlFiles.has(entry.file.name)) {
+            selectedXhtmlFiles.delete(entry.file.name);
+          } else {
+            selectedXhtmlFiles.add(entry.file.name);
+          }
+          renderFileList();
+        });
+
+        els.unifiedFileList.appendChild(card);
+      } else {
+        // Image thumbnail card
+        const card = document.createElement('div');
+        card.className = 'file-card-image';
+        const imgUrl = URL.createObjectURL(entry.file);
+        
+        card.innerHTML = `
+          <div class="file-image-thumb-wrap">
+            <img class="file-image-thumb" src="${imgUrl}" alt="${escapeHtml(entry.file.name)}" loading="lazy" />
+          </div>
+          <div class="file-image-info">
+            <div class="file-image-name" title="${escapeHtml(entry.file.name)}">${escapeHtml(entry.file.name)}</div>
+            <div class="file-image-meta">
+              <span class="file-badge-tag">${getExt(entry.file.name).toUpperCase()}</span>
+              <span>${formatBytes(entry.file.size)}</span>
+            </div>
+          </div>
+        `;
+        els.unifiedFileList.appendChild(card);
+      }
+    });
+  }
+
+  function renderGroupedView() {
+    const term = fileSearchTerm.trim().toLowerCase();
+    const filteredXhtml = term ? xhtmlFiles.filter(f => f.name.toLowerCase().includes(term)) : xhtmlFiles;
+
+    const groups = [
+      {
+        id: 'frontmatter',
+        title: 'Front Matter & Cover',
+        pattern: '_cv, _fm*',
+        filterFn: (name) => {
+          const lower = name.toLowerCase();
+          return lower.includes('_cv') || lower.includes('_fm') || lower.startsWith('cv') || lower.startsWith('fm');
+        }
+      },
+      {
+        id: 'chapters',
+        title: 'Main Chapters',
+        pattern: '_ch*',
+        filterFn: (name) => {
+          const lower = name.toLowerCase();
+          return lower.includes('_ch') || lower.startsWith('ch');
+        }
+      },
+      {
+        id: 'backmatter',
+        title: 'Back Matter & Appendix',
+        pattern: '_bm*',
+        filterFn: (name) => {
+          const lower = name.toLowerCase();
+          return lower.includes('_bm') || lower.startsWith('bm') || lower.includes('_app') || lower.includes('_ref') || lower.includes('_idx');
+        }
+      }
+    ];
+
+    // Collect other files that didn't match the 3 main patterns
+    const assignedFiles = new Set();
+    groups.forEach(g => {
+      g.files = filteredXhtml.filter(f => g.filterFn(f.name));
+      g.files.forEach(f => assignedFiles.add(f.name));
+    });
+
+    const otherFiles = filteredXhtml.filter(f => !assignedFiles.has(f.name));
+    if (otherFiles.length > 0) {
+      groups.push({
+        id: 'other',
+        title: 'Other Files',
+        pattern: 'Remaining files',
+        files: otherFiles
+      });
+    }
+
+    groups.forEach(group => {
+      const groupCard = document.createElement('div');
+      groupCard.className = 'file-card-group';
+
+      const selectedInGroup = group.files.filter(f => selectedXhtmlFiles.has(f.name)).length;
+      const allSelected = group.files.length > 0 && selectedInGroup === group.files.length;
+      const noneSelected = selectedInGroup === 0;
+
+      const header = document.createElement('div');
+      header.className = 'group-card-header';
+      header.innerHTML = `
+        <div class="group-header-left">
+          <div class="group-icon-badge">${group.files.length}</div>
+          <div class="group-title-wrap">
+            <div class="group-card-title">${escapeHtml(group.title)}</div>
+            <div class="group-card-subtitle">${escapeHtml(group.pattern)}</div>
+          </div>
+        </div>
+        <button type="button" class="group-toggle-btn">
+          ${allSelected ? 'Deselect Group' : 'Select Group'}
+        </button>
       `;
-      els.unifiedFileList.appendChild(row);
+
+      header.querySelector('.group-toggle-btn').addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (allSelected) {
+          group.files.forEach(f => selectedXhtmlFiles.delete(f.name));
+        } else {
+          group.files.forEach(f => selectedXhtmlFiles.add(f.name));
+        }
+        renderFileList();
+      });
+
+      const body = document.createElement('div');
+      body.className = 'group-card-body';
+
+      if (group.files.length === 0) {
+        body.innerHTML = `<div style="font-size:12px;color:var(--text-muted);padding:8px 0;">No matching files in this group.</div>`;
+      } else {
+        group.files.forEach(f => {
+          const isSelected = selectedXhtmlFiles.has(f.name);
+          const item = document.createElement('div');
+          item.className = 'group-file-item ' + (isSelected ? 'selected' : 'deselected');
+          item.innerHTML = `
+            <div style="display:flex;align-items:center;gap:8px;min-width:0;">
+              <span style="color:${isSelected ? 'var(--brand-blue)' : 'var(--text-subtle)'};">${icon('file-text', 15)}</span>
+              <span class="group-file-name" title="${escapeHtml(f.name)}">${escapeHtml(f.name)}</span>
+            </div>
+            <div class="group-file-right">
+              <span class="group-file-size">${formatBytes(f.size)}</span>
+              <div class="file-card-checkbox" style="width:18px;height:18px;">${isSelected ? icon('check', 12) : ''}</div>
+            </div>
+          `;
+
+          item.addEventListener('click', () => {
+            if (selectedXhtmlFiles.has(f.name)) {
+              selectedXhtmlFiles.delete(f.name);
+            } else {
+              selectedXhtmlFiles.add(f.name);
+            }
+            renderFileList();
+          });
+
+          body.appendChild(item);
+        });
+      }
+
+      const footer = document.createElement('div');
+      footer.className = 'group-card-footer';
+      footer.innerHTML = `
+        <span>Status: <strong>${selectedInGroup} of ${group.files.length}</strong> selected</span>
+        <span class="file-badge-tag">${selectedInGroup > 0 ? 'Active' : 'Skipped'}</span>
+      `;
+
+      groupCard.appendChild(header);
+      groupCard.appendChild(body);
+      groupCard.appendChild(footer);
+      els.unifiedFileList.appendChild(groupCard);
     });
   }
 
@@ -688,21 +903,25 @@ async function parsePageDataFromExcel(allFiles) {
   }
 
   async function handleValidate() {
-    if (!xhtmlFiles.length) return;
+    const filesToValidate = xhtmlFiles.filter(f => selectedXhtmlFiles.has(f.name));
+    if (!filesToValidate.length) {
+      alert('Please select at least one XHTML file to validate.');
+      return;
+    }
     showValidationOverlay();
 
     try {
       const filesReport = [];
       let totalIssues = 0;
       let totalRules = getRulesConfig().length;
-      const total = xhtmlFiles.length;
+      const total = filesToValidate.length;
       let i = 0;
 
       // Parse page data from Excel (if present) for pagebreak-check rule
       window._pagebreakLabelMap = null;
       window.PAGE_DATA = await parsePageDataFromExcel(allFiles);
 
-      // Preload all xhtml files into fileMap
+      // Preload all xhtml files into fileMap (for cross-file checking rules)
       const fileMap = new Map();
       await Promise.all(xhtmlFiles.map(async (file) => {
         try {
@@ -714,7 +933,7 @@ async function parsePageDataFromExcel(allFiles) {
         }
       }));
 
-      for (const file of xhtmlFiles) {
+      for (const file of filesToValidate) {
         i++;
         updateValidationProgress(i, total, file.name);
         await new Promise(r => setTimeout(r, 0));
@@ -1320,21 +1539,46 @@ async function parsePageDataFromExcel(allFiles) {
     renderFileList();
     goToStep(2);
   });
+  if (els.btnToStep2Top) {
+    els.btnToStep2Top.addEventListener('click', () => {
+      renderFileList();
+      goToStep(2);
+    });
+  }
+
   els.btnBackTo1.addEventListener('click', () => goToStep(1));
+  if (els.btnBackTo1Top) els.btnBackTo1Top.addEventListener('click', () => goToStep(1));
 
   els.btnToStep3.addEventListener('click', () => {
     renderRulesList();
     goToStep(3);
   });
+  if (els.btnToStep3Top) {
+    els.btnToStep3Top.addEventListener('click', () => {
+      renderRulesList();
+      goToStep(3);
+    });
+  }
+
   els.btnBackTo2.addEventListener('click', () => goToStep(2));
+  if (els.btnBackTo2Top) els.btnBackTo2Top.addEventListener('click', () => goToStep(2));
 
   els.btnValidate.addEventListener('click', handleValidate);
+  if (els.btnValidateTop) els.btnValidateTop.addEventListener('click', handleValidate);
+
   els.btnBackTo3.addEventListener('click', () => goToStep(3));
+  if (els.btnBackTo3Top) els.btnBackTo3Top.addEventListener('click', () => goToStep(3));
 
   els.btnRevalidate.addEventListener('click', () => {
     resetAll();
     goToStep(1);
   });
+  if (els.btnRevalidateTop) {
+    els.btnRevalidateTop.addEventListener('click', () => {
+      resetAll();
+      goToStep(1);
+    });
+  }
 
   els.btnResetAll.addEventListener('click', () => {
     resetAll();
@@ -1345,6 +1589,20 @@ async function parsePageDataFromExcel(allFiles) {
     fileSearchTerm = els.fileSearchInput.value;
     renderFileList();
   }, 100));
+
+  if (els.btnSelectAllFiles) {
+    els.btnSelectAllFiles.addEventListener('click', () => {
+      selectedXhtmlFiles = new Set(xhtmlFiles.map(f => f.name));
+      renderFileList();
+    });
+  }
+
+  if (els.btnDeselectAllFiles) {
+    els.btnDeselectAllFiles.addEventListener('click', () => {
+      selectedXhtmlFiles.clear();
+      renderFileList();
+    });
+  }
 
   els.fileTypeChips.addEventListener('click', (e) => {
     const btn = e.target.closest('.filter-chip');
@@ -1430,19 +1688,32 @@ async function parsePageDataFromExcel(allFiles) {
   els.uploadBox.querySelector('#uploadIcon').innerHTML = icon('folder-open', 48);
   els.btnResetAll.innerHTML = icon('refresh-cw', 18);
   els.btnShortcuts.innerHTML = icon('help-circle', 18);
-  document.getElementById('iconArrowRight').innerHTML = icon('arrow-right', 16);
-  document.getElementById('iconArrowRight2').innerHTML = icon('arrow-right', 16);
-  document.getElementById('iconArrowLeft1').innerHTML = icon('arrow-left', 16);
-  document.getElementById('iconArrowLeft2').innerHTML = icon('arrow-left', 16);
-  document.getElementById('iconArrowLeft3').innerHTML = icon('arrow-left', 16);
-  document.getElementById('iconSearch2').innerHTML = icon('search', 16);
-  document.getElementById('iconSearch3').innerHTML = icon('search', 16);
-  document.getElementById('iconSparkles').innerHTML = icon('sparkles', 14);
-  document.getElementById('iconChevronDown1').innerHTML = icon('chevron-down', 14);
-  document.getElementById('iconChevronDown2').innerHTML = icon('chevron-down', 14);
-  document.getElementById('iconSliders').innerHTML = icon('sliders', 16);
-  document.getElementById('iconDownload').innerHTML = icon('download', 14);
-  document.getElementById('iconRefresh').innerHTML = icon('refresh-cw', 16);
+  
+  const setIconIfExists = (id, iconName, size) => {
+    const el = document.getElementById(id);
+    if (el) el.innerHTML = icon(iconName, size || 16);
+  };
+
+  setIconIfExists('iconArrowRight', 'arrow-right', 16);
+  setIconIfExists('iconArrowRightTop1', 'arrow-right', 16);
+  setIconIfExists('iconArrowRight2', 'arrow-right', 16);
+  setIconIfExists('iconArrowRightTop2', 'arrow-right', 16);
+  setIconIfExists('iconArrowLeft1', 'arrow-left', 16);
+  setIconIfExists('iconArrowLeftTop1', 'arrow-left', 16);
+  setIconIfExists('iconArrowLeft2', 'arrow-left', 16);
+  setIconIfExists('iconArrowLeftTop2', 'arrow-left', 16);
+  setIconIfExists('iconArrowLeft3', 'arrow-left', 16);
+  setIconIfExists('iconArrowLeftTop3', 'arrow-left', 16);
+  setIconIfExists('iconSlidersTop', 'sliders', 16);
+  setIconIfExists('iconRefreshTop', 'refresh-cw', 16);
+  setIconIfExists('iconSearch2', 'search', 16);
+  setIconIfExists('iconSearch3', 'search', 16);
+  setIconIfExists('iconSparkles', 'sparkles', 14);
+  setIconIfExists('iconChevronDown1', 'chevron-down', 14);
+  setIconIfExists('iconChevronDown2', 'chevron-down', 14);
+  setIconIfExists('iconSliders', 'sliders', 16);
+  setIconIfExists('iconDownload', 'download', 14);
+  setIconIfExists('iconRefresh', 'refresh-cw', 16);
   els.btnCloseShortcuts.innerHTML = icon('x', 18);
 
   initTheme();

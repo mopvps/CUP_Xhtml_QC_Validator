@@ -4,8 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>E-pub CUP QC Validator</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -61,8 +60,17 @@
 <main class="content-container">
 
   <section class="step-panel active" data-step="1">
-    <h1 class="panel-title">Select Project Folder</h1>
-    <p class="panel-desc">Choose the folder containing your XHTML files and images folder.</p>
+    <div class="panel-header">
+      <div class="panel-header-text">
+        <h1 class="panel-title">Select Project Folder</h1>
+        <p class="panel-desc">Choose the folder containing your XHTML files and images folder.</p>
+      </div>
+      <div class="panel-header-actions">
+        <button id="btnToStep2Top" class="btn btn-primary" disabled>
+          Next <span id="iconArrowRightTop1"></span>
+        </button>
+      </div>
+    </div>
 
     <div id="uploadBox" class="upload-box">
       <label class="upload-label">
@@ -88,8 +96,16 @@
   </section>
 
   <section class="step-panel" data-step="2">
-    <h1 class="panel-title">Project Files</h1>
-    <p class="panel-desc">Review the files found in your project folder.</p>
+    <div class="panel-header">
+      <div class="panel-header-text">
+        <h1 class="panel-title">Project Files</h1>
+        <p class="panel-desc">Review the files found in your project folder.</p>
+      </div>
+      <div class="panel-header-actions">
+        <button id="btnBackTo1Top" class="btn btn-secondary"><span id="iconArrowLeftTop1"></span> Back</button>
+        <button id="btnToStep3Top" class="btn btn-primary">Next <span id="iconArrowRightTop2"></span></button>
+      </div>
+    </div>
 
     <div class="search-box">
       <span class="search-icon" id="iconSearch2"></span>
@@ -98,17 +114,23 @@
 
     <div class="files-toolbar">
       <div class="filter-chips" id="fileTypeChips">
-        <button class="filter-chip active" data-type="all">All <span class="chip-count" id="chipCountAll">0</span></button>
-        <button class="filter-chip" data-type="xhtml">XHTML <span class="chip-count" id="chipCountXhtml">0</span></button>
+        <button class="filter-chip active" data-type="xhtml">XHTML <span class="chip-count" id="chipCountXhtml">0</span></button>
         <button class="filter-chip" data-type="image">Images <span class="chip-count" id="chipCountImage">0</span></button>
+        <button class="filter-chip" data-type="group">Groups <span class="chip-count" id="chipCountGroups">3</span></button>
       </div>
-      <div class="sort-select-wrap">
-        <label for="fileSortSelect" class="sort-label">Sort</label>
-        <select id="fileSortSelect" class="sort-select">
-          <option value="name">Name</option>
-          <option value="size">Size</option>
-          <option value="type">Type</option>
-        </select>
+      <div class="files-toolbar-actions">
+        <div class="files-selection-tools" id="filesSelectionTools">
+          <button type="button" id="btnSelectAllFiles" class="btn btn-secondary btn-sm">Select all</button>
+          <button type="button" id="btnDeselectAllFiles" class="btn btn-secondary btn-sm">Deselect all</button>
+        </div>
+        <div class="sort-select-wrap">
+          <label for="fileSortSelect" class="sort-label">Sort</label>
+          <select id="fileSortSelect" class="sort-select">
+            <option value="name">Name</option>
+            <option value="size">Size</option>
+            <option value="type">Type</option>
+          </select>
+        </div>
       </div>
     </div>
 
@@ -123,8 +145,16 @@
   </section>
 
   <section class="step-panel" data-step="3">
-    <h1 class="panel-title">Validation Rules</h1>
-    <p class="panel-desc">These checks will run against all your XHTML files.</p>
+    <div class="panel-header">
+      <div class="panel-header-text">
+        <h1 class="panel-title">Validation Rules</h1>
+        <p class="panel-desc">These checks will run against all your XHTML files.</p>
+      </div>
+      <div class="panel-header-actions">
+        <button id="btnBackTo2Top" class="btn btn-secondary"><span id="iconArrowLeftTop2"></span> Back</button>
+        <button id="btnValidateTop" class="btn btn-primary"><span id="iconSlidersTop"></span> Validate</button>
+      </div>
+    </div>
 
     <div class="rules-toolbar">
       <div class="search-box">
@@ -159,7 +189,15 @@
   </section>
 
   <section class="step-panel" data-step="4">
-    <h1 class="panel-title">Validation Results</h1>
+    <div class="panel-header">
+      <div class="panel-header-text">
+        <h1 class="panel-title">Validation Results</h1>
+      </div>
+      <div class="panel-header-actions">
+        <button id="btnBackTo3Top" class="btn btn-secondary"><span id="iconArrowLeftTop3"></span> Back</button>
+        <button id="btnRevalidateTop" class="btn btn-primary"><span id="iconRefreshTop"></span> Validate Again</button>
+      </div>
+    </div>
 
     <div class="results-layout">
       <div class="results-header" id="resultsHeader">
