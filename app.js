@@ -823,30 +823,113 @@ async function parsePageDataFromExcel(allFiles) {
     els.celebrationHost.innerHTML = '';
     if (!currentReport || currentReport.totalIssues !== 0) return;
 
+    const filesChecked = currentReport.files.length;
+    const rulesRun = currentReport.files[0]?.report?.activeRules?.length || 0;
+    const xhtmlCount = currentReport.files.filter(f => f.fileName.endsWith('.xhtml')).length;
+    const imageCount = currentReport.files.filter(f => /\.(png|jpg|jpeg|gif|webp)$/i.test(f.fileName)).length;
+
+    const now = new Date();
+    const timestamp = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+      + ' at ' + now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+
+    const quotes = [
+      "Your files are spotless — the QC team approves! ✅",
+      "Not a single issue. You're on a roll! 🎯",
+      "Flawless validation. The book is ready! 📖",
+      "Zero issues. Your attention to detail is unmatched! 🏆",
+      "Clean as a whistle! Ship it! 🚀",
+      "Perfect score. The EPUB gods are pleased! ⚡",
+      "All green across the board. Outstanding work! 🌟"
+    ];
+    const quote = quotes[Math.floor(Math.random() * quotes.length)];
+
+    const xhtmlPct = filesChecked > 0 ? Math.round((xhtmlCount / (xhtmlCount + imageCount)) * 100) : 100;
+    const imagePct = 100 - xhtmlPct;
+
     const hero = document.createElement('div');
     hero.className = 'celebration-hero';
     hero.innerHTML = `
-      <div class="celebration-icon">${icon('check-circle', 72)}</div>
-      <div class="celebration-title">All checks passed</div>
-      <div class="celebration-sub">Your files are clean.</div>
+      <div class="celebration-inner">
+        <div class="celebration-icon-wrap">
+          <svg class="check-svg" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle class="check-circle-bg" cx="40" cy="40" r="38" stroke="var(--brand-green)" stroke-width="3" fill="none"/>
+            <polyline class="check-mark" points="22,42 34,54 58,28" stroke="var(--brand-green)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+        </div>
+        <div class="celebration-text">
+          <div class="celebration-title">Clean Bill of Health</div>
+          <div class="celebration-sub">All checks passed — your files are clean.</div>
+          <div class="celebration-stats">
+            <div class="cel-stat">
+              <span class="cel-stat-value" data-target="${filesChecked}">0</span>
+              <span class="cel-stat-label">Files Checked</span>
+            </div>
+            <div class="cel-stat-divider"></div>
+            <div class="cel-stat">
+              <span class="cel-stat-value" data-target="${rulesRun}">0</span>
+              <span class="cel-stat-label">Rules Run</span>
+            </div>
+            <div class="cel-stat-divider"></div>
+            <div class="cel-stat">
+              <span class="cel-stat-value" data-target="0">0</span>
+              <span class="cel-stat-label">Issues Found</span>
+            </div>
+          </div>
+        </div>
+        <div class="celebration-right">
+          <div class="cel-timestamp">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            ${timestamp}
+          </div>
+          <div class="cel-filebar">
+            <div class="cel-filebar-label">File Breakdown</div>
+            <div class="cel-filebar-track">
+              <div class="cel-filebar-xhtml" style="width:${xhtmlPct}%"></div>
+              <div class="cel-filebar-image" style="width:${imagePct}%"></div>
+            </div>
+            <div class="cel-filebar-legend">
+              <span><span class="cel-dot cel-dot-xhtml"></span>XHTML <strong>${xhtmlCount}</strong></span>
+              <span><span class="cel-dot cel-dot-image"></span>Images <strong>${imageCount}</strong></span>
+            </div>
+          </div>
+          <div class="cel-quote">${quote}</div>
+        </div>
+      </div>
     `;
     els.celebrationHost.appendChild(hero);
-    fireConfetti(hero);
+
+    // Animate stat counters
+    hero.querySelectorAll('.cel-stat-value').forEach(el => {
+      const target = parseInt(el.dataset.target, 10);
+      if (target === 0) return;
+      let start = 0;
+      const step = Math.ceil(target / (1000 / 16));
+      const timer = setInterval(() => {
+        start = Math.min(start + step, target);
+        el.textContent = start;
+        if (start >= target) clearInterval(timer);
+      }, 16);
+    });
+
+    setTimeout(() => fireConfetti(hero), 1100);
   }
 
   function fireConfetti(container) {
-    const colors = ['#1E3A8A', '#15803D', '#D97706', '#DC2626'];
-    for (let i = 0; i < 24; i++) {
+    const colors = ['#1E3A8A', '#15803D', '#D97706', '#6366F1', '#EC4899'];
+    const shapes = ['square', 'circle', 'rect'];
+    for (let i = 0; i < 40; i++) {
       const piece = document.createElement('span');
-      piece.className = 'confetti-piece';
-      piece.style.left = Math.random() * 100 + '%';
+      piece.className = 'confetti-piece confetti-' + shapes[i % shapes.length];
+      piece.style.left = (20 + Math.random() * 60) + '%';
       piece.style.background = colors[i % colors.length];
-      piece.style.animationDelay = (Math.random() * 0.3) + 's';
+      piece.style.animationDelay = (Math.random() * 0.6) + 's';
+      piece.style.animationDuration = (1.2 + Math.random() * 0.8) + 's';
+      piece.style.transform = `rotate(${Math.random() * 360}deg)`;
       container.appendChild(piece);
     }
     setTimeout(() => {
       container.querySelectorAll('.confetti-piece').forEach(p => p.remove());
-    }, 1800);
+    }, 2500);
   }
 
   function renderResultsSidebar() {
