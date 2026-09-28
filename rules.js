@@ -1035,3 +1035,449 @@ window.RULES['pagebreak-duplicate'] = function (parsed, ruleCfg, fileMap, allFil
 
   return issues;
 };
+
+window.RULES['epub-type-id-link-check'] = function (parsed, ruleCfg, fileMap, allFiles, currentFileName) {
+  const issues = [];
+  const dom = parsed.dom;
+  if (!dom) return issues;
+
+  const TARGET_TYPES = ['footnote', 'biblioentry'];
+
+  // 1. Find all elements with epub:type="footnote" or epub:type="biblioentry"
+  //    epub:type may be serialized as "epub:type" attribute in DOMParser output
+  const allElements = Array.from(dom.querySelectorAll('*'));
+  const targets = allElements.filter(el => {
+    const epubType = el.getAttribute('epub:type') || el.getAttributeNS('http://www.idpf.org/2007/ops', 'type') || '';
+    return TARGET_TYPES.includes(epubType.trim().toLowerCase());
+  });
+
+  if (!targets.length) return issues;
+
+  // 2. Extract id from each target:
+  //    Shape 1: id on the element itself
+  //    Shape 2: id on first child <span class="reflabel">
+  const targetIds = []; // [{ id, line }]
+  const parsedEls = parsed.elements;
+
+  targets.forEach((el, idx) => {
+    let id = el.getAttribute('id') || '';
+    let idLine = 0;
+
+    if (!id) {
+      // Check first child span with class="reflabel"
+      const span = el.querySelector('span.reflabel, span[class="reflabel"]');
+      if (span) {
+        id = span.getAttribute('id') || '';
+      }
+    }
+
+    if (!id) return; // no id found — skip (different rule's concern)
+
+    // Get line number from parsed.elements by matching tag + id
+    const matchEl = parsedEls.find(e =>
+      (e.attrs && e.attrs.id === id)
+    );
+    idLine = matchEl ? matchEl.line : 0;
+
+    targetIds.push({ id, line: idLine });
+  });
+
+  if (!targetIds.length) return issues;
+
+  // 3. Build a set of all href fragment references across ALL xhtml files
+  //    fileMap keys are filenames; values are raw text strings
+  const allHrefs = new Set();
+  const allFilesList = Array.isArray(allFiles) ? allFiles : Array.from((allFiles || new Map()).values());
+
+  allFilesList.forEach(f => {
+    if (!f.name.endsWith('.xhtml')) return;
+    const text = fileMap.get(f.name) || '';
+    // Match href="#id" or href="file.xhtml#id" — capture the fragment part
+    const hrefRe = /href="[^"]*#([^"]+)"/g;
+    let m;
+    while ((m = hrefRe.exec(text)) !== null) {
+      allHrefs.add(m[1]);
+    }
+  });
+
+  // 4. Check each target id against allHrefs
+  targetIds.forEach(({ id, line }) => {
+    if (!allHrefs.has(id)) {
+      issues.push({
+        ruleId: 'epub-type-id-link-check',
+        severity: ruleCfg.severity || 'warn',
+        message: `epub:type element id "${id}" is not referenced by any anchor tag across all files`,
+        detail: `id="${id}" — no <a href="#${id}"> or <a href="file.xhtml#${id}"> found in any XHTML file`,
+        line,
+        col: 0
+      });
+    }
+  });
+
+  return issues;
+};
+
+window.RULES['stylesheet-class-check'] = function (parsed, ruleCfg, fileMap, allFiles, currentFileName) {
+  const issues = [];
+  const dom = parsed.dom;
+  if (!dom) return issues;
+
+  // 1. Find the CSS file from allFiles (first .css file inside OEBPS/)
+  const allFilesList = Array.isArray(allFiles) ? allFiles : Array.from((allFiles || new Map()).values());
+  const cssFile = allFilesList.find(f => {
+    const p = (f.webkitRelativePath || f.name || '').toLowerCase();
+    return p.includes('oebps') && f.name.endsWith('.css');
+  });
+
+  if (!cssFile) {
+    return [{
+      ruleId: 'stylesheet-class-check',
+      severity: 'warn',
+      message: 'No CSS file found in OEBPS folder — cannot check classes',
+      detail: '',
+      line: 0,
+      col: 0
+    }];
+  }
+
+  // 2. Read CSS text from fileMap
+  const cssEntry = fileMap.get(cssFile.name);
+  const cssText = cssEntry ? cssEntry : '';
+
+  if (!cssText) {
+    return [{
+      ruleId: 'stylesheet-class-check',
+      severity: 'warn',
+      message: 'CSS file found but could not be read: ' + cssFile.name,
+      detail: '',
+      line: 0,
+      col: 0
+    }];
+  }
+
+  // 3. Extract all defined class names from CSS text
+  // Matches .classname in selectors — handles compound, element+class, pseudo etc.
+  const definedClasses = new Set();
+  const cssClassRe = /\.([a-zA-Z_-][a-zA-Z0-9_-]*)/g;
+  let cm;
+  while ((cm = cssClassRe.exec(cssText)) !== null) {
+    definedClasses.add(cm[1]);
+  }
+
+  if (!definedClasses.size) {
+    return [{
+      ruleId: 'stylesheet-class-check',
+      severity: 'warn',
+      message: 'CSS file has no class definitions: ' + cssFile.name,
+      detail: '',
+      line: 0,
+      col: 0
+    }];
+  }
+
+  // 4. Walk all elements in XHTML and check their classes
+  const allEls = Array.from(dom.querySelectorAll('[class]'));
+  const reported = new Set(); // avoid duplicate reports per class name
+
+  allEls.forEach((el, idx) => {
+    const classAttr = (el.getAttribute('class') || '').trim();
+    if (!classAttr) return;
+
+    const classes = classAttr.split(/\s+/).filter(Boolean);
+    const matchEl = parsed.elements[idx];
+
+    classes.forEach(cls => {
+      if (reported.has(cls)) return;
+      if (!definedClasses.has(cls)) {
+        reported.add(cls);
+        issues.push({
+          ruleId: 'stylesheet-class-check',
+          severity: ruleCfg.severity || 'warn',
+          message: `Class "${cls}" used in XHTML but not defined in CSS`,
+          detail: (el.outerHTML || '').replace(/\s*xmlns(:[a-z]+)?="[^"]*"/g, '').slice(0, 120),
+          line: matchEl ? matchEl.line : 0,
+          col: matchEl ? matchEl.col : 0
+        });
+      }
+    });
+  });
+
+  return issues;
+};
+
+window.RULES['xref-text-match'] = function (parsed, ruleCfg, fileMap, allFiles, currentFileName) {
+  const issues = [];
+  const dom = parsed.dom;
+  if (!dom) return issues;
+
+  // --- Normalize text for comparison ---
+  function normalizeText(str) {
+    return str
+      .trim()
+      // Full words first — Figure/Figures (strip trailing dot if any)
+      .replace(/\bFigures?\.?(?=\s|$)/g, 'Figure')
+      .replace(/\bTables?\.?(?=\s|$)/g, 'Table')
+      // Abbreviations — must NOT be followed by "ure" or "able"
+      .replace(/\bFigs?\.?(?!ure)(?=\s|$|\d)/g, 'Figure')
+      .replace(/\bTabs?\.?(?!le)(?=\s|$|\d)/g, 'Table')
+      .replace(/\.\s*$/, '')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  // --- Build labelMap from all xhtml files via fileMap (stores ParsedDoc) ---
+  // Key: id, Value: { text, fileName }
+  const labelMap = new Map();
+  const allFilesList = Array.isArray(allFiles)
+    ? allFiles
+    : Array.from((allFiles || new Map()).values());
+
+  allFilesList.forEach(f => {
+    if (!f.name.endsWith('.xhtml')) return;
+    const parsedDoc = fileMap.get(f.name);
+    if (!parsedDoc || !parsedDoc.dom) return;
+
+    // Find all span.label with an id in this file's DOM
+    const spans = Array.from(parsedDoc.dom.querySelectorAll('span.label[id], span[class="label"][id]'));
+    spans.forEach(span => {
+      const id = span.getAttribute('id');
+      if (!id) return;
+      const labelText = normalizeText(span.textContent || '');
+      if (labelText) labelMap.set(id, { text: labelText, fileName: f.name });
+    });
+  });
+
+  // Also scan current file's own DOM (current file may not be in fileMap yet)
+  const currentSpans = Array.from(dom.querySelectorAll('span.label[id], span[class="label"][id]'));
+  currentSpans.forEach(span => {
+    const id = span.getAttribute('id');
+    if (!id) return;
+    const labelText = normalizeText(span.textContent || '');
+    if (labelText && !labelMap.has(id)) {
+      labelMap.set(id, { text: labelText, fileName: currentFileName });
+    }
+  });
+
+  // --- Find all <a class="xref" href="#..."> in current file ---
+  const xrefAnchors = Array.from(dom.querySelectorAll('a.xref[href], a[class="xref"][href]'));
+  const parsedEls = parsed.elements;
+
+  xrefAnchors.forEach(anchor => {
+    const href = anchor.getAttribute('href') || '';
+    if (!href.startsWith('#')) return;
+    const targetId = href.slice(1);
+    if (!targetId) return;
+
+    const anchorRaw = (anchor.textContent || '').trim();
+    if (!anchorRaw) return;
+
+    const anchorNorm = normalizeText(anchorRaw);
+    const labelEntry = labelMap.get(targetId);
+
+    // id not found — skip (anchor-link-check covers missing ids)
+    if (!labelEntry) return;
+
+    const labelNorm = labelEntry.text;
+
+    // Multi-ref: "Figures 4.1 and 4.2" — check label appears inside anchor
+    const isMultiRef = /\band\b/i.test(anchorNorm);
+    const matched = isMultiRef
+      ? anchorNorm.includes(labelNorm)
+      : anchorNorm === labelNorm;
+
+    if (!matched) {
+      const matchEl = parsedEls.find(e =>
+        e.tag === 'a' &&
+        e.attrs &&
+        e.attrs.href === href &&
+        (e.attrs.class || '').includes('xref')
+      );
+
+      issues.push({
+        ruleId: 'xref-text-match',
+        severity: ruleCfg.severity || 'error',
+        message: `Xref text mismatch: anchor says "${anchorRaw}" but label says "${labelEntry.text}"`,
+        detail: `href="${href}" in ${currentFileName} → label in ${labelEntry.fileName}`,
+        line: matchEl ? matchEl.line : 0,
+        col: matchEl ? matchEl.col : 0
+      });
+    }
+  });
+
+  return issues;
+};
+
+window.RULES['caption-label-unreferenced'] = function (parsed, ruleCfg, fileMap, allFiles, currentFileName) {
+  const issues = [];
+  const dom = parsed.dom;
+  if (!dom) return issues;
+
+  // 1. Build set of all xref href fragments across ALL xhtml files
+  const allXrefIds = new Set();
+  const allFilesList = Array.isArray(allFiles)
+    ? allFiles
+    : Array.from((allFiles || new Map()).values());
+
+  allFilesList.forEach(f => {
+    if (!f.name.endsWith('.xhtml')) return;
+    const parsedDoc = fileMap.get(f.name);
+    if (!parsedDoc || !parsedDoc.dom) return;
+
+    // Collect all <a class="xref" href="#..."> fragments
+    const anchors = Array.from(parsedDoc.dom.querySelectorAll('a.xref[href], a[class="xref"][href]'));
+    anchors.forEach(a => {
+      const href = a.getAttribute('href') || '';
+      if (href.startsWith('#')) allXrefIds.add(href.slice(1));
+    });
+  });
+
+  // Also collect from current file's own DOM
+  const currentAnchors = Array.from(dom.querySelectorAll('a.xref[href], a[class="xref"][href]'));
+  currentAnchors.forEach(a => {
+    const href = a.getAttribute('href') || '';
+    if (href.startsWith('#')) allXrefIds.add(href.slice(1));
+  });
+
+  // 2. Find all span.label inside figcaption or p.tblcaption in current file
+  const candidateSpans = [];
+
+  // Shape 1: span.label inside <figcaption>
+  const figcaptions = Array.from(dom.querySelectorAll('figcaption'));
+  figcaptions.forEach(fc => {
+    const spans = Array.from(fc.querySelectorAll('span.label[id], span[class="label"][id]'));
+    spans.forEach(s => candidateSpans.push(s));
+  });
+
+  // Shape 2: span.label inside <p class="tblcaption"> or <p class="figcaption">
+  const captionPs = Array.from(dom.querySelectorAll('p.tblcaption, p.figcaption, p[class="tblcaption"], p[class="figcaption"]'));
+  captionPs.forEach(p => {
+    const spans = Array.from(p.querySelectorAll('span.label[id], span[class="label"][id]'));
+    spans.forEach(s => {
+      // Avoid duplicates (figcaption already covered above)
+      if (!candidateSpans.includes(s)) candidateSpans.push(s);
+    });
+  });
+
+  // 3. Check each candidate span
+  const LABEL_RE = /\b(Figure|Figures|Fig|Figs|Table|Tables|Tab|Tabs)\b/i;
+  const parsedEls = parsed.elements;
+
+  candidateSpans.forEach(span => {
+    const id = span.getAttribute('id');
+    if (!id) return;
+
+    const text = (span.textContent || '').trim();
+
+    // Only check spans whose text contains Figure or Table variants
+    if (!LABEL_RE.test(text)) return;
+
+    if (!allXrefIds.has(id)) {
+      // Get line number
+      const matchEl = parsedEls.find(e =>
+        e.attrs && e.attrs.id === id && e.tag === 'span'
+      );
+
+      issues.push({
+        ruleId: 'caption-label-unreferenced',
+        severity: ruleCfg.severity || 'error',
+        message: `Caption label "${text.slice(0, 40)}" (id="${id}") has no <a class="xref"> pointing to it`,
+        detail: `id="${id}" — no <a class="xref" href="#${id}"> found in any XHTML file`,
+        line: matchEl ? matchEl.line : 0,
+        col: matchEl ? matchEl.col : 0
+      });
+    }
+  });
+
+  return issues;
+};
+
+window.RULES['figure-missing-label'] = function (parsed, ruleCfg) {
+  const issues = [];
+  const dom = parsed.dom;
+  if (!dom) return issues;
+
+  const LABEL_RE = /\b(Figure|Figures|Fig|Figs|Table|Tables|Tab|Tabs)\b/i;
+  const parsedEls = parsed.elements;
+
+  // Find all <figure> elements
+  const figures = Array.from(dom.querySelectorAll('figure'));
+
+  figures.forEach(figure => {
+    // Skip cover images
+    const imgs = Array.from(figure.querySelectorAll('img'));
+    const isCover = imgs.some(img =>
+      (img.getAttribute('epub:type') || '') === 'cover' ||
+      (img.getAttribute('role') || '') === 'doc-cover' ||
+      (img.getAttribute('alt') || '').toLowerCase().includes('cover')
+    );
+    if (isCover) return;
+
+    // Skip non-content figures (logos, decorative, publisher marks etc.)
+    // Only process figures with no class OR class contains 'Table'
+    // Skip known non-content classes: publogo, logo, decoration, ornament, etc.
+    const figClass = (figure.getAttribute('class') || '').toLowerCase();
+    const SKIP_CLASSES = ['publogo', 'logo', 'decoration', 'ornament', 'publisher', 'emblem', 'seal', 'icon'];
+    if (SKIP_CLASSES.some(c => figClass.includes(c))) return;
+
+    // 1. Check figcaption exists
+    const figcaption = figure.querySelector('figcaption');
+    if (!figcaption) {
+      const matchEl = parsedEls.find(e =>
+        e.tag === 'figure' &&
+        e.attrs &&
+        JSON.stringify(e.attrs) === JSON.stringify(
+          Object.fromEntries(
+            Array.from(figure.attributes || []).map(a => [a.name.toLowerCase(), a.value])
+          )
+        )
+      );
+      issues.push({
+        ruleId: 'figure-missing-label',
+        severity: ruleCfg.severity || 'error',
+        message: '<figure> is missing a <figcaption> entirely',
+        detail: (figure.outerHTML || '').replace(/\s*xmlns(:[a-z]+)?="[^"]*"/g, '').slice(0, 120),
+        line: matchEl ? matchEl.line : 0,
+        col: matchEl ? matchEl.col : 0
+      });
+      return;
+    }
+
+    // 2. Check span.label exists inside figcaption
+    const labelSpan = figcaption.querySelector('span.label, span[class="label"]');
+    if (!labelSpan) {
+      const matchEl = parsedEls.find(e =>
+        e.tag === 'figcaption'
+      );
+      issues.push({
+        ruleId: 'figure-missing-label',
+        severity: ruleCfg.severity || 'error',
+        message: '<figcaption> is missing a <span class="label"> inside it',
+        detail: (figcaption.outerHTML || '').replace(/\s*xmlns(:[a-z]+)?="[^"]*"/g, '').slice(0, 120),
+        line: matchEl ? matchEl.line : 0,
+        col: matchEl ? matchEl.col : 0
+      });
+      return;
+    }
+
+    // 3. Check span.label text contains Figure or Table variant
+    const labelText = (labelSpan.textContent || '').trim();
+    if (!LABEL_RE.test(labelText)) {
+      const matchEl = parsedEls.find(e =>
+        e.tag === 'span' &&
+        e.attrs &&
+        (e.attrs.class || '').includes('label') &&
+        e.attrs.id === labelSpan.getAttribute('id')
+      );
+      issues.push({
+        ruleId: 'figure-missing-label',
+        severity: ruleCfg.severity || 'error',
+        message: `<span class="label"> text "${labelText.slice(0, 40)}" does not contain Figure or Table`,
+        detail: (labelSpan.outerHTML || '').replace(/\s*xmlns(:[a-z]+)?="[^"]*"/g, '').slice(0, 120),
+        line: matchEl ? matchEl.line : 0,
+        col: matchEl ? matchEl.col : 0
+      });
+    }
+  });
+
+  return issues;
+};

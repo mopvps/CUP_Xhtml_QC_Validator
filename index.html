@@ -6,6 +6,7 @@
 <title>E-pub CUP QC Validator</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230284c7'/><path d='M8 6h11l5 5v15H8z' fill='%2338bdf8'/><path d='M19 6v5h5' fill='%230284c7'/><path d='M12 18l3 3 6-7' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/></svg>" />
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -64,7 +65,7 @@
     <div class="panel-header">
       <div class="panel-header-text">
         <h1 class="panel-title">Select Project Folder</h1>
-        <p class="panel-desc">Choose the folder containing your XHTML files and images folder.</p>
+        <p class="panel-desc">Upload an .epub file or select the project folder to begin validation.</p>
       </div>
       <div class="panel-header-actions">
         <button id="btnToStep2Top" class="btn btn-primary" disabled>
@@ -73,13 +74,27 @@
       </div>
     </div>
 
-    <div id="uploadBox" class="upload-box">
-      <label class="upload-label">
-        <span id="uploadIcon"></span>
-        <span class="upload-title">Drop your project folder here</span>
-        <span class="upload-sub">or click to browse</span>
-        <span class="upload-hint">Looking for .xhtml files and images</span>
-        <input type="file" id="folderInput" webkitdirectory multiple hidden />
+    <div id="uploadBox" class="upload-box-split">
+      <!-- Left: EPUB upload -->
+      <label class="upload-panel upload-panel-epub" id="uploadPanelEpub">
+        <span class="upload-panel-icon" id="uploadIconEpub"></span>
+        <span class="upload-title">Upload EPUB</span>
+        <span class="upload-sub">Drop .epub file or click to browse</span>
+        <span class="upload-hint">Extracts XHTML, images and Excel automatically</span>
+        <input type="file" id="folderInput" accept=".epub" hidden />
+      </label>
+
+      <div class="upload-panel-divider">
+        <span class="upload-panel-or">or</span>
+      </div>
+
+      <!-- Right: Folder select -->
+      <label class="upload-panel upload-panel-folder" id="uploadPanelFolder">
+        <span class="upload-panel-icon" id="uploadIconFolder"></span>
+        <span class="upload-title">Select Folder</span>
+        <span class="upload-sub">Drop folder or click to browse</span>
+        <span class="upload-hint">Select the EPUB project folder directly</span>
+        <input type="file" id="folderDirInput" webkitdirectory multiple hidden />
       </label>
     </div>
     <div id="folderSummary"></div>

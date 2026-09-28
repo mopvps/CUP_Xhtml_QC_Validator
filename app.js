@@ -164,6 +164,7 @@ async function parsePageDataFromExcel(allFiles) {
 
   const els = {
     folderInput: document.getElementById('folderInput'),
+    folderDirInput: document.getElementById('folderDirInput'),
     uploadBox: document.getElementById('uploadBox'),
     folderSummary: document.getElementById('folderSummary'),
     recentFoldersSection: document.getElementById('recentFoldersSection'),
@@ -238,8 +239,25 @@ async function parsePageDataFromExcel(allFiles) {
 
   /* ---------- Rule config helpers ---------- */
 
+  function getRuleConfigHash() {
+    // Fingerprint from rule ids only — enabled is the default, not part of identity
+    return getRulesConfig().map(r => r.id).join('|');
+  }
+
   function seedRuleState() {
     ruleState = {};
+    const configHash = getRuleConfigHash();
+    const savedHash = (() => { try { return localStorage.getItem('vpqc.ruleStateHash') || ''; } catch(e) { return ''; } })();
+
+    if (savedHash !== configHash) {
+      // Config changed — wipe stale localStorage state and start fresh from config
+      try { localStorage.removeItem('vpqc.ruleState'); } catch(e) {}
+      try { localStorage.setItem('vpqc.ruleStateHash', configHash); } catch(e) {}
+      getRulesConfig().forEach(rule => { ruleState[rule.id] = rule.enabled; });
+      return;
+    }
+
+    // Hash matches — safe to use stored toggles
     const savedRuleState = (() => { try { return JSON.parse(localStorage.getItem('vpqc.ruleState') || '{}'); } catch(e) { return {}; } })();
     getRulesConfig().forEach(rule => {
       ruleState[rule.id] = rule.id in savedRuleState ? savedRuleState[rule.id] : rule.enabled;
@@ -444,6 +462,7 @@ async function parsePageDataFromExcel(allFiles) {
       els.fileTypeChips.querySelectorAll('.filter-chip').forEach(b => b.classList.toggle('active', b.dataset.type === 'xhtml'));
     }
     els.folderInput.value = '';
+    if (els.folderDirInput) els.folderDirInput.value = '';
     els.folderSummary.innerHTML = '';
     els.uploadBox.style.display = '';
     els.btnToStep2.disabled = true;
@@ -561,25 +580,81 @@ async function parsePageDataFromExcel(allFiles) {
     document.getElementById('btnChangeFolder').addEventListener('click', resetAll);
   }
 
-  // Read all files fresh from a directory handle
-  async function readFilesFromDirHandle(dirHandle) {
-    const files = [];
-    async function walk(handle, path) {
-      for await (const [name, entry] of handle.entries()) {
-        if (entry.kind === 'file') {
-          const file = await entry.getFile();
-          Object.defineProperty(file, 'webkitRelativePath', { value: path + name });
-          files.push(file);
-        } else if (entry.kind === 'directory') {
-          await walk(entry, path + name + '/');
-        }
-      }
+  async function handleFolderSelect(e) {
+    const file = e.target.files && e.target.files[0];
+    if (!file || !file.name.endsWith('.epub')) {
+      showToast('Please select a valid .epub file', 'error');
+      return;
     }
-    await walk(dirHandle, dirHandle.name + '/');
-    return files;
+
+    showToast('Extracting .epub…', 'info');
+
+    try {
+      const zip = await JSZip.loadAsync(file);
+      const extractedFiles = [];
+
+      for (const [relativePath, zipEntry] of Object.entries(zip.files)) {
+        if (zipEntry.dir) continue;
+
+        const name = relativePath.split('/').pop();
+        const ext = getExt(name);
+
+        // Only extract files we care about
+        const keep = ext === 'xhtml' || ext === 'xlsx' || ext === 'css' ||
+                     ['jpg','jpeg','png','gif','svg','webp'].includes(ext);
+        if (!keep) continue;
+
+        let blob;
+        if (ext === 'xlsx') {
+          const ab = await zipEntry.async('arraybuffer');
+          blob = new Blob([ab], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+        } else if (['jpg','jpeg','png','gif','svg','webp'].includes(ext)) {
+          const ab = await zipEntry.async('arraybuffer');
+          blob = new Blob([ab], { type: 'image/' + ext });
+        } else if (ext === 'css') {
+          const text = await zipEntry.async('string');
+          blob = new Blob([text], { type: 'text/css' });
+        } else {
+          const text = await zipEntry.async('string');
+          blob = new Blob([text], { type: 'application/xhtml+xml' });
+        }
+
+        const f = new File([blob], name, { type: blob.type });
+        // Fake webkitRelativePath so existing rules work unchanged
+        Object.defineProperty(f, 'webkitRelativePath', {
+          value: relativePath,
+          writable: false
+        });
+        extractedFiles.push(f);
+      }
+
+      if (!extractedFiles.length) {
+        showToast('No usable files found in .epub', 'error');
+        return;
+      }
+
+      allFiles = extractedFiles;
+      xhtmlFiles = extractedFiles.filter(f => getExt(f.name) === 'xhtml');
+      imageFiles = extractedFiles.filter(f => IMAGE_EXT.includes(getExt(f.name)));
+      selectedXhtmlFiles = new Set(xhtmlFiles.map(f => f.name));
+
+      // Use epub filename (without extension) as folder name
+      folderName = file.name.replace(/\.epub$/i, '');
+
+      renderFolderSummary();
+      const isStep2Disabled = xhtmlFiles.length === 0;
+      els.btnToStep2.disabled = isStep2Disabled;
+      if (els.btnToStep2Top) els.btnToStep2Top.disabled = isStep2Disabled;
+      saveRecentFolder(folderName, xhtmlFiles.length, file.name);
+      renderRecentFolders();
+      showToast(`Extracted ${xhtmlFiles.length} XHTML files from .epub`, 'success');
+
+    } catch (err) {
+      showToast('Failed to extract .epub: ' + err.message, 'error');
+    }
   }
 
-  function handleFolderSelect(e) {
+  function handleFolderDirSelect(e) {
     const files = Array.from(e.target.files || []);
     if (!files.length) return;
 
@@ -597,6 +672,7 @@ async function parsePageDataFromExcel(allFiles) {
     if (els.btnToStep2Top) els.btnToStep2Top.disabled = isStep2Disabled;
     saveRecentFolder(folderName, xhtmlFiles.length, relPath ? relPath.split('/')[0] : folderName);
     renderRecentFolders();
+    showToast(`Loaded ${xhtmlFiles.length} XHTML files from folder`, 'success');
   }
 
   /* ---------- Step 2: unified file list ---------- */
@@ -1012,13 +1088,13 @@ async function parsePageDataFromExcel(allFiles) {
   }
 
   function enableAllRules() {
-    getRulesConfig().filter(rule => rule.enabled).forEach(rule => { ruleState[rule.id] = true; });
+    getRulesConfig().forEach(rule => { ruleState[rule.id] = true; });
     try { localStorage.setItem('vpqc.ruleState', JSON.stringify(ruleState)); } catch(e) {}
     renderRulesList();
   }
 
   function disableAllRules() {
-    getRulesConfig().filter(rule => rule.enabled).forEach(rule => { ruleState[rule.id] = false; });
+    getRulesConfig().forEach(rule => { ruleState[rule.id] = false; });
     try { localStorage.setItem('vpqc.ruleState', JSON.stringify(ruleState)); } catch(e) {}
     renderRulesList();
   }
@@ -1081,6 +1157,8 @@ async function parsePageDataFromExcel(allFiles) {
 
       // Preload all xhtml files into fileMap (for cross-file checking rules)
       const fileMap = new Map();
+      window._debugFileMap = fileMap;
+      window._debugAllFiles = allFiles;
       await Promise.all(xhtmlFiles.map(async (file) => {
         try {
           const fileText = await readFileAsText(file);
@@ -1088,6 +1166,17 @@ async function parsePageDataFromExcel(allFiles) {
           if (parsedFile) fileMap.set(file.name, parsedFile);
         } catch(e) {
           console.warn('Could not preload file:', file.name, e);
+        }
+      }));
+
+      // Preload all css files into fileMap as raw text (for stylesheet-class-check rule)
+      const cssFiles = allFiles.filter(f => getExt(f.name) === 'css');
+      await Promise.all(cssFiles.map(async (file) => {
+        try {
+          const cssText = await readFileAsText(file);
+          fileMap.set(file.name, cssText);
+        } catch(e) {
+          console.warn('Could not preload css file:', file.name, e);
         }
       }));
 
@@ -1106,6 +1195,7 @@ async function parsePageDataFromExcel(allFiles) {
         totalIssues += report.issueCount || 0;
         totalRules = report.activeRules ? report.activeRules.length : totalRules;
         filesReport.push({ fileName: file.name, report });
+        window._lastReport = { files: filesReport, fileMap };
       }
 
       // Smooth completion indicator: show 100% and "Validation Complete" before closing
@@ -1452,6 +1542,8 @@ async function parsePageDataFromExcel(allFiles) {
   }
 
   function buildIssueTable(issues, fileName) {
+    const wrap = document.createElement('div');
+    wrap.className = 'issue-table-wrap';
     const table = document.createElement('table');
     table.className = 'issue-table';
     table.innerHTML = `
@@ -1476,7 +1568,8 @@ async function parsePageDataFromExcel(allFiles) {
       tr.querySelector('.row-copy-btn').addEventListener('click', () => copyIssueToClipboard(issue, fileName));
       tbody.appendChild(tr);
     });
-    return table;
+    wrap.appendChild(table);
+    return wrap;
   }
 
   function buildGroupEl(group, fileName) {
@@ -1717,37 +1810,13 @@ async function parsePageDataFromExcel(allFiles) {
 
   /* ---------- Wiring ---------- */
 
-  els.uploadBox.addEventListener('click', async (e) => {
-    if (e.target === els.folderInput) return;
-    // Try File System Access API first (Chrome/Edge)
-    if (window.showDirectoryPicker) {
-      try {
-        const dirHandle = await window.showDirectoryPicker({ mode: 'read' });
-        window._dirHandle = dirHandle;
-        const files = await readFilesFromDirHandle(dirHandle);
-        if (!files.length) return;
-        allFiles = files;
-        xhtmlFiles = files.filter(f => getExt(f.name) === 'xhtml');
-        imageFiles = files.filter(f => IMAGE_EXT.includes(getExt(f.name)));
-        selectedXhtmlFiles = new Set(xhtmlFiles.map(f => f.name));
-        const relPath = files[0].webkitRelativePath || '';
-        folderName = relPath.split('/')[0] || 'Selected folder';
-        renderFolderSummary();
-        const isStep2Disabled = xhtmlFiles.length === 0;
-        els.btnToStep2.disabled = isStep2Disabled;
-        if (els.btnToStep2Top) els.btnToStep2Top.disabled = isStep2Disabled;
-        saveRecentFolder(folderName, xhtmlFiles.length, folderName);
-        renderRecentFolders();
-        return;
-      } catch (err) {
-        if (err.name === 'AbortError') return;
-        // Fall through to input fallback
-      }
-    }
-    // Fallback for Firefox
-    els.folderInput.click();
-  });
+  // EPUB panel click
   els.folderInput.addEventListener('change', handleFolderSelect);
+
+  // Folder panel click
+  if (els.folderDirInput) {
+    els.folderDirInput.addEventListener('change', handleFolderDirSelect);
+  }
 
   els.btnToStep2.addEventListener('click', () => {
     renderFileList();
@@ -1783,37 +1852,11 @@ async function parsePageDataFromExcel(allFiles) {
   els.btnBackTo3.addEventListener('click', () => goToStep(3));
   if (els.btnBackTo3Top) els.btnBackTo3Top.addEventListener('click', () => goToStep(3));
 
-  els.btnRevalidate.addEventListener('click', async () => {
-    if (window._dirHandle) {
-      try {
-        showToast('Re-reading files from disk…', 'info');
-        const files = await readFilesFromDirHandle(window._dirHandle);
-        allFiles = files;
-        xhtmlFiles = files.filter(f => getExt(f.name) === 'xhtml');
-        imageFiles = files.filter(f => IMAGE_EXT.includes(getExt(f.name)));
-        selectedXhtmlFiles = new Set(xhtmlFiles.map(f => f.name));
-      } catch(err) {
-        showToast('Could not re-read folder: ' + err.message, 'error');
-        return;
-      }
-    }
+  els.btnRevalidate.addEventListener('click', () => {
     handleValidate();
   });
   if (els.btnRevalidateTop) {
-    els.btnRevalidateTop.addEventListener('click', async () => {
-      if (window._dirHandle) {
-        try {
-          showToast('Re-reading files from disk…', 'info');
-          const files = await readFilesFromDirHandle(window._dirHandle);
-          allFiles = files;
-          xhtmlFiles = files.filter(f => getExt(f.name) === 'xhtml');
-          imageFiles = files.filter(f => IMAGE_EXT.includes(getExt(f.name)));
-          selectedXhtmlFiles = new Set(xhtmlFiles.map(f => f.name));
-        } catch(err) {
-          showToast('Could not re-read folder: ' + err.message, 'error');
-          return;
-        }
-      }
+    els.btnRevalidateTop.addEventListener('click', () => {
       handleValidate();
     });
   }
@@ -1925,7 +1968,10 @@ async function parsePageDataFromExcel(allFiles) {
 
   /* ---------- Init ---------- */
 
-  els.uploadBox.querySelector('#uploadIcon').innerHTML = icon('folder-open', 48);
+  const epubIconEl = document.getElementById('uploadIconEpub');
+  if (epubIconEl) epubIconEl.innerHTML = icon('book', 48);
+  const folderIconEl = document.getElementById('uploadIconFolder');
+  if (folderIconEl) folderIconEl.innerHTML = icon('folder-open', 48);
   els.btnResetAll.innerHTML = icon('refresh-cw', 18);
   els.btnShortcuts.innerHTML = icon('help-circle', 18);
   

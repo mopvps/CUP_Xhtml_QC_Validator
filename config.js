@@ -4,7 +4,7 @@ window.RULES_CONFIG = [
     name: 'Sup must contain anchor',
     description: '<sup> tags must contain an <a> tag inside them',
     severity: 'error',
-    enabled: true,
+    enabled: false,
     preset: 'recommended'
   },
   {
@@ -12,7 +12,7 @@ window.RULES_CONFIG = [
     name: 'Superscript Serial Check',
     description: 'Checks that <sup> numbers are sequential — separately for body sups and footnote sups (<li class="fn">)',
     severity: 'error',
-    enabled: true,
+    enabled: false,
     preset: 'recommended'
   },
   {
@@ -20,7 +20,7 @@ window.RULES_CONFIG = [
     name: 'Sup Link Check',
     description: 'Checks that all <a> tags inside <sup> have valid internal or external links',
     severity: 'error',
-    enabled: true,
+    enabled: false,
     preset: 'recommended'
   },
   {
@@ -44,7 +44,7 @@ window.RULES_CONFIG = [
     name: 'Duplicate ID Check',
     description: 'Checks that no id attribute is duplicated across all project files',
     severity: 'error',
-    enabled: true,
+    enabled: false,
     preset: 'recommended'
   },
   {
@@ -52,7 +52,7 @@ window.RULES_CONFIG = [
     name: 'Paragraph Missing Class',
     description: 'Checks that every <p> tag has a non-empty class attribute (except inside <blockquote>)',
     severity: 'error',
-    enabled: true,
+    enabled: false,
     preset: 'recommended'
   },
   {
@@ -60,7 +60,7 @@ window.RULES_CONFIG = [
     name: 'Span Outside List Item',
     description: 'Checks that no <span> is a direct child of <ul> or <ol> — it must be inside a <li>',
     severity: 'error',
-    enabled: true,
+    enabled: false,
     preset: 'recommended'
   },
   {
@@ -76,7 +76,7 @@ window.RULES_CONFIG = [
     name: 'BM Unlinked Range Number',
     description: 'In _bm* files, numbers after a dash or dash entity must be wrapped in an <a> tag',
     severity: 'error',
-    enabled: true,
+    enabled: false,
     preset: 'recommended'
   },
   {
@@ -84,7 +84,7 @@ window.RULES_CONFIG = [
     name: 'Pagebreak Check',
     description: 'Checks that all expected page breaks (from Excel) exist in each XHTML file',
     severity: 'error',
-    enabled: true,
+    enabled: false,
     preset: 'recommended'
   },
   {
@@ -92,7 +92,7 @@ window.RULES_CONFIG = [
     name: 'Pagebreak in Wrong File',
     description: 'Flags pagebreaks found in a file that belong to a different file based on Excel page ranges',
     severity: 'error',
-    enabled: true,
+    enabled: false,
     preset: 'recommended'
   },
   {
@@ -100,7 +100,7 @@ window.RULES_CONFIG = [
     name: 'Duplicate Pagebreak',
     description: 'Checks if the same pagebreak aria-label appears in more than one XHTML file',
     severity: 'error',
-    enabled: true,
+    enabled: false,
     preset: 'recommended'
   },
   {
@@ -108,7 +108,47 @@ window.RULES_CONFIG = [
     name: 'Pagebreak Sequence Order',
     description: 'Checks that pagebreaks appear in ascending order within each file (supports both roman and arabic numerals)',
     severity: 'error',
+    enabled: false,
+    preset: 'recommended'
+  },
+  {
+    id: 'stylesheet-class-check',
+    name: 'Stylesheet Class Check',
+    description: 'Checks that every class used in XHTML files is defined in the OEBPS CSS stylesheet',
+    severity: 'warn',
     enabled: true,
+    preset: 'recommended'
+  },
+  {
+    id: 'epub-type-id-link-check',
+    name: 'Cross link Id Not linked',
+    description: 'Checks that every epub:type="footnote" or epub:type="biblioentry" element has its id referenced by at least one anchor tag across all XHTML files',
+    severity: 'warn',
+    enabled: true,
+    preset: 'recommended'
+  },
+  {
+    id: 'xref-text-match',
+    name: 'Xref Text Match',
+    description: 'Checks that <a class="xref"> anchor text matches the <span class="label"> text it points to (supports Fig./Figure, Tab./Table, cross-file)',
+    severity: 'error',
+    enabled: true,
+    preset: 'recommended'
+  },
+  {
+    id: 'caption-label-unreferenced',
+    name: 'Caption Label Unreferenced',
+    description: 'Checks that every <span class="label"> inside a figcaption or tblcaption that contains "Figure" or "Table" text is referenced by at least one <a class="xref"> across all files',
+    severity: 'error',
+    enabled: true,
+    preset: 'recommended'
+  },
+  {
+    id: 'figure-missing-label',
+    name: 'Figure Missing Label',
+    description: 'Checks that every <figure> tag has a <figcaption> containing a <span class="label"> with Figure or Table text',
+    severity: 'error',
+    enabled: false,
     preset: 'recommended'
   }
 ];

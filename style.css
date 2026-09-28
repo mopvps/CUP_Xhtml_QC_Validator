@@ -2276,15 +2276,26 @@ svg { display: block; }
 .severity-tag-pass { background: var(--brand-green-soft); color: var(--brand-green); }
 
 .rule-group-body { max-height: 0; overflow: hidden; transition: max-height 0.25s ease; }
-.rule-group.expanded .rule-group-body { max-height: 4000px; }
+.rule-group.expanded .rule-group-body { max-height: none; overflow: visible; }
 .rule-group-body-inner { border-top: 1px solid var(--border); padding: 0; }
 
 .group-issue-row { padding: 12px 16px; font-size: 13px; color: var(--text); border-left: 3px solid var(--border); }
 .group-issue-row.row-pass { border-left-color: var(--brand-green); color: var(--text-muted); }
 
+.issue-table-wrap {
+  max-height: 320px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border: 1px solid var(--border);
+  border-radius: 0 0 6px 6px;
+}
 .issue-table { width: 100%; table-layout: fixed; border-collapse: collapse; }
 
 .issue-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--surface-2, var(--surface));
   text-align: left;
   font-size: 11px;
   font-weight: 600;
@@ -2876,3 +2887,81 @@ kbd {
   border-radius: 50%;
   display: inline-block;
 }
+
+/* Upload split box */
+.upload-box-split {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  border: 2px dashed var(--border-strong, #cbd5e1);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--surface-2, var(--surface));
+  min-height: 180px;
+  transition: border-color 0.2s;
+}
+.upload-box-split:hover {
+  border-color: var(--brand-blue);
+}
+.upload-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 32px 24px;
+  cursor: pointer;
+  transition: background 0.15s;
+  text-align: center;
+}
+.upload-panel:hover {
+  background: var(--surface-hover, rgba(2,132,199,0.06));
+}
+.upload-panel-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  flex-shrink: 0;
+  position: relative;
+}
+.upload-panel-divider::before {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: var(--border);
+}
+.upload-panel-or {
+  position: relative;
+  z-index: 1;
+  background: var(--surface-2, var(--surface));
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.upload-panel-icon {
+  color: var(--brand-blue);
+  margin-bottom: 4px;
+}
+.upload-panel .upload-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+}
+.upload-panel .upload-sub {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.upload-panel .upload-hint {
+  font-size: 11px;
+  color: var(--text-subtle, var(--text-muted));
+}
+.upload-panel-epub:hover .upload-panel-icon { color: var(--brand-blue); }
+.upload-panel-folder:hover .upload-panel-icon { color: var(--brand-green, #16a34a); }
+.upload-panel-folder:hover { background: var(--surface-hover-green, rgba(22,163,74,0.06)); }
