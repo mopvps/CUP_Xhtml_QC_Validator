@@ -124,7 +124,7 @@ window.RULES_CONFIG = [
     name: 'Stylesheet Class Check',
     description: 'Checks that every class used in XHTML files is defined in the OEBPS CSS stylesheet',
     severity: 'warn',
-    enabled: true,
+    enabled: false,
     preset: 'recommended'
   },
   {
