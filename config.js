@@ -129,7 +129,7 @@ window.RULES_CONFIG = [
   },
   {
     id: 'xref-text-match',
-    name: 'Xref Text Match',
+    name: 'Figure/Table Link Text Mismatch',
     description: 'Checks that <a class="xref"> anchor text matches the <span class="label"> text it points to (supports Fig./Figure, Tab./Table, cross-file)',
     severity: 'error',
     enabled: true,
@@ -140,7 +140,7 @@ window.RULES_CONFIG = [
     name: 'Caption Label Unreferenced',
     description: 'Checks that every <span class="label"> inside a figcaption or tblcaption that contains "Figure" or "Table" text is referenced by at least one <a class="xref"> across all files',
     severity: 'error',
-    enabled: true,
+    enabled: false,
     preset: 'recommended'
   },
   {
@@ -149,6 +149,22 @@ window.RULES_CONFIG = [
     description: 'Checks that every <figure> tag has a <figcaption> containing a <span class="label"> with Figure or Table text',
     severity: 'error',
     enabled: false,
+    preset: 'recommended'
+  },
+  {
+    id: 'figure-caption-sequence',
+    name: 'Figure/Table Caption Sequence',
+    description: 'Checks that every <p> referencing a Figure or Table is immediately followed by the matching <figure> tag(s) in the correct sequence order',
+    severity: 'error',
+    enabled: true,
+    preset: 'recommended'
+  },
+  {
+    id: 'spix-log-check',
+    name: 'Spix Log Check',
+    description: 'Checks the Spix .log file for errors, warnings and exceptions — all counts must be 0',
+    severity: 'error',
+    enabled: true,
     preset: 'recommended'
   }
 ];

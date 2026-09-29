@@ -1180,6 +1180,19 @@ async function parsePageDataFromExcel(allFiles) {
         }
       }));
 
+      // Preload .log file into fileMap for spix-log-check rule
+      const logFile = Array.from(allFiles).find(f =>
+        (f.webkitRelativePath || f.name).toLowerCase().endsWith('.log')
+      );
+      if (logFile) {
+        try {
+          const logText = await readFileAsText(logFile);
+          fileMap.set('__spix.log__', logText);
+        } catch(e) {
+          console.warn('Could not read log file:', e);
+        }
+      }
+
       for (const file of filesToValidate) {
         i++;
         updateValidationProgress(i, total, file.name);

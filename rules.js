@@ -401,28 +401,57 @@ window.RULES = {
     return issues;
   },
 
-  'missing-images': function (parsed, ruleCfg, fileMap, allFiles) {
+  'missing-images': function (parsed, ruleCfg, fileMap, allFiles, currentFileName) {
     const issues = [];
     const dom = parsed.dom;
     if (!dom) return issues;
 
-    // Supported image formats
-    const IMAGE_EXT = ['jpg', 'jpeg', 'png'];
+    // Supported image formats (expanded)
+    const IMAGE_EXT = ['jpg', 'jpeg', 'png', 'gif', 'svg', 'webp'];
 
     // Build a set of all file paths from allFiles
-    // webkitRelativePath gives "folderName/images/ch6-fig-05.png"
-    // Normalize to "images/ch6-fig-05.png" by stripping root folder
+    // webkitRelativePath gives "folderName/OEBPS/images/fig01.png"
+    // Normalize by stripping the root folder prefix
     const availablePaths = new Set();
     (allFiles || []).forEach(file => {
       const relPath = file.webkitRelativePath || file.name;
       const parts = relPath.split('/');
-      if (parts.length > 1) {
-        const normalized = parts.slice(1).join('/');
-        availablePaths.add(normalized);
-      } else {
-        availablePaths.add(relPath);
-      }
+      // Strip root folder (index 0), keep the rest: "OEBPS/images/fig01.png"
+      const normalized = parts.length > 1 ? parts.slice(1).join('/') : relPath;
+      availablePaths.add(normalized.toLowerCase());
     });
+
+    // Find the current XHTML file's folder path (relative to root folder)
+    // e.g. allFiles entry: "BookFolder/OEBPS/xhtml/ch01.xhtml" → folder = "OEBPS/xhtml"
+    let currentFileFolder = '';
+    if (currentFileName) {
+      const match = Array.from(allFiles || []).find(f =>
+        (f.webkitRelativePath || f.name).endsWith('/' + currentFileName) ||
+        (f.webkitRelativePath || f.name) === currentFileName
+      );
+      if (match) {
+        const relPath = match.webkitRelativePath || match.name;
+        const parts = relPath.split('/');
+        // Strip root folder, keep folder up to file: "OEBPS/xhtml"
+        if (parts.length > 2) {
+          currentFileFolder = parts.slice(1, -1).join('/');
+        }
+      }
+    }
+
+    // Resolve a src path relative to the current file's folder
+    function resolveSrc(src) {
+      if (!currentFileFolder) return src.toLowerCase();
+      // Split folder into segments and apply src navigation
+      const folderParts = currentFileFolder.split('/');
+      const srcParts = src.split('/');
+      const resolved = [...folderParts];
+      srcParts.forEach(part => {
+        if (part === '..') resolved.pop();
+        else if (part !== '.') resolved.push(part);
+      });
+      return resolved.join('/').toLowerCase();
+    }
 
     // Build line lookup for img elements
     const imgElements = parsed.elements.filter(el => el.tag === 'img');
@@ -451,20 +480,21 @@ window.RULES = {
         return;
       }
 
-      // Skip external URLs
-      if (src.startsWith('http://') || src.startsWith('https://') || src.startsWith('//')) return;
+      // Skip external URLs and data URIs
+      if (src.startsWith('http://') || src.startsWith('https://') || src.startsWith('//') || src.startsWith('data:')) return;
 
       // Check extension is supported
-      const ext = src.split('.').pop().toLowerCase();
+      const ext = src.split('.').pop().split('?')[0].toLowerCase();
       if (!IMAGE_EXT.includes(ext)) return;
 
-      // Check if file exists in project
-      if (!availablePaths.has(src)) {
+      // Resolve relative path and check against available files
+      const resolved = resolveSrc(src);
+      if (!availablePaths.has(resolved)) {
         issues.push({
           ruleId: 'missing-images',
           severity: ruleCfg.severity,
           message: `Missing image — "${src}" not found in project folder`,
-          detail: src,
+          detail: `Resolved path: ${resolved}`,
           line: imgLineMap.get(src) || 0,
           col: 0
         });
@@ -642,7 +672,7 @@ window.RULES = {
 
 window.RULES['unlinked-reference'] = function (parsed) {
   const issues = [];
-  const REFERENCE_RE = /(?<![A-Za-z])(Figure|Fig\.|Fig|Illustration|Illus\.|Ill\.|Chapter|Ch\.|Section|Sect\.|Sec\.|Appendix|App\.|Algorithm|Algo\.|Exercise|Equation|Eq\.|Footnote|Theorem|Thm\.|Listing|List\.|Problem|Prob\.|Example|Ex\.|Article|Art\.|Exhibit|Formula|Diagram|Sidebar|Annex|Amendment|Schedule|Clause|Specimen|Solution|Sample|Stanza|Scene|Verse|Volume|Vol\.|Plate|Pl\.|Table|Tab\.|Graph|Chart|Image|Scheme|Lemma|Proof|Answer|Panel|Part|Map|Box|Note|Act|Line|Case)(?![A-Za-z])[\s\-\.]*(\d[\d\.]*[A-Za-z]?)/gi;
+  const REFERENCE_RE = /(?<![A-Za-z])(Figure|Fig\.|Fig|Table|Tab\.|Tab|Chapter|Ch\.|Ch|Section|Sect\.|Sect|Sec\.|Sec|Appendix|App\.|App|Equation|Eq\.|Eq|Exercise|Example|Ex\.|Ex)(?![A-Za-z])[\s\-\.]*(\d[\d\.]*[A-Za-z]?)/gi;
   // Build a set of line indices that are inside <figcaption>...</figcaption>
   const skipLines = new Set();
   let inFigcaption = false;
@@ -1478,6 +1508,227 @@ window.RULES['figure-missing-label'] = function (parsed, ruleCfg) {
       });
     }
   });
+
+  return issues;
+};
+
+
+window.RULES['figure-caption-sequence'] = function (parsed, ruleCfg) {
+  const issues = [];
+  const dom = parsed.dom;
+  if (!dom) return issues;
+
+  const LABEL_RE = /\b(Figure|Figures|Fig|Table|Tables|Tab)\s+([\d.A-Z]+)/gi;
+
+  function normalizeText(t) {
+    return (t || '').toLowerCase().replace(/[.\s,;]+/g, ' ').trim();
+  }
+
+  function extractRefs(pEl) {
+    const refs = [];
+    // ONLY check <a class="xref"> tags — never raw paragraph text
+    const xrefs = Array.from(pEl.querySelectorAll('a.xref[href], a[class="xref"][href]'));
+    xrefs.forEach(a => {
+      const text = (a.textContent || '').trim();
+      const href = (a.getAttribute('href') || '');
+      const id = href.startsWith('#') ? href.slice(1) : '';
+      // Must match Figure/Table followed by a number
+      const match = text.match(/\b(Figure|Figures|Fig|Table|Tables|Tab)\s+([\d.]+)/i);
+      if (match && id) refs.push({ text: match[0].trim(), id });
+    });
+    return refs;
+  }
+
+  function getFigureLabel(figEl) {
+    const span = figEl.querySelector('span.label, span[class="label"]');
+    if (!span) return { text: '', id: '' };
+    return {
+      text: (span.textContent || '').trim(),
+      id: (span.getAttribute('id') || '').trim()
+    };
+  }
+
+  function isMatch(ref, label) {
+    if (!label.text && !label.id) return false;
+    if (label.text && normalizeText(label.text).startsWith(normalizeText(ref.text))) return true;
+    if (ref.id && label.id && ref.id === label.id) return true;
+    return false;
+  }
+
+  // Build a map from outerHTML prefix -> line number using parsed.elements
+  // since parser assigns line numbers in DOM order
+  const elLineMap = new Map();
+  parsed.elements.forEach(e => {
+    const key = e.tag + '|' + (e.attrs.id || '') + '|' + (e.attrs.class || '') + '|' + e.textContent.slice(0, 40);
+    if (!elLineMap.has(key)) elLineMap.set(key, e.line);
+  });
+
+  function getLine(el) {
+    const tag = (el.tagName || '').toLowerCase();
+    const id = el.getAttribute('id') || '';
+    const cls = el.getAttribute('class') || '';
+    const text = (el.textContent || '').trim().slice(0, 40);
+    const key = tag + '|' + id + '|' + cls + '|' + text;
+    return elLineMap.get(key) || 0;
+  }
+
+  function processContainer(container) {
+    const children = Array.from(container.children);
+
+    children.forEach((child, idx) => {
+      const tag = (child.tagName || '').toLowerCase();
+      if (tag !== 'p') return;
+
+      const refs = extractRefs(child);
+      if (refs.length === 0) return;
+
+      const nextSiblings = children.slice(idx + 1, idx + 1 + refs.length);
+
+      refs.forEach((ref, i) => {
+        const sibling = nextSiblings[i];
+
+        if (!sibling) {
+          issues.push({
+            ruleId: 'figure-caption-sequence',
+            severity: ruleCfg.severity || 'error',
+            message: `No figure found after the reference "${ref.text}"`,
+            detail: `The paragraph references "${ref.text}" but there is no figure after it`,
+            line: getLine(child),
+            col: 0
+          });
+          return;
+        }
+
+        const sibTag = (sibling.tagName || '').toLowerCase();
+
+        if (sibTag !== 'figure') {
+          issues.push({
+            ruleId: 'figure-caption-sequence',
+            severity: ruleCfg.severity || 'error',
+            message: `The paragraph references "${ref.text}" but the next element is not a figure`,
+            detail: `Something else appears between the "${ref.text}" reference and its figure`,
+            line: getLine(child),
+            col: 0
+          });
+          return;
+        }
+
+        const label = getFigureLabel(sibling);
+        if (!label.text && !label.id) {
+          issues.push({
+            ruleId: 'figure-caption-sequence',
+            severity: ruleCfg.severity || 'error',
+            message: `The figure after "${ref.text}" has no label inside it`,
+            detail: `Add a <span class="label"> with the figure or table number inside the figcaption`,
+            line: getLine(sibling),
+            col: 0
+          });
+          return;
+        }
+
+        if (!isMatch(ref, label)) {
+          issues.push({
+            ruleId: 'figure-caption-sequence',
+            severity: ruleCfg.severity || 'error',
+            message: `Reference says "${ref.text}" but the figure label says "${label.text || label.id}"`,
+            detail: `The reference and the figure label do not match — please check the numbering`,
+            line: getLine(sibling),
+            col: 0
+          });
+        }
+      });
+    });
+
+    children.forEach(child => {
+      const tag = (child.tagName || '').toLowerCase();
+      if (['section', 'div', 'article', 'main'].includes(tag)) {
+        processContainer(child);
+      }
+    });
+  }
+
+  const body = dom.querySelector('body') || dom.documentElement;
+  processContainer(body);
+
+  return issues;
+};
+
+window.RULES['spix-log-check'] = function (parsed, ruleCfg, fileMap, allFiles) {
+  const issues = [];
+
+  const logText = fileMap.get('__spix.log__');
+
+  if (!logText) {
+    const isEpubMode = Array.from(allFiles || []).every(f =>
+      (f.webkitRelativePath || '').indexOf('/') === -1
+    );
+    issues.push({
+      ruleId: 'spix-log-check',
+      severity: 'warn',
+      message: isEpubMode
+        ? 'Log file check is only available when selecting a project folder'
+        : 'No Spix log file found in the project folder',
+      detail: isEpubMode
+        ? 'Please use the folder selection method to enable Spix log checking'
+        : 'Make sure the .log file is in the same root folder as mimetype, META-INF and OEBPS',
+      line: 0,
+      col: 0
+    });
+    return issues;
+  }
+
+  const errorMatch     = logText.match(/#Total Error count\s*:\s*(\d+)/i);
+  const warningMatch   = logText.match(/#Total Warning count\s*:\s*(\d+)/i);
+  const exceptionMatch = logText.match(/#Total Exception count\s*:\s*(\d+)/i);
+
+  const errorCount     = errorMatch     ? parseInt(errorMatch[1], 10)     : null;
+  const warningCount   = warningMatch   ? parseInt(warningMatch[1], 10)   : null;
+  const exceptionCount = exceptionMatch ? parseInt(exceptionMatch[1], 10) : null;
+
+  if (errorCount === null && warningCount === null && exceptionCount === null) {
+    issues.push({
+      ruleId: 'spix-log-check',
+      severity: 'warn',
+      message: 'Could not read the Spix log file — format may be different',
+      detail: 'Expected lines like "#Total Error count: 0" in the log file',
+      line: 0,
+      col: 0
+    });
+    return issues;
+  }
+
+  if (errorCount !== null && errorCount > 0) {
+    issues.push({
+      ruleId: 'spix-log-check',
+      severity: 'error',
+      message: `Spix log has ${errorCount} error${errorCount > 1 ? 's' : ''}`,
+      detail: `Total Error count should be 0 but found ${errorCount}`,
+      line: 0,
+      col: 0
+    });
+  }
+
+  if (warningCount !== null && warningCount > 0) {
+    issues.push({
+      ruleId: 'spix-log-check',
+      severity: 'warn',
+      message: `Spix log has ${warningCount} warning${warningCount > 1 ? 's' : ''}`,
+      detail: `Total Warning count should be 0 but found ${warningCount}`,
+      line: 0,
+      col: 0
+    });
+  }
+
+  if (exceptionCount !== null && exceptionCount > 0) {
+    issues.push({
+      ruleId: 'spix-log-check',
+      severity: 'error',
+      message: `Spix log has ${exceptionCount} exception${exceptionCount > 1 ? 's' : ''}`,
+      detail: `Total Exception count should be 0 but found ${exceptionCount}`,
+      line: 0,
+      col: 0
+    });
+  }
 
   return issues;
 };
