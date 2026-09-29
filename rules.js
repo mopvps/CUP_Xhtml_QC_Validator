@@ -672,7 +672,7 @@ window.RULES = {
 
 window.RULES['unlinked-reference'] = function (parsed) {
   const issues = [];
-  const REFERENCE_RE = /(?<![A-Za-z])(Figure|Fig\.|Fig|Table|Tab\.|Tab|Chapter|Ch\.|Ch|Section|Sect\.|Sect|Sec\.|Sec|Appendix|App\.|App|Equation|Eq\.|Eq|Exercise|Example|Ex\.|Ex)(?![A-Za-z])[\s\-\.]*(\d[\d\.]*[A-Za-z]?)/gi;
+  const REFERENCE_RE = /(?<![A-Za-z])(Figure|Fig\.|Table|Tab\.|Chapter|Subsection|Section|Sect\.|Appendix|Equation|Eq\.|Exercise|Example)(?![A-Za-z])[\s\-\.]*([\d][\d\.]*[A-Za-z]?)/gi;
   // Build a set of line indices that are inside <figcaption>...</figcaption>
   const skipLines = new Set();
   let inFigcaption = false;
@@ -685,14 +685,18 @@ window.RULES['unlinked-reference'] = function (parsed) {
   parsed.lines.forEach((line, i) => {
     // Skip figcaption blocks
     if (skipLines.has(i)) return;
-    // Skip lines containing img or figure tags
-    if (/<img\s|<figure[\s>]|<\/figure>/i.test(line)) return;
-
     REFERENCE_RE.lastIndex = 0;
     let match;
     while ((match = REFERENCE_RE.exec(line)) !== null) {
       const matchIndex = match.index;
       const before = line.slice(0, matchIndex);
+
+      // Skip if inside a tag attribute (between < and >)
+      const lastOpen = before.lastIndexOf('<');
+      const lastClose = before.lastIndexOf('>');
+      if (lastOpen !== -1 && lastOpen > lastClose) continue;
+
+      // Skip if already inside an <a> tag
       const openA = before.lastIndexOf('<a ');
       const closeA = before.lastIndexOf('</a>');
       if (openA !== -1 && openA > closeA) continue;
@@ -706,6 +710,40 @@ window.RULES['unlinked-reference'] = function (parsed) {
       });
     }
   });
+  return issues;
+};
+
+window.RULES['raw-url'] = function(parsed, ruleCfg) {
+  const issues = [];
+  const URL_RE = /(?:https?:\/\/|ftp:\/\/|mailto:|www\.)[^\s<>"']+/gi;
+
+  parsed.lines.forEach((line, i) => {
+    URL_RE.lastIndex = 0;
+    let match;
+    while ((match = URL_RE.exec(line)) !== null) {
+      const before = line.slice(0, match.index);
+
+      // Skip if inside a tag attribute (between < and >)
+      const lastOpen = before.lastIndexOf('<');
+      const lastClose = before.lastIndexOf('>');
+      if (lastOpen !== -1 && lastOpen > lastClose) continue;
+
+      // Skip if already inside an <a> tag
+      const openA = before.lastIndexOf('<a ');
+      const closeA = before.lastIndexOf('</a>');
+      if (openA !== -1 && openA > closeA) continue;
+
+      issues.push({
+        ruleId: 'raw-url',
+        severity: ruleCfg.severity,
+        line: i + 1,
+        col: match.index + 1,
+        message: `Raw URL in text: "${match[0].slice(0, 60)}" is not wrapped in an <a> tag`,
+        detail: match[0]
+      });
+    }
+  });
+
   return issues;
 };
 
@@ -1212,6 +1250,7 @@ window.RULES['stylesheet-class-check'] = function (parsed, ruleCfg, fileMap, all
   allEls.forEach((el, idx) => {
     const classAttr = (el.getAttribute('class') || '').trim();
     if (!classAttr) return;
+    if ((el.tagName || '').toLowerCase() === 'section') return;
 
     const classes = classAttr.split(/\s+/).filter(Boolean);
     const matchEl = parsed.elements[idx];
@@ -1729,6 +1768,109 @@ window.RULES['spix-log-check'] = function (parsed, ruleCfg, fileMap, allFiles) {
       col: 0
     });
   }
+
+  return issues;
+};
+
+window.RULES['bm-see-also-link-check'] = function (parsed, ruleCfg, fileMap, allFiles, currentFileName) {
+  const issues = [];
+  const dom = parsed.dom;
+  if (!dom) return issues;
+
+  // Only run on _bm* files
+  const fileName = (currentFileName || '').toLowerCase();
+  if (!/_bm/.test(fileName)) return issues;
+
+  const elements = Array.from(dom.querySelectorAll('p, li'));
+
+  elements.forEach(el => {
+    const html = el.innerHTML || '';
+
+    // Check if "See also" exists in this element
+    const seeAlsoMatch = html.match(/See\s+also\s*|See\s+next\s*|(?<!\w)See\s+(?!also|next)/i);
+    if (!seeAlsoMatch) return;
+
+    // Get everything after "See also"
+    const afterSeeAlso = html.slice(seeAlsoMatch.index + seeAlsoMatch[0].length);
+
+    // Strip all <a>...</a> tags (linked terms) from the remaining HTML
+    const stripped = afterSeeAlso
+      .replace(/<a[\s\S]*?<\/a>/gi, '')   // remove linked terms
+      .replace(/<[^>]+>/g, '')            // remove any other tags
+      .replace(/&[a-z0-9#]+;/gi, ' ')    // replace entities
+      .trim();
+
+    // If there is still meaningful text left, it's unlinked
+    const unlinked = stripped.replace(/[;,.\s]/g, '').trim();
+    if (unlinked.length > 0) {
+      // Find line number from parsed.elements
+      const tag = (el.tagName || '').toLowerCase();
+      const id = el.getAttribute('id') || '';
+      const matchEl = parsed.elements.find(e =>
+        e.tag === tag && (e.attrs.id || '') === id
+      );
+      issues.push({
+        ruleId: 'bm-see-also-link-check',
+        severity: ruleCfg.severity || 'error',
+        message: `"See also" contains unlinked text: "${stripped.slice(0, 80)}"`,
+        detail: html.replace(/\s*xmlns(:[a-z]+)?="[^"]*"/g, '').slice(0, 150),
+        line: matchEl ? matchEl.line : 0,
+        col: matchEl ? matchEl.col : 0
+      });
+    }
+  });
+
+  return issues;
+};
+
+window.RULES['bm-index-roman-check'] = function (parsed, ruleCfg, fileMap, allFiles, currentFileName) {
+  const issues = [];
+  const dom = parsed.dom;
+  if (!dom) return issues;
+
+  // Only run on _bm* files
+  const fileName = (currentFileName || '').toLowerCase();
+  if (!/_bm/.test(fileName)) return issues;
+
+  const VALID_ROMANS = new Set([
+    'i','ii','iii','iv','v','vi','vii','viii','ix','x',
+    'xi','xii','xiii','xiv','xv','xvi','xvii','xviii','xix','xx',
+    'xxi','xxii','xxiii','xxiv','xxv'
+  ]);
+
+  const entries = Array.from(dom.querySelectorAll('li')).filter(li =>
+    li.getAttribute('epub:type') === 'index-entry'
+  );
+
+  entries.forEach(li => {
+    if (li.querySelector('ul')) return;
+    // Remove all <a> tags and their content
+    const html = li.innerHTML || '';
+    const stripped = html
+      .replace(/<a[\s\S]*?<\/a>/gi, '')
+      .replace(/<[^>]+>/g, '')
+      .replace(/&[a-z0-9#]+;/gi, ' ')
+      .trim();
+
+    // Check each word for Roman numeral
+    const words = stripped.split(/[\s,;.()]+/).filter(Boolean);
+    words.forEach(word => {
+      if (VALID_ROMANS.has(word.toLowerCase())) {
+        const id = li.getAttribute('id') || '';
+        const matchEl = parsed.elements.find(e =>
+          e.tag === 'li' && (e.attrs.id || '') === id
+        );
+        issues.push({
+          ruleId: 'bm-index-roman-check',
+          severity: ruleCfg.severity || 'error',
+          message: `Roman numeral "${word}" found as plain text in index entry`,
+          detail: li.innerHTML.replace(/\s*xmlns(:[a-z]+)?="[^"]*"/g, '').slice(0, 150),
+          line: matchEl ? matchEl.line : 0,
+          col: matchEl ? matchEl.col : 0
+        });
+      }
+    });
+  });
 
   return issues;
 };

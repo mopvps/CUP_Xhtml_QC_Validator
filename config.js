@@ -72,6 +72,14 @@ window.RULES_CONFIG = [
     preset: 'recommended'
   },
   {
+    id: 'raw-url',
+    name: 'Raw URL in Text',
+    description: 'Checks that URLs like http://, https://, ftp://, mailto:, www. appearing as visible text are wrapped in an <a> tag',
+    severity: 'warn',
+    enabled: true,
+    preset: 'recommended'
+  },
+  {
     id: 'bm-unlinked-range-number',
     name: 'BM Unlinked Range Number',
     description: 'In _bm* files, numbers after a dash or dash entity must be wrapped in an <a> tag',
@@ -163,6 +171,22 @@ window.RULES_CONFIG = [
     id: 'spix-log-check',
     name: 'Spix Log Check',
     description: 'Checks the Spix .log file for errors, warnings and exceptions — all counts must be 0',
+    severity: 'error',
+    enabled: true,
+    preset: 'recommended'
+  },
+  {
+    id: 'bm-see-also-link-check',
+    name: 'BM See Also Link Check',
+    description: 'In _bm* files, checks that all terms after "See also" in <p> and <li> tags are wrapped in an <a> tag',
+    severity: 'error',
+    enabled: true,
+    preset: 'recommended'
+  },
+  {
+    id: 'bm-index-roman-check',
+    name: 'BM Index Roman Numeral Check',
+    description: 'In _bm* files, checks that <li epub:type="index-entry"> elements do not contain Roman numerals as plain text (outside <a> tags)',
     severity: 'error',
     enabled: true,
     preset: 'recommended'
