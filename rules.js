@@ -1823,6 +1823,36 @@ window.RULES['bm-see-also-link-check'] = function (parsed, ruleCfg, fileMap, all
   return issues;
 };
 
+window.RULES['biblioentry-missing-anchor'] = function (parsed, ruleCfg) {
+  const issues = [];
+  const dom = parsed.dom;
+  if (!dom) return issues;
+
+  const entries = Array.from(dom.querySelectorAll('li.biblioentry, li[class="biblioentry"]'));
+
+  entries.forEach(li => {
+    const hasAnchor = !!li.querySelector('a');
+    const hasReflabel = !!li.querySelector('span.reflabel, span[class="reflabel"]');
+
+    if (!hasAnchor && !hasReflabel) {
+      const id = li.getAttribute('id') || '';
+      const matchEl = parsed.elements.find(e =>
+        e.tag === 'li' && (e.attrs.id || '') === id
+      );
+      issues.push({
+        ruleId: 'biblioentry-missing-anchor',
+        severity: ruleCfg.severity || 'error',
+        message: '<li class="biblioentry"> is missing both an <a> tag and a <span class="reflabel">',
+        detail: li.innerHTML.replace(/\s*xmlns(:[a-z]+)?="[^"]*"/g, '').slice(0, 150),
+        line: matchEl ? matchEl.line : 0,
+        col: matchEl ? matchEl.col : 0
+      });
+    }
+  });
+
+  return issues;
+};
+
 window.RULES['bm-index-roman-check'] = function (parsed, ruleCfg, fileMap, allFiles, currentFileName) {
   const issues = [];
   const dom = parsed.dom;

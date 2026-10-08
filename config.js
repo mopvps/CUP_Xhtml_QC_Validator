@@ -190,5 +190,13 @@ window.RULES_CONFIG = [
     severity: 'error',
     enabled: true,
     preset: 'recommended'
+  },
+  {
+    id: 'biblioentry-missing-anchor',
+    name: 'Biblioentry Missing Anchor',
+    description: 'Checks that every <li class="biblioentry"> contains at least one <a> tag or a <span class="reflabel"> — flags entries where neither is present',
+    severity: 'error',
+    enabled: true,
+    preset: 'recommended'
   }
 ];
