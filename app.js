@@ -1595,7 +1595,9 @@ async function parsePageDataFromExcel(allFiles) {
 
     const countBadge = group.passed
       ? `<span class="count-badge count-pass">Passed</span>`
-      : `<span class="count-badge count-${group.severity}">${group.issues.length} issue${group.issues.length === 1 ? '' : 's'}</span>`;
+      : group.severity === 'info'
+        ? `<span class="count-badge count-info" style="background:var(--brand-blue-soft, #eff6ff); color:var(--brand-blue, #2563eb); border:1px solid #bfdbfe;">${group.issues.length} check${group.issues.length === 1 ? '' : 's'}</span>`
+        : `<span class="count-badge count-${group.severity}">${group.issues.length} issue${group.issues.length === 1 ? '' : 's'}</span>`;
 
     const severityLabel = group.passed ? 'PASS' : group.severity.toUpperCase();
 

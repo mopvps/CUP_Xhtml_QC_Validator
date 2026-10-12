@@ -220,7 +220,7 @@ window.RULES_CONFIG = [
     name: 'Chapter Heading ID Check',
     description: 'Finds chapter headings (<h1> or <h2> containing "chapter") and displays the chapter text and its ID (e.g. "chapter 1 : ch1_1")',
     severity: 'info',
-    enabled: true,
+    enabled: false,
     preset: 'recommended'
   }
 ];

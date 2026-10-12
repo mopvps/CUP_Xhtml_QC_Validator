@@ -2139,71 +2139,115 @@ window.RULES['duplicate-element-check'] = function (parsed, ruleCfg, fileMap, al
   return issues;
 };
 
-window.RULES['chapter-link-check'] = function (parsed, ruleCfg, fileMap, allFiles, currentFileName) {
-  const issues = [];
-  const dom = parsed.dom;
-  if (!dom) return issues;
+window.RULES['chapter-link-check'] = {
+  check: function (parsed, ruleCfg, fileMap, allFiles, currentFileName) {
+    const issues = [];
+    const dom = parsed.dom;
+    if (!dom) return issues;
 
-  const lines = parsed.lines || [];
+    const lines = parsed.lines || [];
 
-  // Helper to find line number from parsed.ids or raw lines
-  function getLine(el, id, textSnippet) {
-    if (id && parsed.ids && parsed.ids.has(id)) {
-      const idVal = parsed.ids.get(id);
-      return Array.isArray(idVal) ? idVal[0] : idVal;
-    }
-    const cleanSnippet = (textSnippet || '').trim().slice(0, 30);
-    for (let i = 0; i < lines.length; i++) {
-      if ((id && lines[i].includes(id)) || (cleanSnippet && lines[i].includes(cleanSnippet))) {
-        return i + 1;
+    // Helper to find line number from parsed.ids or raw lines
+    function getLine(el, id, textSnippet) {
+      if (id && parsed.ids && parsed.ids.has(id)) {
+        const idVal = parsed.ids.get(id);
+        return Array.isArray(idVal) ? idVal[0] : idVal;
       }
-    }
-    return 1;
-  }
-
-  // Find all heading elements (h1, h2) in the document
-  const headings = Array.from(dom.querySelectorAll('h1, h2'));
-
-  headings.forEach(h => {
-    const text = (h.textContent || '').replace(/\s+/g, ' ').trim();
-    const chMatch = text.match(/\bchapter\s+([0-9]+|[ivxlcdm]+)\b/i);
-    if (!chMatch) return;
-
-    const chapterText = chMatch[0].toLowerCase();
-    let id = h.getAttribute('id') || '';
-
-    // If h1/h2 has no direct id, check the parent section or header
-    if (!id) {
-      const parentSec = h.closest('section');
-      if (parentSec) {
-        id = parentSec.getAttribute('id') || parentSec.getAttribute('aria-labelledby') || '';
+      const cleanSnippet = (textSnippet || '').trim().slice(0, 30);
+      for (let i = 0; i < lines.length; i++) {
+        if ((id && lines[i].includes(id)) || (cleanSnippet && lines[i].includes(cleanSnippet))) {
+          return i + 1;
+        }
       }
+      return 1;
     }
 
-    const line = getLine(h, id, chMatch[0]);
+    // Find all heading elements (h1, h2) in the document
+    const headings = Array.from(dom.querySelectorAll('h1, h2'));
+    const items = [];
 
-    if (id) {
+    headings.forEach(h => {
+      const text = (h.textContent || '').replace(/\s+/g, ' ').trim();
+      const chMatch = text.match(/\bchapter\s+([0-9]+|[ivxlcdm]+)\b/i);
+      if (!chMatch) return;
+
+      const chapterText = chMatch[0].toLowerCase();
+      let id = h.getAttribute('id') || '';
+
+      // If h1/h2 has no direct id, check the parent section or header
+      if (!id) {
+        const parentSec = h.closest('section');
+        if (parentSec) {
+          id = parentSec.getAttribute('id') || parentSec.getAttribute('aria-labelledby') || '';
+        }
+      }
+
+      const line = getLine(h, id, chMatch[0]);
+
+      items.push({
+        chapterText,
+        id: id || '(no id)',
+        line,
+        detail: (h.outerHTML || '').replace(/\s*xmlns(:[a-z]+)?="[^"]*"/g, '').slice(0, 140)
+      });
+    });
+
+    if (items.length > 0) {
       issues.push({
         ruleId: 'chapter-link-check',
         severity: ruleCfg.severity || 'info',
-        message: `${chapterText} : ${id}`,
-        detail: (h.outerHTML || '').replace(/\s*xmlns(:[a-z]+)?="[^"]*"/g, '').slice(0, 140),
-        line: line,
-        col: 1
-      });
-    } else {
-      issues.push({
-        ruleId: 'chapter-link-check',
-        severity: 'warn',
-        message: `${chapterText} has no ID`,
-        detail: (h.outerHTML || '').replace(/\s*xmlns(:[a-z]+)?="[^"]*"/g, '').slice(0, 140),
-        line: line,
-        col: 1
+        message: items.map(it => `${it.chapterText} : ${it.id}`).join(', '),
+        detail: '',
+        line: items[0].line,
+        col: 1,
+        _custom: { items }
       });
     }
-  });
 
-  return issues;
+    return issues;
+  },
+
+  render: function (issue) {
+    const wrap = document.createElement('div');
+    wrap.style.padding = '14px 18px';
+    wrap.style.background = 'var(--surface)';
+    wrap.style.borderRadius = 'var(--r-md)';
+
+    const items = (issue._custom && issue._custom.items) || [];
+    if (!items.length) {
+      wrap.innerHTML = '<div style="color:var(--text-muted); font-size:13px;">No chapter headings found.</div>';
+      return wrap;
+    }
+
+    let rowsHtml = items.map(item => `
+      <tr style="border-bottom: 1px solid var(--border);">
+        <td style="padding: 10px 14px; font-weight: 600; color: var(--text);">${item.chapterText}</td>
+        <td style="padding: 10px 14px; font-family: var(--font-mono, monospace); color: var(--brand-blue, #2563eb); font-weight: 600;">
+          ${item.id}
+        </td>
+        <td style="padding: 10px 14px; color: var(--text-muted); font-size: 12px;">Line ${item.line}</td>
+      </tr>
+    `).join('');
+
+    wrap.innerHTML = `
+      <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 10px; font-weight: 700;">
+        Chapter Headings &amp; IDs Check
+      </div>
+      <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+        <thead>
+          <tr style="border-bottom: 1.5px solid var(--border); text-align: left; color: var(--text-muted); font-size: 11px; text-transform: uppercase;">
+            <th style="padding: 8px 14px;">Chapter Text</th>
+            <th style="padding: 8px 14px;">Element ID</th>
+            <th style="padding: 8px 14px;">Location</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${rowsHtml}
+        </tbody>
+      </table>
+    `;
+    return wrap;
+  }
 };
 
 
