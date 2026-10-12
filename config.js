@@ -123,8 +123,8 @@ window.RULES_CONFIG = [
     id: 'stylesheet-class-check',
     name: 'Stylesheet Class Check',
     description: 'Checks that every class used in XHTML files is defined in the OEBPS CSS stylesheet',
-    severity: 'warn',
-    enabled: false,
+    severity: 'error',
+    enabled: true,
     preset: 'recommended'
   },
   {
@@ -196,6 +196,30 @@ window.RULES_CONFIG = [
     name: 'Biblioentry Missing Anchor',
     description: 'Checks that every <li class="biblioentry"> contains at least one <a> tag or a <span class="reflabel"> — flags entries where neither is present',
     severity: 'error',
+    enabled: true,
+    preset: 'recommended'
+  },
+  {
+    id: 'introduction-filename-check',
+    name: 'Introduction Filename Check',
+    description: 'Checks that if a heading (<h1> or <h2>) inside or immediately following <header> contains "Introduction", the file must be a frontmatter file (named fm*)',
+    severity: 'error',
+    enabled: true,
+    preset: 'recommended'
+  },
+  {
+    id: 'duplicate-element-check',
+    name: 'Duplicate Tag / Block Check',
+    description: 'Detects identical duplicate block elements (<p>, <li>, <tr>, headings, etc.) having the exact same tag and inner content in the file',
+    severity: 'error',
+    enabled: true,
+    preset: 'recommended'
+  },
+  {
+    id: 'chapter-link-check',
+    name: 'Chapter Heading ID Check',
+    description: 'Finds chapter headings (<h1> or <h2> containing "chapter") and displays the chapter text and its ID (e.g. "chapter 1 : ch1_1")',
+    severity: 'info',
     enabled: true,
     preset: 'recommended'
   }

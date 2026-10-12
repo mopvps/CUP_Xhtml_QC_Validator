@@ -1190,33 +1190,101 @@ window.RULES['stylesheet-class-check'] = function (parsed, ruleCfg, fileMap, all
   const dom = parsed.dom;
   if (!dom) return issues;
 
-  // 1. Find the CSS file from allFiles (first .css file inside OEBPS/)
-  const allFilesList = Array.isArray(allFiles) ? allFiles : Array.from((allFiles || new Map()).values());
-  const cssFile = allFilesList.find(f => {
-    const p = (f.webkitRelativePath || f.name || '').toLowerCase();
-    return p.includes('oebps') && f.name.endsWith('.css');
+  // 1. Find all stylesheet <link> tags in the current XHTML file
+  // Try DOM first, fallback to parsed/raw lines if DOM namespace stripped head or failed
+  let hrefs = [];
+  const linkEls = Array.from(dom.querySelectorAll('link[rel~="stylesheet"], link[rel="stylesheet"], link[type="text/css"]'));
+  linkEls.forEach(link => {
+    const rel = (link.getAttribute('rel') || '').toLowerCase();
+    const href = (link.getAttribute('href') || '').trim();
+    if (href && (rel.includes('stylesheet') || !rel)) {
+      hrefs.push(href);
+    }
   });
 
-  if (!cssFile) {
+  // Fallback: search raw text lines for <link ... rel="stylesheet" ... href="..." ...>
+  if (!hrefs.length && parsed.lines && parsed.lines.length) {
+    const linkTagRe = /<link\b([^>]*)\/?>/gi;
+    const rawText = parsed.lines.join('\n');
+    let lm;
+    while ((lm = linkTagRe.exec(rawText)) !== null) {
+      const attrStr = lm[1] || '';
+      const isStylesheet = /rel\s*=\s*["'][^"']*stylesheet[^"']*["']/i.test(attrStr) || /type\s*=\s*["']text\/css["']/i.test(attrStr);
+      if (isStylesheet) {
+        const hrefMatch = attrStr.match(/href\s*=\s*["']([^"']+)["']/i);
+        if (hrefMatch && hrefMatch[1].trim()) {
+          hrefs.push(hrefMatch[1].trim());
+        }
+      }
+    }
+  }
+
+  // Deduplicate hrefs
+  hrefs = Array.from(new Set(hrefs));
+
+  if (!hrefs.length) {
     return [{
       ruleId: 'stylesheet-class-check',
-      severity: 'warn',
-      message: 'No CSS file found in OEBPS folder — cannot check classes',
+      severity: 'error',
+      message: 'No stylesheet <link rel="stylesheet"> found in XHTML file',
       detail: '',
-      line: 0,
-      col: 0
+      line: 1,
+      col: 1
     }];
   }
 
-  // 2. Read CSS text from fileMap
-  const cssEntry = fileMap.get(cssFile.name);
-  const cssText = cssEntry ? cssEntry : '';
+  // 2. Read CSS text for each referenced stylesheet from fileMap / allFiles
+  const allFilesList = Array.isArray(allFiles) ? allFiles : Array.from((allFiles || new Map()).values());
+  let combinedCssText = '';
+  const missingFiles = [];
 
-  if (!cssText) {
+  for (const href of hrefs) {
+    const cleanHref = href.split('?')[0].split('#')[0];
+    const cssBaseName = cleanHref.split('/').pop().toLowerCase();
+
+    let cssText = '';
+
+    // Check direct match in fileMap
+    if (fileMap.has(cleanHref) && typeof fileMap.get(cleanHref) === 'string') {
+      cssText = fileMap.get(cleanHref);
+    } else if (fileMap.has(cssBaseName) && typeof fileMap.get(cssBaseName) === 'string') {
+      cssText = fileMap.get(cssBaseName);
+    }
+
+    // Check case-insensitive / partial match in fileMap
+    if (!cssText) {
+      for (const [key, val] of fileMap.entries()) {
+        if (typeof val === 'string' && (key.toLowerCase() === cssBaseName || key.toLowerCase().endsWith('/' + cssBaseName) || key.toLowerCase().endsWith('\\' + cssBaseName))) {
+          cssText = val;
+          break;
+        }
+      }
+    }
+
+    // Fallback: check allFilesList
+    if (!cssText) {
+      const matchedFile = allFilesList.find(f => {
+        const fname = (f.name || '').toLowerCase();
+        const fpath = (f.webkitRelativePath || '').toLowerCase();
+        return fname === cssBaseName || fpath.endsWith('/' + cssBaseName) || fpath.endsWith('\\' + cssBaseName);
+      });
+      if (matchedFile && fileMap.has(matchedFile.name)) {
+        cssText = fileMap.get(matchedFile.name);
+      }
+    }
+
+    if (cssText) {
+      combinedCssText += '\n' + cssText;
+    } else {
+      missingFiles.push(href);
+    }
+  }
+
+  if (missingFiles.length && !combinedCssText.trim()) {
     return [{
       ruleId: 'stylesheet-class-check',
       severity: 'warn',
-      message: 'CSS file found but could not be read: ' + cssFile.name,
+      message: 'Referenced CSS file(s) not found or could not be read: ' + missingFiles.join(', '),
       detail: '',
       line: 0,
       col: 0
@@ -1228,7 +1296,7 @@ window.RULES['stylesheet-class-check'] = function (parsed, ruleCfg, fileMap, all
   const definedClasses = new Set();
   const cssClassRe = /\.([a-zA-Z_-][a-zA-Z0-9_-]*)/g;
   let cm;
-  while ((cm = cssClassRe.exec(cssText)) !== null) {
+  while ((cm = cssClassRe.exec(combinedCssText)) !== null) {
     definedClasses.add(cm[1]);
   }
 
@@ -1236,36 +1304,46 @@ window.RULES['stylesheet-class-check'] = function (parsed, ruleCfg, fileMap, all
     return [{
       ruleId: 'stylesheet-class-check',
       severity: 'warn',
-      message: 'CSS file has no class definitions: ' + cssFile.name,
+      message: 'Referenced CSS file(s) have no class definitions: ' + hrefs.join(', '),
       detail: '',
       line: 0,
       col: 0
     }];
   }
 
+  // Helper to find exact line number of a class from raw lines
+  const lines = parsed.lines || [];
+  function findClassLine(cls) {
+    const classRe = new RegExp('class\\s*=\\s*["\'][^"\']*\\b' + cls.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&') + '\\b', 'i');
+    for (let i = 0; i < lines.length; i++) {
+      if (classRe.test(lines[i])) return i + 1;
+    }
+    return 0;
+  }
+
   // 4. Walk all elements in XHTML and check their classes
   const allEls = Array.from(dom.querySelectorAll('[class]'));
   const reported = new Set(); // avoid duplicate reports per class name
 
-  allEls.forEach((el, idx) => {
+  allEls.forEach((el) => {
     const classAttr = (el.getAttribute('class') || '').trim();
     if (!classAttr) return;
     if ((el.tagName || '').toLowerCase() === 'section') return;
 
     const classes = classAttr.split(/\s+/).filter(Boolean);
-    const matchEl = parsed.elements[idx];
 
     classes.forEach(cls => {
       if (reported.has(cls)) return;
       if (!definedClasses.has(cls)) {
         reported.add(cls);
+        const line = findClassLine(cls);
         issues.push({
           ruleId: 'stylesheet-class-check',
           severity: ruleCfg.severity || 'warn',
           message: `Class "${cls}" used in XHTML but not defined in CSS`,
           detail: (el.outerHTML || '').replace(/\s*xmlns(:[a-z]+)?="[^"]*"/g, '').slice(0, 120),
-          line: matchEl ? matchEl.line : 0,
-          col: matchEl ? matchEl.col : 0
+          line: line,
+          col: 0
         });
       }
     });
@@ -1904,3 +1982,229 @@ window.RULES['bm-index-roman-check'] = function (parsed, ruleCfg, fileMap, allFi
 
   return issues;
 };
+
+window.RULES['introduction-filename-check'] = function (parsed, ruleCfg, fileMap, allFiles, currentFileName) {
+  const issues = [];
+  const dom = parsed.dom;
+  if (!dom) return issues;
+
+  // Check if filename indicates a frontmatter file (e.g., 02_71770_fm1.xhtml, fm1.xhtml, etc.)
+  const fname = (currentFileName || '').toLowerCase();
+  const baseName = fname.split(/[\\/]/).pop();
+  const isFmFile = /(?:^|[_\-.])fm\d*(?:[_\-.]|$|\.xhtml$|\.html$)/i.test(baseName);
+
+  // Helper to extract clean visible text
+  function getCleanText(el) {
+    return (el.textContent || '').replace(/\s+/g, ' ').trim();
+  }
+
+  // Helper to find line number from parsed.elements or raw lines
+  function getHeadingLine(headingEl) {
+    const id = headingEl.getAttribute('id');
+    if (id && parsed.ids && parsed.ids.has(id)) {
+      const lineVal = parsed.ids.get(id);
+      return Array.isArray(lineVal) ? lineVal[0] : lineVal;
+    }
+    const tag = (headingEl.tagName || '').toLowerCase();
+    const matchEl = (parsed.elements || []).find(e =>
+      e.tag === tag && (!id || (e.attrs && e.attrs.id === id))
+    );
+    if (matchEl && matchEl.line) return matchEl.line;
+
+    // Fallback: search raw text lines for heading tag
+    const lines = parsed.lines || [];
+    const re = new RegExp('<' + tag + '\\b', 'i');
+    for (let i = 0; i < lines.length; i++) {
+      if (re.test(lines[i])) return i + 1;
+    }
+    return 1;
+  }
+
+  // Find all <header> tags in the document
+  const headers = Array.from(dom.querySelectorAll('header'));
+
+  headers.forEach(header => {
+    // 1. Check <h1|h2> inside <header>
+    const headingsInside = Array.from(header.querySelectorAll('h1, h2'));
+
+    // 2. Check <h1|h2> tag immediately after <header> (as next sibling)
+    let nextEl = header.nextElementSibling;
+    const headingsAfter = [];
+    if (nextEl && /^(h1|h2)$/i.test(nextEl.tagName)) {
+      headingsAfter.push(nextEl);
+    }
+
+    const targetHeadings = [...headingsInside, ...headingsAfter];
+
+    targetHeadings.forEach(heading => {
+      const text = getCleanText(heading);
+      // Check if text exactly matches "introduction" (case-insensitive)
+      if (/^introduction$/i.test(text)) {
+        if (!isFmFile) {
+          const line = getHeadingLine(heading);
+          issues.push({
+            ruleId: 'introduction-filename-check',
+            severity: ruleCfg.severity || 'error',
+            message: `Heading <${heading.tagName.toLowerCase()}> contains "Introduction" but file "${baseName}" is not a frontmatter (fm*) file`,
+            detail: (heading.outerHTML || '').replace(/\s*xmlns(:[a-z]+)?="[^"]*"/g, '').slice(0, 150),
+            line: line,
+            col: 1
+          });
+        }
+      }
+    });
+  });
+
+  return issues;
+};
+
+window.RULES['duplicate-element-check'] = function (parsed, ruleCfg, fileMap, allFiles, currentFileName) {
+  const issues = [];
+  const dom = parsed.dom;
+  if (!dom) return issues;
+
+  // Track occurrences of elements: normalizedContent -> { firstLine, count }
+  const seenElements = new Map();
+
+  // Helper to normalize content: strip namespaces, collapse whitespace
+  function normalizeContent(str) {
+    return (str || '')
+      .replace(/\s*xmlns(:[a-z0-9_-]+)?="[^"]*"/gi, '')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  // Build a position queue for block elements from parsed.lines
+  const lines = parsed.lines || [];
+
+  function findTagLine(tag, id, snippet, startIndex) {
+    if (id && parsed.ids && parsed.ids.has(id)) {
+      const idVal = parsed.ids.get(id);
+      if (Array.isArray(idVal)) {
+        return idVal[startIndex] || idVal[0] || 0;
+      }
+      return idVal;
+    }
+
+    // Try finding by matching unique text / snippet in lines
+    const cleanSnippet = snippet.replace(/<[^>]+>/g, '').trim().slice(0, 40);
+    if (cleanSnippet) {
+      for (let i = 0; i < lines.length; i++) {
+        if (lines[i].includes(cleanSnippet)) {
+          return i + 1;
+        }
+      }
+    }
+
+    return 0;
+  }
+
+  // Check candidate block elements that shouldn't be duplicated verbatim
+  const candidateTags = 'p, li, tr, blockquote, h1, h2, h3, h4, h5, h6, dt, dd';
+  const nodes = Array.from(dom.querySelectorAll(candidateTags));
+
+  nodes.forEach(el => {
+    // Skip empty or trivial tags (less than 20 non-space characters) to avoid false positives on short labels
+    const textContent = (el.textContent || '').replace(/\s+/g, ' ').trim();
+    if (textContent.length < 20) return;
+
+    const tagName = (el.tagName || '').toLowerCase();
+    const outerHtml = normalizeContent(el.outerHTML || '');
+    // Key by tagName + normalized outerHTML
+    const key = tagName + '::' + outerHtml;
+
+    const id = el.getAttribute('id') || (el.querySelector('[id]') ? el.querySelector('[id]').getAttribute('id') : '');
+
+    if (seenElements.has(key)) {
+      const prior = seenElements.get(key);
+      prior.count++;
+
+      // Find line number of this duplicate
+      const line = findTagLine(tagName, id, textContent, prior.count - 1);
+
+      issues.push({
+        ruleId: 'duplicate-element-check',
+        severity: ruleCfg.severity || 'error',
+        message: `Duplicate <${tagName}> tag with identical content detected (first seen on line ${prior.line || 'earlier'})`,
+        detail: outerHtml.slice(0, 140),
+        line: line || prior.line || 0,
+        col: 1
+      });
+    } else {
+      const line = findTagLine(tagName, id, textContent, 0);
+      seenElements.set(key, { line, count: 1 });
+    }
+  });
+
+  return issues;
+};
+
+window.RULES['chapter-link-check'] = function (parsed, ruleCfg, fileMap, allFiles, currentFileName) {
+  const issues = [];
+  const dom = parsed.dom;
+  if (!dom) return issues;
+
+  const lines = parsed.lines || [];
+
+  // Helper to find line number from parsed.ids or raw lines
+  function getLine(el, id, textSnippet) {
+    if (id && parsed.ids && parsed.ids.has(id)) {
+      const idVal = parsed.ids.get(id);
+      return Array.isArray(idVal) ? idVal[0] : idVal;
+    }
+    const cleanSnippet = (textSnippet || '').trim().slice(0, 30);
+    for (let i = 0; i < lines.length; i++) {
+      if ((id && lines[i].includes(id)) || (cleanSnippet && lines[i].includes(cleanSnippet))) {
+        return i + 1;
+      }
+    }
+    return 1;
+  }
+
+  // Find all heading elements (h1, h2) in the document
+  const headings = Array.from(dom.querySelectorAll('h1, h2'));
+
+  headings.forEach(h => {
+    const text = (h.textContent || '').replace(/\s+/g, ' ').trim();
+    const chMatch = text.match(/\bchapter\s+([0-9]+|[ivxlcdm]+)\b/i);
+    if (!chMatch) return;
+
+    const chapterText = chMatch[0].toLowerCase();
+    let id = h.getAttribute('id') || '';
+
+    // If h1/h2 has no direct id, check the parent section or header
+    if (!id) {
+      const parentSec = h.closest('section');
+      if (parentSec) {
+        id = parentSec.getAttribute('id') || parentSec.getAttribute('aria-labelledby') || '';
+      }
+    }
+
+    const line = getLine(h, id, chMatch[0]);
+
+    if (id) {
+      issues.push({
+        ruleId: 'chapter-link-check',
+        severity: ruleCfg.severity || 'info',
+        message: `${chapterText} : ${id}`,
+        detail: (h.outerHTML || '').replace(/\s*xmlns(:[a-z]+)?="[^"]*"/g, '').slice(0, 140),
+        line: line,
+        col: 1
+      });
+    } else {
+      issues.push({
+        ruleId: 'chapter-link-check',
+        severity: 'warn',
+        message: `${chapterText} has no ID`,
+        detail: (h.outerHTML || '').replace(/\s*xmlns(:[a-z]+)?="[^"]*"/g, '').slice(0, 140),
+        line: line,
+        col: 1
+      });
+    }
+  });
+
+  return issues;
+};
+
+
+
